@@ -4,19 +4,14 @@ import { useFormContext, Controller } from 'react-hook-form';
 
 const FormInput = ({ name, label }) => {
   const { control } = useFormContext();
-
   return (
     <Grid item xs={12} sm={6}>
       <Controller
         control={control}
-        render={() => (
-          <TextField
-            name={name}
-            label={label}
-            required
-            fullWidth
-          />
-        )}
+        name={name}
+        render={({ field }) => {
+          return <TextField {...field} label={label} required fullWidth />
+        }}
       />
     </Grid>
   )

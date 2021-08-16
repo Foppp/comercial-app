@@ -55,7 +55,7 @@ const PaymentForm = ({ checkoutToken, shippingData, backStep, nextStep, onCaptur
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-            <form onSubmit={(e) => handleSubmit(e.live, elements, stripe)}>
+            <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
               <CardElement />
               <br /> <br />
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>

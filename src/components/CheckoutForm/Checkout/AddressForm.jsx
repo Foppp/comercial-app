@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { InputLabel, Select, MenuItem, Button, Grid, Typography } from '@material-ui/core'
+import { InputLabel, Select, TextField, MenuItem, Button, Grid, Typography } from '@material-ui/core'
 import { useForm, FormProvider } from 'react-hook-form';
 import { commerce } from '../../../lib/commerce';
 import { Link } from 'react-router-dom';
@@ -58,7 +58,7 @@ const AddressForm = ({ checkoutToken, next }) => {
   useEffect(() => {
     if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
   }, [shippingSubdivision, checkoutToken.id, shippingCountry]);
-  
+
   return (
     <>
       <Typography variant="h6" gutterBottom>Shipping Adress</Typography>
@@ -67,7 +67,7 @@ const AddressForm = ({ checkoutToken, next }) => {
           <Grid container spacing={3}>
             <FormInput name="firstName" label="First Name" />
             <FormInput name="lastName" label="Last Name" />
-            <FormInput name="adress" label="Adress" />
+            <FormInput name="address1" label="Adress line 1" />
             <FormInput name="email" label="Email" />
             <FormInput name="city" label="City" />
             <FormInput name="zip" label="ZIP / Postal Code" />
