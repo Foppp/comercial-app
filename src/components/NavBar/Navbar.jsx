@@ -19,7 +19,6 @@ const Navbar = ({ totalItems }) => {
             YuraSynth Shop
           </Typography>
           <div className={classes.grow} />
-          {location.pathname === '/' && (
             <div className={classes.button}>
               <IconButton component={Link} to="/cart" aria-label="Show Cart Items" color="inherit">
                 <Badge badgeContent={totalItems} color="secondary">
@@ -27,7 +26,7 @@ const Navbar = ({ totalItems }) => {
                 </Badge>
               </IconButton>
             </div>
-          )}
+          
         </Toolbar>
       </AppBar>
     </>

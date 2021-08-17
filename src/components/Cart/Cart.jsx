@@ -12,7 +12,7 @@ const Cart = ({
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       You have no items in your shopping cart...
-      <Link to="/" className={classes.link}>Start adding some!</Link>
+      <Link to="/products" className={classes.link}>Start adding some!</Link>
     </Typography>
   );
   const FilledCart = () => (

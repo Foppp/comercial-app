@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { InputLabel, Select, TextField, MenuItem, Button, Grid, Typography } from '@material-ui/core'
+import { InputLabel, Select, MenuItem, Button, Grid, Typography } from '@material-ui/core'
 import { useForm, FormProvider } from 'react-hook-form';
 import { commerce } from '../../../lib/commerce';
 import { Link } from 'react-router-dom';
@@ -65,7 +65,7 @@ const AddressForm = ({ checkoutToken, next }) => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit((data) => next({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
           <Grid container spacing={3}>
-            <FormInput name="firstName" label="First Name" />
+            <FormInput name="firstName" label="First Name" defaultvalue="gg"/>
             <FormInput name="lastName" label="Last Name" />
             <FormInput name="address1" label="Adress line 1" />
             <FormInput name="email" label="Email" />

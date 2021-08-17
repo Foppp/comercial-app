@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react'
 import {
-  Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button,
+  Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button, CssBaseline,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { commerce } from '../../../lib/commerce';
@@ -22,7 +22,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' })
         setCheckoutToken(token);
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
     }
     generateToken();
@@ -36,32 +36,32 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     nextStep();
   };
 
-  const Confirmation = () => order.customer ? (
+  const Confirmation = () => (order.customer ? (
     <>
       <div>
-        <Typography variant="h5">
-          Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}
-        </Typography>
+        <Typography variant="h5">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
         <Divider className={classes.divider} />
         <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
       </div>
       <br />
-      <Button component={Link} to="/" variant="outlined" type="button">Back to Home</Button>
+      <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
     </>
   ) : (
-      <div className={classes.spinner}>
-        <CircularProgress />
-      </div>
-  );
+    <div className={classes.spinner}>
+      <CircularProgress />
+    </div>
+  ));
 
-  if (error) {
-    <>
-      <Typography variant="h5">Error: {error}</Typography>
-      <br />
-      <Button component={Link} to="/" variant="outlined" type="button">Back to Home</Button>
-    </>
-  };
-
+  // if (error) {
+  //   Confirmation = () => (
+  //     <>
+  //       <Typography variant="h5">Error: {error}</Typography>
+  //       <br />
+  //       <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
+  //     </>
+  //   );
+  // }
+  
   const Form = () => activeStep === 0
     ? <AddressForm
       checkoutToken={checkoutToken}
@@ -77,6 +77,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
   
   return (
     <>
+      <CssBaseline />
       <div className={classes.toolbar} />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
