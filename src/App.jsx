@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import './assets/index.css';
 
-import { Navbar, Products, Cart, Checkout } from './components';
+import { Navbar, Products, Home, Cart, Checkout } from './components';
 import { commerce } from './lib/commerce';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#82b1ff',
+    },
+    secondary: {
+      main: '#bf360c',
+    },
+  },
+});
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -74,13 +87,15 @@ const App = () => {
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' }} >
         <CssBaseline />
         <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
         <Switch>
           <Route exact path="/">
-            <Products products={products} onAddToCart={handleAddToCart} handleUpdateCartQty />
+            <Home />
+            {/* <Products products={products} onAddToCart={handleAddToCart} handleUpdateCartQty /> */}
           </Route>
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
@@ -90,7 +105,8 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </Router>
+      </Router>
+      </ThemeProvider>
   );
 };
 

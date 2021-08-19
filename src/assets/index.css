@@ -1,3 +1,8 @@
 body {
-  background-color: rgb(236, 224, 200);
+  background-image: linear-gradient(217deg, rgba(196, 196, 196, 0.8), rgba(255,0,0,0) 70.71%),
+      linear-gradient(127deg, rgba(32, 73, 255, 0.8), rgba(0,255,0,0) 70.71%),
+      linear-gradient(336deg, rgba(244, 255, 96, 0.8), rgba(0,0,255,0) 70.71%);;
+  /* background-image: url('https://cdn.wallpapersafari.com/86/18/Xfu6As.jpg'); */
+  
+  background-attachment: fixed;
 }

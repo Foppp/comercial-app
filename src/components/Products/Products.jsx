@@ -10,16 +10,19 @@ const Products = ({ products, onAddToCart }) => {
   if (!products.length) return <p>Loading...</p>;
 
   return (
-    <main className={classes.content}>
-      <div className={classes.toolbar} />
-      <Grid container justifyContent="center" spacing={4}>
-        {products.map((product) => (
-          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
+    <Grid container>
+      <Grid item xs={0} sm={1}/>
+      <Grid className={classes.content} item xs={12} sm={10}>
+        <Grid container spacing={3}>
+{products.map((product) => (
+  <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
             <Product product={product} onAddToCart={onAddToCart} />
           </Grid>
         ))}
+        </Grid>
       </Grid>
-    </main>
+      <Grid item xs={0} sm={1}/>
+    </Grid>
   );
 };
 

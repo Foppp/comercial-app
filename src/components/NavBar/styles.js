@@ -1,45 +1,41 @@
-import { makeStyles, alpha as fade } from '@material-ui/core/styles';
+import { makeStyles, alpha } from '@material-ui/core/styles';
 
-const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
-  appBar: {
-    boxShadow: 'none',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  title: {
+  root: {
     flexGrow: 1,
-    alignItems: 'center',
-    display: 'flex',
-    textDecoration: 'none',
   },
-  image: {
-    marginRight: '10px',
+  appBar: {
+    boxShadow: '0 10px 6px rgba(50, 50, 93, 0.11)',
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textDecoration: 'none',
+    color: 'inherit',
+    fontFamily: "Helvetica Neue",
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'none',
+      display: 'block',
     },
   },
-  grow: {
-    flexGrow: 1,
+  image: {
+    marginLeft: '10px',
   },
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
       width: 'auto',
     },
   },
@@ -57,11 +53,15 @@ export default makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
     },
   },
 }));
