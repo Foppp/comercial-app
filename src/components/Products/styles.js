@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: '100px',
+    marginTop: '30px',
     backgroundColor: 'red',
   },
   root: {

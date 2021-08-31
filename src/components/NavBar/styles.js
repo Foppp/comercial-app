@@ -23,6 +23,9 @@ export default makeStyles((theme) => ({
   },
   image: {
     marginLeft: '10px',
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
 
   search: {

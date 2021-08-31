@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import './assets/index.css';
 
-import { Navbar, Products, Home, Cart, Checkout } from './components';
+import { Navbar, Home, Cart, Checkout } from './components';
 import { commerce } from './lib/commerce';
 
 const theme = createTheme({
@@ -29,7 +29,7 @@ const App = () => {
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
-
+    console.log(data)
     setProducts(data);
   };
 
@@ -91,11 +91,10 @@ const App = () => {
     <Router>
       <div style={{ display: 'flex' }} >
         <CssBaseline />
-        <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
+          <Navbar totalItems={cart.total_items} handleDrawerToggle={handleDrawerToggle} />
         <Switch>
-          <Route exact path="/">
-            <Home />
-            {/* <Products products={products} onAddToCart={handleAddToCart} handleUpdateCartQty /> */}
+            <Route exact path="/">
+              <Home products={products} onAddToCart={handleAddToCart} handleUpdateCartQty/>
           </Route>
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
