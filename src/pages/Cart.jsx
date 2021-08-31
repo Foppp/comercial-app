@@ -51,9 +51,9 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
               Back to Shopping
             </Link>
           </div>
-          <div className="column">
+          <div className="column float-end">
             <button
-              className="btn btn-danger"
+              className="btn btn-danger mx-3"
               type="button"
               onClick={handleEmptyCart}
             >

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { Toast } from "bootstrap";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";

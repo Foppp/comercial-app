@@ -29,19 +29,19 @@ const ProductDetails = ({ products, onAddToCart, toastRef }) => {
                 alt={`${product.name}`}
               />
             </div>
-            <div class=" col-md-6 d-flex flex-column justify-content-around bd-highlight mb-3">
-              <div class="p-2 text-center">
+            <div className=" col-md-6 d-flex flex-column justify-content-around bd-highlight mb-3">
+              <div className="p-2 text-center">
                 <div className="small mb-1">{product.sku}</div>
                 <h1 className="display-5 fw-bolder">{product.name}</h1>
               </div>
-              <div class="p-2 text-center">
+              <div className="p-2 text-center">
                 <div className="fs-5">
                   <span className="fs-3">
                     {product.price.formatted_with_symbol}
                   </span>
                 </div>
               </div>
-              <div class="p-2 d-flex justify-content-around text-center">
+              <div className="p-2 d-flex justify-content-around text-center">
                 <Link
                   to="/products"
                   className="btn btn-outline-dark"

@@ -3,7 +3,6 @@ import ProductItem from "./ProductItem";
 import ToastMessage from "../Toast/ToastMessage";
 
 const Products = ({ products, onAddToCart, toastRef }) => {
-  console.log(products);
   return (
     <div className="col-sm-6 col-md-8 col-lg-9">
       <section className="py-2">
