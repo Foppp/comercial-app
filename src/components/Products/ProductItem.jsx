@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductItem = ({ product, onAddToCart }) => {
   const handleAddToCart = () => onAddToCart(product.id, 1);
-
+  console.log("product ---->", product);
   return (
     <div className="col mb-5">
       <div className="card product-card h-100">
