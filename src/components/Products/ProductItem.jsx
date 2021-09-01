@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 const ProductItem = ({ product, onAddToCart }) => {
-  const handleAddToCart = () => onAddToCart(product.id, 1);
+  const dispatch = useDispatch();
 
   return (
     <div className="col mb-5">
@@ -28,7 +30,7 @@ const ProductItem = ({ product, onAddToCart }) => {
         <div className="card-footer pt-0 border-top-0 bg-transparent text-center">
           <button
             className="btn btn-outline-dark mt-auto"
-            onClick={handleAddToCart}
+            onClick={dispatch(onAddToCart(product.id, 1))}
           >
             Add to cart
           </button>

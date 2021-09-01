@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
 import ToastMessage from "../Toast/ToastMessage";
 
-const Products = ({ products, onAddToCart, toastRef }) => {
+import { commerce } from "./lib/commerce";
+
+const Products = ({ onAddToCart, toastRef }) => {
+  const products = useSelector((state) => state.productsInfoReducer.products);
+
   return (
     <div className="col-sm-6 col-md-8 col-lg-9">
       <section className="py-2">

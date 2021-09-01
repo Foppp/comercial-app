@@ -8,6 +8,24 @@ import Review from "../components/Checkout/Review";
 import Spinner from "../components/Spinner/Spinner";
 import Confirmation from "../components/Checkout/Confirmation";
 
+const refreshCart = () => async (dispatch) => {
+  const newCart = await commerce.cart.refresh();
+  dispatch(setCart(newCart));
+};
+
+const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+  try {
+    const incomingOrder = await commerce.checkout.capture(
+      checkoutTokenId,
+      newOrder
+    );
+    setOrder(incomingOrder);
+    refreshCart();
+  } catch (error) {
+    setErrorMessage(error.data.error.message);
+  }
+};
+
 const Checkout = ({
   cart,
   onCaptureCheckout,

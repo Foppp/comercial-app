@@ -1,14 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import ToastMessage from "../Toast/ToastMessage";
 
-const ProductDetails = ({ products, onAddToCart, toastRef }) => {
+const ProductDetails = ({ onAddToCart, toastRef }) => {
   const { id } = useParams();
+  const products = useSelector((state) => state.productsInfoReducer.products);
   const [product] = products.filter((item) => item.permalink === id);
-
-  const handleAddToCart = () => onAddToCart(product.id, 1);
+  const dispatch = useDispatch();
 
   if (products.length === 0)
     return (
@@ -51,7 +52,7 @@ const ProductDetails = ({ products, onAddToCart, toastRef }) => {
                 </Link>
                 <button
                   className="btn btn-outline-dark mt-auto"
-                  onClick={handleAddToCart}
+                  onClick={dispatch(onAddToCart(product.id, 1))}
                 >
                   Add to cart
                 </button>

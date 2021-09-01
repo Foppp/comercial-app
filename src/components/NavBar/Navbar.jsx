@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
@@ -9,10 +10,15 @@ const navbarMenuItems = [
   { id: 2, title: "Products", path: "/products" },
   { id: 3, title: "Contact", path: "/contact" },
 ];
-const Navbar = ({ totalItems }) => {
+
+const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
+
+  const totalItems = useSelector(
+    (state) => state.cartInfoReducer.cart.total_items
+  );
 
   const navToggleClass = cn("collapse navbar-collapse", {
     show: showNav,

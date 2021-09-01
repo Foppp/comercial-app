@@ -1,11 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../redux/cart";
 
-const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
-  const handleUpdateCartQty = (lineItemId, newQuantity) =>
-    onUpdateCartQty(lineItemId, newQuantity);
+import { commerce } from "./lib/commerce";
 
-  const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
+const handleUpdateCartQty = (lineItemId, quantity) => async (dispatch) => {
+  try {
+    const response = await commerce.cart.update(lineItemId, { quantity });
+    dispatch(setCart(response.cart));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const handleRemoveFromCart = (lineItemId) => async (dispatch) => {
+  const response = await commerce.cart.remove(lineItemId);
+  dispatch(setCart(response.cart));
+};
+
+const CartItem = ({ item }) => {
+  const dispatch = useDispatch();
+
+  // const handleUpdateCartQty = (lineItemId, newQuantity) =>
+  //   onUpdateCartQty(lineItemId, newQuantity);
+
+  // const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
 
   return (
     <div className="row text-center m-1 border rounded p-2">
@@ -45,7 +65,9 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={() => handleUpdateCartQty(item.id, item.quantity - 1)}
+            onClick={() =>
+              dispatch(handleUpdateCartQty(item.id, item.quantity - 1))
+            }
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +84,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
           <button
             type="button"
             className="btn"
-            onClick={() => handleRemoveFromCart(item.id)}
+            onClick={() => dispatch(handleRemoveFromCart(item.id))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
