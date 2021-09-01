@@ -5,6 +5,14 @@ export const checkoutInfo = createSlice({
   initialState: {
     steps: [],
     currentStep: 0,
+    order: null,
+    shippingData: null,
+    shippingCountries: [],
+    shippingCountry: '',
+    shippingSubdivisions: [],
+    shippingSubdivision: '',
+    shippingOptions: [],
+    shippingOption: '',
   },
   reducers: {
     setSteps: (state, action) => {
@@ -15,6 +23,30 @@ export const checkoutInfo = createSlice({
     },
     backStep: (state) => {
       state.currentStep -= 1;
+    },
+    setOrder: (state, action) => {
+      state.order = action.payload;
+    },
+    setShippingData: (state, action) => {
+      state.shippingData = action.payload;
+    },
+    setShippingCountries: (state, action) => {
+      state.shippingCountries = action.payload;
+    },
+    setShippingCountry: (state, action) => {
+      state.shippingCountry = action.payload;
+    },
+    setShippingSubdivisions: (state, action) => {
+      state.shippingSubdivisions = action.payload;
+    },
+    setShippingSubdivision: (state, action) => {
+      state.shippingSubdivision = action.payload;
+    },
+    setShippingOptions: (state, action) => {
+      state.shippingOptions = action.payload;
+    },
+    setShippingOption: (state, action) => {
+      state.shippingOption = action.payload;
     },
   }
 });
