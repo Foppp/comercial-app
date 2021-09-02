@@ -7,7 +7,7 @@ export const checkoutInfo = createSlice({
     currentStep: 1,
     checkoutToken: null,
     order: null,
-    shippingData: null,
+    shippingData: {},
     shippingCountries: [],
     shippingCountry: '',
     shippingSubdivisions: [],

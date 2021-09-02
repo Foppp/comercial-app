@@ -52,6 +52,9 @@ const AdressForm = () => {
     (state) => state.checkoutInfoReducer.checkoutToken
   );
   const cart = useSelector((state) => state.cartInfoReducer.cart);
+  const shippingData = useSelector(
+    (state) => state.checkoutInfoReducer.shippingData
+  );
   const shippingCountries = useSelector(
     (state) => state.checkoutInfoReducer.shippingCountries
   );
@@ -98,12 +101,12 @@ const AdressForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      address1: "",
-      city: "",
-      zip: "",
+      firstName: shippingData.firstName,
+      lastName: shippingData.lastName,
+      email: shippingData.email,
+      address1: shippingData.address1,
+      city: shippingData.city,
+      zip: shippingData.zip,
     },
     onSubmit: (data) => {
       submitShippingData({
@@ -135,7 +138,7 @@ const AdressForm = () => {
                   name="firstName"
                   placeholder="Name"
                   onChange={formik.handleChange}
-                  value={formik.values.firstName}
+                  defaultValue={formik.values.firstName}
                   required
                 />
                 <label htmlFor="firstName">First name</label>
@@ -150,7 +153,7 @@ const AdressForm = () => {
                   id="lastName"
                   placeholder="Last Name"
                   onChange={formik.handleChange}
-                  value={formik.values.lastName}
+                  defaultValue={formik.values.lastName}
                   required
                 />
                 <label htmlFor="lastName">Last name</label>
@@ -166,7 +169,7 @@ const AdressForm = () => {
                   name="email"
                   placeholder="you@example.com"
                   onChange={formik.handleChange}
-                  value={formik.values.email}
+                  defaultValue={formik.values.email}
                   required
                 />
                 <label htmlFor="email">Email</label>
@@ -183,7 +186,7 @@ const AdressForm = () => {
                   placeholder="1234 Main St"
                   required
                   onChange={formik.handleChange}
-                  value={formik.values.address1}
+                  defaultValue={formik.values.address1}
                 />
                 <label htmlFor="address1">Address</label>
                 <div className="invalid-feedback">
@@ -199,7 +202,7 @@ const AdressForm = () => {
                   placeholder="City"
                   required
                   onChange={formik.handleChange}
-                  value={formik.values.city}
+                  defaultValue={formik.values.city}
                 />
                 <label htmlFor="city">City</label>
                 <div className="invalid-feedback">Please enter your city.</div>
@@ -213,7 +216,7 @@ const AdressForm = () => {
                   placeholder="Zip"
                   required
                   onChange={formik.handleChange}
-                  value={formik.values.zip}
+                  defaultValue={formik.values.zip}
                 />
                 <label htmlFor="zip">Zip</label>
                 <div className="invalid-feedback">Zip code required.</div>
@@ -223,7 +226,7 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="country"
                   required
-                  // value={shippingCountry}
+                  // defaultValue="fdfdf"
                   onChange={(e) => dispatch(setShippingCountry(e.target.value))}
                 >
                   <option value={shippingCountry}>Select...</option>
