@@ -4,7 +4,7 @@ export const checkoutInfo = createSlice({
   name: 'checkout',
   initialState: {
     steps: [],
-    currentStep: 0,
+    currentStep: 1,
     checkoutToken: null,
     order: null,
     shippingData: null,
@@ -18,6 +18,9 @@ export const checkoutInfo = createSlice({
   reducers: {
     setSteps: (state, action) => {
       state.steps = action.payload;
+    },
+    setCurrentStep: (state, action) => {
+      state.currentStep = action.payload;
     },
     nextStep: (state) => {
       state.currentStep += 1;
@@ -57,6 +60,7 @@ export const checkoutInfo = createSlice({
 
 export const {
   setSteps,
+  setCurrentStep,
   nextStep,
   backStep,
   setOrder,

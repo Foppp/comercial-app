@@ -7,7 +7,12 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../redux/cart.js";
-import { setOrder, nextStep, backStep } from "../../redux/checkout.js";
+import {
+  setOrder,
+  nextStep,
+  backStep,
+  setCurrentStep,
+} from "../../redux/checkout.js";
 
 import { commerce } from "../../lib/commerce";
 
@@ -33,12 +38,13 @@ const Payment = () => {
   const [paymentStatus, setPaymentStatus] = useState(null);
   const dispatch = useDispatch();
   const checkoutToken = useSelector(
-    (state) => state.ccheckoutInfoReducer.checkoutToken
+    (state) => state.checkoutInfoReducer.checkoutToken
   );
   const shippingData = useSelector(
-    (state) => state.ccheckoutInfoReducer.shippingData
+    (state) => state.checkoutInfoReducer.shippingData
   );
-  const handleSubmit = async (event, elements, stripe) => {
+
+  const handleSubmit = (event, elements, stripe) => async (dispatch) => {
     event.preventDefault();
 
     if (!stripe || !elements) return;
@@ -88,42 +94,39 @@ const Payment = () => {
   };
 
   return (
-    <div className="card checkout-card shadow-sm">
-      <div className="container">
-        <main>
-          <div className="py-5 text-center">
-            <h2>Order Payment</h2>
-          </div>
-          <Elements stripe={stripePromise}>
-            <ElementsConsumer>
-              {({ elements, stripe }) => (
-                <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
-                  <CardElement />
-                  {errorMessage && (
-                    <p className="text-center text-danger mt-3">
-                      {errorMessage}
-                    </p>
-                  )}
-                  <br /> <br />
-                  <div className="d-flex justify-content-between m-3">
-                    <button className="btn btn-secondary" onClick={backStep}>
-                      Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-success"
-                      disabled={!stripe || paymentStatus === "processing"}
-                    >
-                      Pay {checkoutToken.live.subtotal.formatted_with_symbol}
-                    </button>
-                  </div>
-                </form>
-              )}
-            </ElementsConsumer>
-          </Elements>
-        </main>
+    <main>
+      <div className="py-5 text-center">
+        <h2>Order Payment</h2>
       </div>
-    </div>
+      <Elements stripe={stripePromise}>
+        <ElementsConsumer>
+          {({ elements, stripe }) => (
+            <form onSubmit={(e) => dispatch(handleSubmit(e, elements, stripe))}>
+              <CardElement />
+              {errorMessage && (
+                <p className="text-center text-danger mt-3">{errorMessage}</p>
+              )}
+              <br /> <br />
+              <div className="d-flex justify-content-between m-3">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => dispatch(backStep())}
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  disabled={!stripe || paymentStatus === "processing"}
+                >
+                  Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                </button>
+              </div>
+            </form>
+          )}
+        </ElementsConsumer>
+      </Elements>
+    </main>
   );
 };
 
