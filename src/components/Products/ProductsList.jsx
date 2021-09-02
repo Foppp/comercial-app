@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
 import ToastMessage from "../Toast/ToastMessage";
 
-import { commerce } from "./lib/commerce";
-
 const Products = ({ onAddToCart, toastRef }) => {
   const products = useSelector((state) => state.productsInfoReducer.products);
 

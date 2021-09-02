@@ -1,8 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 
-const Confirmation = ({ error, order, backStep, shippingData }) => {
+const Confirmation = ({ error }) => {
+  const order = useSelector((state) => state.checkoutInfoReducer.order);
+  const shippingData = useSelector(
+    (state) => state.checkoutInfoReducer.shippingData
+  );
+
   return (
     <div>
       {error ? (

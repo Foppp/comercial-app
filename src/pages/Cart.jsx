@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "./redux/cart.js";
+import { setCart } from "../redux/cart.js";
 
-import { commerce } from "./lib/commerce";
+import { commerce } from "../lib/commerce";
 
 import CartItem from "../components/Cart/CartItem";
 import Spinner from "../components/Spinner/Spinner";
@@ -60,7 +60,7 @@ const Cart = () => {
             <button
               className="btn btn-danger mx-3"
               type="button"
-              onClick={dispatch(handleEmptyCart())}
+              onClick={() => dispatch(handleEmptyCart())}
             >
               Clear Cart
             </button>

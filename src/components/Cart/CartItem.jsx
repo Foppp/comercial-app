@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCart } from "../../redux/cart";
+import { setCart } from "../../redux/cart.js";
 
-import { commerce } from "./lib/commerce";
+import { commerce } from "../../lib/commerce.js";
 
 const handleUpdateCartQty = (lineItemId, quantity) => async (dispatch) => {
   try {
@@ -21,11 +21,6 @@ const handleRemoveFromCart = (lineItemId) => async (dispatch) => {
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-
-  // const handleUpdateCartQty = (lineItemId, newQuantity) =>
-  //   onUpdateCartQty(lineItemId, newQuantity);
-
-  // const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
 
   return (
     <div className="row text-center m-1 border rounded p-2">
@@ -47,7 +42,9 @@ const CartItem = ({ item }) => {
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={() => handleUpdateCartQty(item.id, item.quantity + 1)}
+            onClick={() =>
+              dispatch(handleUpdateCartQty(item.id, item.quantity + 1))
+            }
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -1,62 +1,99 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import {
+  nextStep,
+  setShippingData,
+  setShippingCountries,
+  setShippingCountry,
+  setShippingSubdivisions,
+  setShippingSubdivision,
+  setShippingOptions,
+  setShippingOption,
+} from "../../redux/checkout.js";
 import { commerce } from "../../lib/commerce";
 
-const AdressForm = ({ checkoutToken, totalItems, submitShippingData }) => {
-  const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState("");
-  const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  const [shippingSubdivision, setShippingSubdivision] = useState("");
-  const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState("");
+const fetchShippingCountries = (checkoutTokenId) => async (dispatch) => {
+  const { countries } = await commerce.services.localeListShippingCountries(
+    checkoutTokenId
+  );
 
-  const fetchShippingCountries = async (checkoutTokenId) => {
-    const { countries } = await commerce.services.localeListShippingCountries(
-      checkoutTokenId
-    );
+  dispatch(setShippingCountries(countries));
+};
 
-    setShippingCountries(countries);
-  };
+const fetchSubdivisions = (countryCode) => async (dispatch) => {
+  const { subdivisions } = await commerce.services.localeListSubdivisions(
+    countryCode
+  );
 
-  const fetchSubdivisions = async (countryCode) => {
-    const { subdivisions } = await commerce.services.localeListSubdivisions(
-      countryCode
-    );
+  dispatch(setShippingSubdivisions(subdivisions));
+};
 
-    setShippingSubdivisions(subdivisions);
-  };
-
-  const fetchShippingOptions = async (
-    checkoutTokenId,
-    country,
-    stateProvince = null
-  ) => {
+const fetchShippingOptions =
+  (checkoutTokenId, country, stateProvince = null) =>
+  async (dispatch) => {
     const options = await commerce.checkout.getShippingOptions(
       checkoutTokenId,
-      { country, region: stateProvince }
+      {
+        country,
+        region: stateProvince,
+      }
     );
 
-    setShippingOptions(options);
+    dispatch(setShippingOptions(options));
+  };
+
+const AdressForm = () => {
+  const dispatch = useDispatch();
+  const checkoutToken = useSelector(
+    (state) => state.checkoutInfoReducer.checkoutToken
+  );
+  const cart = useSelector((state) => state.cartInfoReducer.cart);
+  const shippingCountries = useSelector(
+    (state) => state.checkoutInfoReducer.shippingCountries
+  );
+  const shippingCountry = useSelector(
+    (state) => state.checkoutInfoReducer.shippingCountry
+  );
+  const shippingSubdivisions = useSelector(
+    (state) => state.checkoutInfoReducer.shippingSubdivisions
+  );
+  const shippingSubdivision = useSelector(
+    (state) => state.checkoutInfoReducer.shippingSubdivision
+  );
+  const shippingOptions = useSelector(
+    (state) => state.checkoutInfoReducer.shippingOptions
+  );
+  const shippingOption = useSelector(
+    (state) => state.checkoutInfoReducer.shippingOption
+  );
+  const totalItems = cart.total_items;
+
+  const submitShippingData = (data) => {
+    dispatch(setShippingData(data));
+    dispatch(nextStep());
   };
 
   useEffect(() => {
-    fetchShippingCountries(checkoutToken.id);
-  }, []);
+    dispatch(fetchShippingCountries(checkoutToken.id));
+  }, [dispatch]);
 
   useEffect(() => {
-    if (shippingCountry) fetchSubdivisions(shippingCountry);
-  }, [shippingCountry]);
+    if (shippingCountry) dispatch(fetchSubdivisions(shippingCountry));
+  }, [dispatch]);
 
   useEffect(() => {
     if (shippingSubdivision)
-      fetchShippingOptions(
-        checkoutToken.id,
-        shippingCountry,
-        shippingSubdivision
+      dispatch(
+        fetchShippingOptions(
+          checkoutToken.id,
+          shippingCountry,
+          shippingSubdivision
+        )
       );
-  }, [shippingSubdivision]);
+  }, [dispatch]);
 
   const formik = useFormik({
     initialValues: {

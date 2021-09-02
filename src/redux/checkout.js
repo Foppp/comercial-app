@@ -5,6 +5,7 @@ export const checkoutInfo = createSlice({
   initialState: {
     steps: [],
     currentStep: 0,
+    checkoutToken: null,
     order: null,
     shippingData: null,
     shippingCountries: [],
@@ -26,6 +27,9 @@ export const checkoutInfo = createSlice({
     },
     setOrder: (state, action) => {
       state.order = action.payload;
+    },
+    setCheckoutToken: (state, action) => {
+      state.checkoutToken = action.payload;
     },
     setShippingData: (state, action) => {
       state.shippingData = action.payload;
@@ -55,6 +59,15 @@ export const {
   setSteps,
   nextStep,
   backStep,
+  setOrder,
+  setCheckoutToken,
+  setShippingData,
+  setShippingCountries,
+  setShippingCountry,
+  setShippingSubdivisions,
+  setShippingSubdivision,
+  setShippingOptions,
+  setShippingOption,
 } = checkoutInfo.actions;
 
 export default checkoutInfo.reducer;

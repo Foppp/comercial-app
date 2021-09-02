@@ -1,99 +1,61 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-
-import { commerce } from "../lib/commerce";
+import { useSelector, useDispatch } from "react-redux";
+import { setOrder, setCheckoutToken } from "../redux/checkout.js";
+import { setCart } from "../redux/cart.js";
+import { commerce } from "../lib/commerce.js";
 import Payment from "../components/Checkout/Payment";
 import AdressForm from "../components/Checkout/AdressFormPayment";
 import Review from "../components/Checkout/Review";
 import Spinner from "../components/Spinner/Spinner";
 import Confirmation from "../components/Checkout/Confirmation";
 
-const refreshCart = () => async (dispatch) => {
-  const newCart = await commerce.cart.refresh();
-  dispatch(setCart(newCart));
-};
+const Checkout = ({ error, setErrorMessage }) => {
+  const cart = useSelector((state) => state.cartInfoReducer.cart);
+  // const totalItems = cart.total_items;
+  const order = useSelector((state) => state.checkoutInfoReducer.order);
+  const checkoutToken = useSelector(
+    (state) => state.checkoutInfoReducer.checkoutToken
+  );
 
-const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
-  try {
-    const incomingOrder = await commerce.checkout.capture(
-      checkoutTokenId,
-      newOrder
-    );
-    setOrder(incomingOrder);
-    refreshCart();
-  } catch (error) {
-    setErrorMessage(error.data.error.message);
-  }
-};
+  const currentStep = useSelector(
+    (state) => state.checkoutInfoReducer.currentStep
+  );
 
-const Checkout = ({
-  cart,
-  onCaptureCheckout,
-  order,
-  error,
-  totalItems,
-  setErrorMessage,
-  setOrder,
-}) => {
-  const [checkoutToken, setCheckoutToken] = useState(null);
-  const [activeStep, setActiveStep] = useState(0);
-  const [shippingData, setShippingData] = useState({});
+  const dispatch = useDispatch();
+  // const [checkoutToken, setCheckoutToken] = useState(null);
+  // const [currentStep, setActiveStep] = useState(0);
+  // const [shippingData, setShippingData] = useState({});
 
-  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   useEffect(() => {
-    setErrorMessage("");
-    setOrder(null);
+    // setErrorMessage("");
+    // dispatch(setOrder(null));
 
     if (cart.id) {
-      const generateToken = async () => {
+      const generateToken = () => async (dispatch) => {
         try {
           const token = await commerce.checkout.generateToken(cart.id, {
             type: "cart",
           });
-          setCheckoutToken(token);
+          dispatch(setCheckoutToken(token));
         } catch (e) {
           console.log(e);
         }
       };
-      generateToken();
+      dispatch(generateToken());
     }
-  }, [activeStep, setErrorMessage, setOrder]);
-
-  const submitShippingData = (data) => {
-    setShippingData(data);
-    nextStep();
-  };
+  }, [dispatch]);
 
   const Form = () => {
     const steps = {
-      0: () => (
-        <AdressForm
-          checkoutToken={checkoutToken}
-          nextStep={nextStep}
-          submitShippingData={submitShippingData}
-        />
-      ),
-      1: () => (
-        <Review
-          checkoutToken={checkoutToken}
-          shippingData={shippingData}
-          nextStep={nextStep}
-          backStep={backStep}
-        />
-      ),
-      2: () => (
-        <Payment
-          checkoutToken={checkoutToken}
-          nextStep={nextStep}
-          backStep={backStep}
-          shippingData={shippingData}
-          onCaptureCheckout={onCaptureCheckout}
-        />
-      ),
+      0: () => <AdressForm />,
+      1: () => <Review />,
+      2: () => <Payment />,
     };
-    return steps[activeStep]();
+    return steps[currentStep]();
   };
 
   return (
@@ -102,18 +64,7 @@ const Checkout = ({
         {!checkoutToken ? (
           <Spinner />
         ) : (
-          <>
-            {activeStep === 3 ? (
-              <Confirmation
-                order={order}
-                error={error}
-                backStep={backStep}
-                shippingData={shippingData}
-              />
-            ) : (
-              <Form />
-            )}
-          </>
+          <>{currentStep === 3 ? <Confirmation error={error} /> : <Form />}</>
         )}
       </div>
     </div>

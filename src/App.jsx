@@ -15,7 +15,7 @@ import Footer from "./components/Footer/Footer";
 
 import "./style.css";
 
-import { commerce } from "./lib/commerce";
+import { commerce } from "./lib/commerce.js";
 import ProductDetails from "./components/Products/ProductDetails";
 
 const fetchProducts = () => async (dispatch) => {
@@ -39,8 +39,6 @@ const handleAddToCart = (productId, quantity) => async (dispatch) => {
 };
 
 const App = () => {
-  // const [products, setProducts] = useState([]);
-  // const [cart, setCart] = useState({});
   const [order, setOrder] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const toastRef = useRef(null);
@@ -51,55 +49,6 @@ const App = () => {
     const toast = new Toast(toastRef.current);
     toast.show();
   };
-
-  // const handleAddToCart = async (productId, quantity) => {
-  //   try {
-  //     const item = await commerce.cart.add(productId, quantity);
-  //     setCart(item.cart);
-  //     showToast();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const handleUpdateCartQty = async (lineItemId, quantity) => {
-  //   try {
-  //     const response = await commerce.cart.update(lineItemId, { quantity });
-  //     setCart(response.cart);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const handleRemoveFromCart = async (lineItemId) => {
-  //   const response = await commerce.cart.remove(lineItemId);
-
-  //   setCart(response.cart);
-  // };
-
-  // const handleEmptyCart = async () => {
-  //   const response = await commerce.cart.empty();
-
-  //   setCart(response.cart);
-  // };
-
-  // const refreshCart = async () => {
-  //   const newCart = await commerce.cart.refresh();
-  //   setCart(newCart);
-  // };
-
-  // const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
-  //   try {
-  //     const incomingOrder = await commerce.checkout.capture(
-  //       checkoutTokenId,
-  //       newOrder
-  //     );
-  //     setOrder(incomingOrder);
-  //     refreshCart();
-  //   } catch (error) {
-  //     setErrorMessage(error.data.error.message);
-  //   }
-  // };
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -114,11 +63,7 @@ const App = () => {
           <Home />
         </Route>
         <Route exact path="/products">
-          <Products
-            onAddToCart={handleAddToCart}
-            handleUpdateCartQty
-            toastRef={toastRef}
-          />
+          <Products onAddToCart={handleAddToCart} toastRef={toastRef} />
         </Route>
         <Route exact path="/contact">
           <Contact />
@@ -128,12 +73,8 @@ const App = () => {
         </Route>
         <Route exact path="/checkout">
           <Checkout
-            cart={cart}
-            totalItems={cart.total_items}
-            order={order}
-            onCaptureCheckout={handleCaptureCheckout}
             error={errorMessage}
-            setOrder={setOrder}
+            // setOrder={setOrder}
             setErrorMessage={setErrorMessage}
           />
         </Route>

@@ -5,19 +5,39 @@ import {
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../redux/cart.js";
+import { setOrder, nextStep, backStep } from "../../redux/checkout.js";
+
+import { commerce } from "../../lib/commerce";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Payment = ({
-  checkoutToken,
-  nextStep,
-  backStep,
-  shippingData,
-  onCaptureCheckout,
-}) => {
+const refreshCart = () => async (dispatch) => {
+  const newCart = await commerce.cart.refresh();
+  dispatch(setCart(newCart));
+};
+
+const handleCaptureCheckout =
+  (checkoutTokenId, newOrder) => async (dispatch) => {
+    const incomingOrder = await commerce.checkout.capture(
+      checkoutTokenId,
+      newOrder
+    );
+    dispatch(setOrder(incomingOrder));
+    dispatch(refreshCart());
+  };
+
+const Payment = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
-
+  const dispatch = useDispatch();
+  const checkoutToken = useSelector(
+    (state) => state.ccheckoutInfoReducer.checkoutToken
+  );
+  const shippingData = useSelector(
+    (state) => state.ccheckoutInfoReducer.shippingData
+  );
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
 
@@ -62,8 +82,8 @@ const Payment = ({
       };
       setPaymentStatus("fulfilled");
       setErrorMessage(null);
-      onCaptureCheckout(checkoutToken.id, orderData);
-      nextStep();
+      dispatch(handleCaptureCheckout(checkoutToken.id, orderData));
+      dispatch(nextStep());
     }
   };
 

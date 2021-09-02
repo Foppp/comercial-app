@@ -52,7 +52,7 @@ const ProductDetails = ({ onAddToCart, toastRef }) => {
                 </Link>
                 <button
                   className="btn btn-outline-dark mt-auto"
-                  onClick={dispatch(onAddToCart(product.id, 1))}
+                  onClick={() => dispatch(onAddToCart(product.id, 1))}
                 >
                   Add to cart
                 </button>

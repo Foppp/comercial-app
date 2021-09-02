@@ -1,6 +1,16 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep, backStep } from "../../redux/checkout.js";
 
-const Review = ({ checkoutToken, shippingData, nextStep, backStep }) => {
+const Review = () => {
+  const checkoutToken = useSelector(
+    (state) => state.ccheckoutInfoReducer.checkoutToken
+  );
+  const shippingData = useSelector(
+    (state) => state.ccheckoutInfoReducer.shippingData
+  );
+  const dispatch = useDispatch();
+
   return (
     <div className="card checkout-card shadow-sm">
       <div className="col-lg-12 order-last">
@@ -73,14 +83,14 @@ const Review = ({ checkoutToken, shippingData, nextStep, backStep }) => {
           <button
             className="btn btn-secondary"
             type="button"
-            onClick={backStep}
+            onClick={dispatch(backStep())}
           >
             Back
           </button>
           <button
             className="full-width btn btn-primary"
             type="submit"
-            onClick={nextStep}
+            onClick={dispatch(nextStep())}
           >
             Continue to payment
           </button>

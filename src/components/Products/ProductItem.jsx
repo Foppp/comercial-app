@@ -30,7 +30,7 @@ const ProductItem = ({ product, onAddToCart }) => {
         <div className="card-footer pt-0 border-top-0 bg-transparent text-center">
           <button
             className="btn btn-outline-dark mt-auto"
-            onClick={dispatch(onAddToCart(product.id, 1))}
+            onClick={() => dispatch(onAddToCart(product.id, 1))}
           >
             Add to cart
           </button>
