@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Elements,
   CardElement,
@@ -7,16 +7,17 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../redux/cart.js";
+import { setOrder, nextStep, backStep } from "../../redux/checkout.js";
 import {
-  setOrder,
-  nextStep,
-  backStep,
-  setCurrentStep,
-} from "../../redux/checkout.js";
-
+  setPaymentStatus,
+  setPaymentErrorMessage,
+} from "../../redux/payment.js";
+import PayButton from "./PayButton.jsx";
 import { commerce } from "../../lib/commerce";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, {
+  locale: "en",
+});
 
 const refreshCart = () => async (dispatch) => {
   const newCart = await commerce.cart.refresh();
@@ -25,71 +26,78 @@ const refreshCart = () => async (dispatch) => {
 
 const handleCaptureCheckout =
   (checkoutTokenId, newOrder) => async (dispatch) => {
-    const incomingOrder = await commerce.checkout.capture(
-      checkoutTokenId,
-      newOrder
-    );
-    dispatch(setOrder(incomingOrder));
-    dispatch(refreshCart());
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      dispatch(setOrder(incomingOrder));
+      dispatch(refreshCart());
+      dispatch(setPaymentStatus("fulfilled"));
+      dispatch(setPaymentErrorMessage(null));
+      dispatch(nextStep());
+    } catch (e) {
+      dispatch(setPaymentStatus("rejected"));
+      dispatch(setPaymentErrorMessage(e.data.error.message));
+    }
   };
 
 const Payment = () => {
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [paymentStatus, setPaymentStatus] = useState(null);
+  const paymentErrorMessage = useSelector(
+    (state) => state.paymentInfoReducer.paymentErrorMessage
+  );
+
   const dispatch = useDispatch();
   const checkoutToken = useSelector(
     (state) => state.checkoutInfoReducer.checkoutToken
   );
   const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shippingData
+    (state) => state.checkoutInfoReducer.shipping.shippingData
   );
-
   const handleSubmit = (event, elements, stripe) => async (dispatch) => {
     event.preventDefault();
 
     if (!stripe || !elements) return;
-
-    setPaymentStatus("processing");
+    dispatch(setPaymentErrorMessage(null));
+    dispatch(setPaymentStatus("processing"));
 
     const cardElement = elements.getElement(CardElement);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    });
-
-    if (error) {
-      console.log(error);
-      setPaymentStatus("rejected");
-      setErrorMessage(error.message);
-    } else {
-      const orderData = {
-        line_items: checkoutToken.live.line_items,
-        customer: {
-          firstname: shippingData.firstName,
-          lastname: shippingData.lastName,
-          email: shippingData.email,
-        },
-        shipping: {
-          name: "International",
-          street: shippingData.address1,
-          town_city: shippingData.city,
-          county_state: shippingData.shippingSubdivision,
-          postal_zip_code: shippingData.zip,
-          country: shippingData.shippingCountry,
-        },
-        fulfillment: { shipping_method: shippingData.shippingOption },
-        payment: {
-          gateway: "stripe",
-          stripe: {
-            payment_method_id: paymentMethod.id,
+    try {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+      });
+      if (error) {
+        throw error;
+      } else {
+        const orderData = {
+          line_items: checkoutToken.live.line_items,
+          customer: {
+            firstname: shippingData.firstName,
+            lastname: shippingData.lastName,
+            email: shippingData.email,
           },
-        },
-      };
-      setPaymentStatus("fulfilled");
-      setErrorMessage(null);
-      dispatch(handleCaptureCheckout(checkoutToken.id, orderData));
-      dispatch(nextStep());
+          shipping: {
+            name: "International",
+            street: shippingData.address1,
+            town_city: shippingData.city,
+            county_state: shippingData.shippingSubdivision,
+            postal_zip_code: shippingData.zip,
+            country: shippingData.shippingCountry,
+          },
+          fulfillment: { shipping_method: shippingData.shippingOption },
+          payment: {
+            gateway: "stripe",
+            stripe: {
+              payment_method_id: paymentMethod.id,
+            },
+          },
+        };
+        dispatch(handleCaptureCheckout(checkoutToken.id, orderData));
+      }
+    } catch (e) {
+      dispatch(setPaymentStatus("rejected"));
+      dispatch(setPaymentErrorMessage(e.message));
     }
   };
 
@@ -103,8 +111,10 @@ const Payment = () => {
           {({ elements, stripe }) => (
             <form onSubmit={(e) => dispatch(handleSubmit(e, elements, stripe))}>
               <CardElement />
-              {errorMessage && (
-                <p className="text-center text-danger mt-3">{errorMessage}</p>
+              {paymentErrorMessage && (
+                <p className="text-center text-danger mt-3">
+                  {paymentErrorMessage}
+                </p>
               )}
               <br /> <br />
               <div className="d-flex justify-content-between m-3">
@@ -114,13 +124,7 @@ const Payment = () => {
                 >
                   Back
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-success"
-                  disabled={!stripe || paymentStatus === "processing"}
-                >
-                  Pay {checkoutToken.live.subtotal.formatted_with_symbol}
-                </button>
+                <PayButton stripe={stripe} />
               </div>
             </form>
           )}

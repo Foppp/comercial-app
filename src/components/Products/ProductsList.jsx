@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
-import ToastMessage from "../Toast/ToastMessage";
 
-const Products = ({ onAddToCart, toastRef }) => {
+const Products = ({ onAddToCart }) => {
   const products = useSelector((state) => state.productsInfoReducer.products);
 
   return (
@@ -29,7 +28,6 @@ const Products = ({ onAddToCart, toastRef }) => {
           </div>
         </div>
       </section>
-      <ToastMessage toastRef={toastRef} message="Item was added to cart!" />
     </div>
   );
 };

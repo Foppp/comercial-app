@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import {
   nextStep,
-  setCurrentStep,
   setShippingData,
   setShippingCountries,
   setShippingCountry,
@@ -51,29 +50,27 @@ const AdressForm = () => {
   const checkoutToken = useSelector(
     (state) => state.checkoutInfoReducer.checkoutToken
   );
-  const cart = useSelector((state) => state.cartInfoReducer.cart);
   const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shippingData
+    (state) => state.checkoutInfoReducer.shipping.shippingData
   );
   const shippingCountries = useSelector(
-    (state) => state.checkoutInfoReducer.shippingCountries
+    (state) => state.checkoutInfoReducer.shipping.shippingCountries
   );
   const shippingCountry = useSelector(
-    (state) => state.checkoutInfoReducer.shippingCountry
+    (state) => state.checkoutInfoReducer.shipping.shippingCountry
   );
   const shippingSubdivisions = useSelector(
-    (state) => state.checkoutInfoReducer.shippingSubdivisions
+    (state) => state.checkoutInfoReducer.shipping.shippingSubdivisions
   );
   const shippingSubdivision = useSelector(
-    (state) => state.checkoutInfoReducer.shippingSubdivision
+    (state) => state.checkoutInfoReducer.shipping.shippingSubdivision
   );
   const shippingOptions = useSelector(
-    (state) => state.checkoutInfoReducer.shippingOptions
+    (state) => state.checkoutInfoReducer.shipping.shippingOptions
   );
   const shippingOption = useSelector(
-    (state) => state.checkoutInfoReducer.shippingOption
+    (state) => state.checkoutInfoReducer.shipping.shippingOption
   );
-  const totalItems = cart.total_items;
 
   const submitShippingData = (data) => {
     dispatch(setShippingData(data));

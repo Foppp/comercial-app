@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Toast } from "bootstrap";
-import { setProducts } from "./redux/products.js";
-import { setCart } from "./redux/cart.js";
-
+import { setProducts, setProductsErrorMessage } from "./redux/products.js";
+import { setCart, setCartErrorMessage } from "./redux/cart.js";
+import showNotification from "./components/ToastNotification/index.js";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -17,38 +16,40 @@ import "./style.css";
 
 import { commerce } from "./lib/commerce.js";
 import ProductDetails from "./components/Products/ProductDetails";
+import ToastMessage from "./components/ToastNotification/ToastNotification.jsx";
 
 const fetchProducts = () => async (dispatch) => {
-  const { data } = await commerce.products.list();
-  dispatch(setProducts(data));
+  try {
+    const { data } = await commerce.products.list();
+    dispatch(setProducts(data));
+  } catch (e) {
+    dispatch(setProductsErrorMessage(e.message));
+  }
 };
 
 const fetchCart = () => async (dispatch) => {
-  const cart = await commerce.cart.retrieve();
-  dispatch(setCart(cart));
+  try {
+    const cart = await commerce.cart.retrieve();
+    dispatch(setCart(cart));
+  } catch (e) {
+    dispatch(setCartErrorMessage(e.message));
+  }
 };
 
 const handleAddToCart = (productId, quantity) => async (dispatch) => {
   try {
     const item = await commerce.cart.add(productId, quantity);
     dispatch(setCart(item.cart));
-    // showToast();
+    dispatch(showNotification("success", "Item was added to cart!"));
   } catch (e) {
-    console.log(e);
+    dispatch(
+      showNotification("danger", "Item was NOT added to cart! Try again!")
+    );
   }
 };
 
 const App = () => {
-  const [order, setOrder] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const toastRef = useRef(null);
-
   const dispatch = useDispatch();
-
-  const showToast = () => {
-    const toast = new Toast(toastRef.current);
-    toast.show();
-  };
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -63,7 +64,7 @@ const App = () => {
           <Home />
         </Route>
         <Route exact path="/products">
-          <Products onAddToCart={handleAddToCart} toastRef={toastRef} />
+          <Products onAddToCart={handleAddToCart} />
         </Route>
         <Route exact path="/contact">
           <Contact />
@@ -72,17 +73,14 @@ const App = () => {
           <Cart />
         </Route>
         <Route exact path="/checkout">
-          <Checkout
-            error={errorMessage}
-            // setOrder={setOrder}
-            setErrorMessage={setErrorMessage}
-          />
+          <Checkout />
         </Route>
         <Route path="/products/:id">
-          <ProductDetails onAddToCart={handleAddToCart} toastRef={toastRef} />
+          <ProductDetails onAddToCart={handleAddToCart} />
         </Route>
       </Switch>
       <Footer />
+      <ToastMessage />
     </Router>
   );
 };

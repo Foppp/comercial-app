@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
-import ToastMessage from "../Toast/ToastMessage";
 
-const ProductDetails = ({ onAddToCart, toastRef }) => {
+const ProductDetails = ({ onAddToCart }) => {
   const { id } = useParams();
   const products = useSelector((state) => state.productsInfoReducer.products);
   const [product] = products.filter((item) => item.permalink === id);
@@ -69,7 +68,6 @@ const ProductDetails = ({ onAddToCart, toastRef }) => {
           </div>
         </div>
       </div>
-      <ToastMessage toastRef={toastRef} message="Item was added to cart!" />
     </section>
   ) : (
     <section>

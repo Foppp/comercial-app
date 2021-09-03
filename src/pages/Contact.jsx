@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import emailjs from "emailjs-com";
 import { Toast } from "bootstrap";
-import ToastMessage from "../components/Toast/ToastMessage";
+import ToastMessage from "../components/ToastNotification/ToastNotification";
 
 const Contact = () => {
   const [messageStatus, setMessageStatus] = useState(null);

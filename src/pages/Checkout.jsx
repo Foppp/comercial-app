@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setCheckoutToken,
   setCurrentStep,
-  setOrder,
+  setShippingData,
+  setErrorMessage,
 } from "../redux/checkout.js";
 import { commerce } from "../lib/commerce.js";
 import Spinner from "../components/Spinner/Spinner";
 import CheckoutForm from "../components/Checkout/index.jsx";
 
-const Checkout = ({ error, setErrorMessage }) => {
+const Checkout = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const checkoutToken = useSelector(
     (state) => state.checkoutInfoReducer.checkoutToken
@@ -19,9 +20,6 @@ const Checkout = ({ error, setErrorMessage }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setErrorMessage("");
-    dispatch(setOrder(null));
-
     if (cart.id) {
       const generateToken = () => async (dispatch) => {
         try {
@@ -30,9 +28,10 @@ const Checkout = ({ error, setErrorMessage }) => {
           });
           dispatch(setCheckoutToken(token));
         } catch (e) {
-          console.log(e);
+          dispatch(setErrorMessage(e.message));
         }
       };
+      dispatch(setShippingData({}));
       dispatch(generateToken());
       dispatch(setCurrentStep(1));
     }

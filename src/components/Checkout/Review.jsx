@@ -7,7 +7,7 @@ const Review = () => {
     (state) => state.checkoutInfoReducer.checkoutToken
   );
   const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shippingData
+    (state) => state.checkoutInfoReducer.shipping.shippingData
   );
   const dispatch = useDispatch();
 

@@ -5,6 +5,7 @@ export const productsInfo = createSlice({
   initialState: {
     products: [],
     currentProductId: null,
+    productsErrorMessage: null,
   },
   reducers: {
     setProducts: (state, action) => {
@@ -13,12 +14,16 @@ export const productsInfo = createSlice({
     setCurrentProductId: (state, action) => {
       state.currentProductId = action.payload;
     },
+    setProductsErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    },
   }
 });
 
 export const {
   setProducts,
   setCurrentProductId,
+  setProductsErrorMessage,
 } = productsInfo.actions;
 
 export default productsInfo.reducer;

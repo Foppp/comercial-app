@@ -3,11 +3,11 @@ import React from "react";
 import Filters from "../components/Filters/Filters";
 import ProductsList from "../components/Products/ProductsList";
 
-const Products = ({ toastRef, onAddToCart }) => {
+const Products = ({ onAddToCart }) => {
   return (
     <div className="row products-container">
       <Filters />
-      <ProductsList onAddToCart={onAddToCart} toastRef={toastRef} />
+      <ProductsList onAddToCart={onAddToCart} />
     </div>
   );
 };

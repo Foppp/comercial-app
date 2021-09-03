@@ -1,25 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCart } from "../../redux/cart.js";
 
-import { commerce } from "../../lib/commerce.js";
-
-const handleUpdateCartQty = (lineItemId, quantity) => async (dispatch) => {
-  try {
-    const response = await commerce.cart.update(lineItemId, { quantity });
-    dispatch(setCart(response.cart));
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const handleRemoveFromCart = (lineItemId) => async (dispatch) => {
-  const response = await commerce.cart.remove(lineItemId);
-  dispatch(setCart(response.cart));
-};
-
-const CartItem = ({ item }) => {
+const CartItem = ({ item, onRemove, onUpdateQty }) => {
   const dispatch = useDispatch();
 
   return (
@@ -42,9 +25,7 @@ const CartItem = ({ item }) => {
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={() =>
-              dispatch(handleUpdateCartQty(item.id, item.quantity + 1))
-            }
+            onClick={() => dispatch(onUpdateQty(item.id, item.quantity + 1))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +43,7 @@ const CartItem = ({ item }) => {
           <button
             type="button"
             className="btn btn-light btn-sm"
-            onClick={() =>
-              dispatch(handleUpdateCartQty(item.id, item.quantity - 1))
-            }
+            onClick={() => dispatch(onUpdateQty(item.id, item.quantity - 1))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +60,7 @@ const CartItem = ({ item }) => {
           <button
             type="button"
             className="btn"
-            onClick={() => dispatch(handleRemoveFromCart(item.id))}
+            onClick={() => dispatch(onRemove(item.id))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

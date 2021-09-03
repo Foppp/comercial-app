@@ -3,17 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export const checkoutInfo = createSlice({
   name: 'checkout',
   initialState: {
-    steps: [],
     currentStep: 1,
     checkoutToken: null,
     order: null,
-    shippingData: {},
-    shippingCountries: [],
-    shippingCountry: '',
-    shippingSubdivisions: [],
-    shippingSubdivision: '',
-    shippingOptions: [],
-    shippingOption: '',
+    shipping: {
+      shippingData: {},
+      shippingCountries: [],
+      shippingCountry: '',
+      shippingSubdivisions: [],
+      shippingSubdivision: '',
+      shippingOptions: [],
+      shippingOption: '',
+    },
+    errorMessage: '',
   },
   reducers: {
     setSteps: (state, action) => {
@@ -35,26 +37,29 @@ export const checkoutInfo = createSlice({
       state.checkoutToken = action.payload;
     },
     setShippingData: (state, action) => {
-      state.shippingData = action.payload;
+      state.shipping.shippingData = action.payload;
     },
     setShippingCountries: (state, action) => {
-      state.shippingCountries = action.payload;
+      state.shipping.shippingCountries = action.payload;
     },
     setShippingCountry: (state, action) => {
-      state.shippingCountry = action.payload;
+      state.shipping.shippingCountry = action.payload;
     },
     setShippingSubdivisions: (state, action) => {
-      state.shippingSubdivisions = action.payload;
+      state.shipping.shippingSubdivisions = action.payload;
     },
     setShippingSubdivision: (state, action) => {
-      state.shippingSubdivision = action.payload;
+      state.shipping.shippingSubdivision = action.payload;
     },
     setShippingOptions: (state, action) => {
-      state.shippingOptions = action.payload;
+      state.shipping.shippingOptions = action.payload;
     },
     setShippingOption: (state, action) => {
-      state.shippingOption = action.payload;
+      state.shipping.shippingOption = action.payload;
     },
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    }
   }
 });
 
@@ -72,6 +77,7 @@ export const {
   setShippingSubdivision,
   setShippingOptions,
   setShippingOption,
+  setErrorMessage,
 } = checkoutInfo.actions;
 
 export default checkoutInfo.reducer;
