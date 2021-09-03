@@ -13,11 +13,10 @@ import CheckoutForm from "../components/Checkout/index.jsx";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
+  const dispatch = useDispatch();
   const checkoutToken = useSelector(
     (state) => state.checkoutInfoReducer.checkoutToken
   );
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cart.id) {

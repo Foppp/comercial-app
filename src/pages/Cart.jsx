@@ -97,11 +97,7 @@ const Cart = ({ showNotification }) => {
         </div>
         <div className="shopping-cart-footer mt-3">
           <div className="column float-start">
-            <Link
-              to="/products"
-              className="btn btn-outline-secondary"
-              href="/#"
-            >
+            <Link to="/products" className="btn btn-outline-secondary">
               Back to Shopping
             </Link>
           </div>

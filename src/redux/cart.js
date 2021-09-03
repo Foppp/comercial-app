@@ -4,14 +4,14 @@ export const cartInfo = createSlice({
   name: 'cart',
   initialState: {
     cart: {},
-    errorMessage: null,
-    cartStatus: '',
+    cartErrorMessage: null,
+    cartStatus: null,
   },
   reducers: {
     setCart: (state, action) => {
       state.cart = action.payload;
     },
-    cartCartErrorMessage: (state, action) => {
+    setCartErrorMessage: (state, action) => {
       state.errorMessage = action.payload;
     },
     setCartStatus: (state, action) => {

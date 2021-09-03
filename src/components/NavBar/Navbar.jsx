@@ -104,7 +104,7 @@ const Navbar = () => {
             </svg>
             Cart
             <span className="badge bg-danger text-white ms-1 rounded-pill">
-              {totalItems}
+              {totalItems ?? 0}
             </span>
           </Link>
         </div>

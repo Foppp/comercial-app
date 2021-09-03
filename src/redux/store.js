@@ -5,6 +5,7 @@ import filterProductsInfoReducer from "./filter.js";
 import checkoutInfoReducer from './checkout.js';
 import paymentInfoReducer from "./payment.js";
 import notificationInfoReducer from "./notification.js";
+import contactInfoReducer from "./contact.js";
 
 export default configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export default configureStore({
     checkoutInfoReducer,
     paymentInfoReducer,
     notificationInfoReducer,
+    contactInfoReducer,
   },
   middleware: getDefaultMiddleware(),
   devTools: true,

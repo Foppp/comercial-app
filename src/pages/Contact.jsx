@@ -1,42 +1,41 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import emailjs from "emailjs-com";
-import { Toast } from "bootstrap";
-import ToastMessage from "../components/ToastNotification/ToastNotification";
+import { useDispatch, useSelector } from "react-redux";
+import { setSendErrorMessage, setMessageStatus } from "../redux/contact";
+import showNotification from "../components/ToastNotification/index.js";
+
+const sendEmail = (e) => (dispatch) => {
+  e.preventDefault();
+  dispatch(setMessageStatus("processing"));
+  emailjs
+    .sendForm(
+      "service_slxhkgl",
+      "template_xxundmk",
+      e.target,
+      "user_YMWIwXTCBxoyKXwb2L7tm"
+    )
+    .then(
+      (result) => {
+        dispatch(setMessageStatus("fulfilled"));
+        dispatch(setSendErrorMessage(null));
+        dispatch(showNotification("success", "Message was sent!"));
+      },
+      (error) => {
+        dispatch(setMessageStatus("rejected"));
+        dispatch(setSendErrorMessage(error.text));
+        dispatch(
+          showNotification("danger", "Message was not sent! Try again!")
+        );
+      }
+    );
+  e.target.reset();
+};
 
 const Contact = () => {
-  const [messageStatus, setMessageStatus] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const toastRef = useRef(null);
-
-  const showToast = () => {
-    const toast = new Toast(toastRef.current);
-    toast.show();
-  };
-
-  const sendEmail = (e) => {
-    setMessageStatus("sending");
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_slxhkgl",
-        "template_xxundmk",
-        e.target,
-        "user_YMWIwXTCBxoyKXwb2L7tm"
-      )
-      .then(
-        (result) => {
-          setMessageStatus("fulfilled");
-          showToast();
-          console.log(result.text);
-        },
-        (error) => {
-          setMessageStatus("rejected");
-          setErrorMessage(error.text);
-          console.log(errorMessage);
-        }
-      );
-    e.target.reset();
-  };
+  const messageStatus = useSelector(
+    (state) => state.contactInfoReducer.messageStatus
+  );
+  const dispatch = useDispatch();
 
   return (
     <div className="container-fluid contact-container mt-5">
@@ -73,7 +72,7 @@ const Contact = () => {
           </ul>
         </div>
         <div className="col-md-6">
-          <form onSubmit={sendEmail}>
+          <form onSubmit={(e) => dispatch(sendEmail(e))}>
             <div className="row">
               <div className="col-md-12 form-group">
                 <label htmlFor="name" className="col-form-label">
@@ -84,7 +83,7 @@ const Contact = () => {
                   className="form-control"
                   name="user_name"
                   id="name"
-                  disabled={messageStatus === "sending"}
+                  disabled={messageStatus === "processing"}
                 />
               </div>
             </div>
@@ -99,7 +98,7 @@ const Contact = () => {
                   name="user_email"
                   id="email"
                   required
-                  disabled={messageStatus === "sending"}
+                  disabled={messageStatus === "processing"}
                 />
               </div>
             </div>
@@ -114,7 +113,7 @@ const Contact = () => {
                   id="message"
                   cols="30"
                   rows="7"
-                  disabled={messageStatus === "sending"}
+                  disabled={messageStatus === "processing"}
                 ></textarea>
               </div>
             </div>
@@ -124,16 +123,12 @@ const Contact = () => {
                   type="submit"
                   value="Send Message"
                   className="btn btn-primary rounded-3"
-                  disabled={messageStatus === "sending"}
+                  disabled={messageStatus === "processing"}
                 />
                 <span className="submitting"></span>
               </div>
             </div>
           </form>
-          <ToastMessage
-            toastRef={toastRef}
-            message="Message was sent successfully!"
-          />
         </div>
       </div>
     </div>
