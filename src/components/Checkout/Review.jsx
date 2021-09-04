@@ -3,13 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep, backStep } from "../../redux/checkout.js";
 
 const Review = () => {
-  const checkoutToken = useSelector(
-    (state) => state.checkoutInfoReducer.checkoutToken
-  );
-  const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingData
-  );
   const dispatch = useDispatch();
+  const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
+  const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
 
   return (
     <div className="col-lg-12 order-last">

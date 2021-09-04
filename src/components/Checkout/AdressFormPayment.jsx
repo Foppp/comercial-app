@@ -16,61 +16,32 @@ import {
 import { commerce } from "../../lib/commerce";
 
 const fetchShippingCountries = (checkoutTokenId) => async (dispatch) => {
-  const { countries } = await commerce.services.localeListShippingCountries(
-    checkoutTokenId
-  );
-
+  const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
   dispatch(setShippingCountries(countries));
 };
 
 const fetchSubdivisions = (countryCode) => async (dispatch) => {
-  const { subdivisions } = await commerce.services.localeListSubdivisions(
-    countryCode
-  );
-
+  const { subdivisions } = await commerce.services.localeListSubdivisions(countryCode);
   dispatch(setShippingSubdivisions(subdivisions));
 };
 
-const fetchShippingOptions =
-  (checkoutTokenId, country, stateProvince = null) =>
-  async (dispatch) => {
-    const options = await commerce.checkout.getShippingOptions(
-      checkoutTokenId,
-      {
-        country,
-        region: stateProvince,
-      }
-    );
-
-    dispatch(setShippingOptions(options));
-  };
+const fetchShippingOptions = (checkoutTokenId, country, stateProvince = null ) => async (dispatch) => {
+  const options = await commerce.checkout.getShippingOptions(
+    checkoutTokenId, { country, region: stateProvince }
+  );
+  dispatch(setShippingOptions(options));
+};
 
 const AdressForm = () => {
   const dispatch = useDispatch();
-  const checkoutToken = useSelector(
-    (state) => state.checkoutInfoReducer.checkoutToken
-  );
-  const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingData
-  );
-  const shippingCountries = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingCountries
-  );
-  const shippingCountry = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingCountry
-  );
-  const shippingSubdivisions = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingSubdivisions
-  );
-  const shippingSubdivision = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingSubdivision
-  );
-  const shippingOptions = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingOptions
-  );
-  const shippingOption = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingOption
-  );
+  const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
+  const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
+  const shippingCountries = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountries);
+  const shippingCountry = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountry);
+  const shippingSubdivisions = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivisions);
+  const shippingSubdivision = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivision);
+  const shippingOptions = useSelector((state) => state.checkoutInfoReducer.shipping.shippingOptions);
+  const shippingOption = useSelector((state) => state.checkoutInfoReducer.shipping.shippingOption);
 
   const submitShippingData = (data) => {
     dispatch(setShippingData(data));
@@ -87,13 +58,7 @@ const AdressForm = () => {
 
   useEffect(() => {
     if (shippingSubdivision)
-      dispatch(
-        fetchShippingOptions(
-          checkoutToken.id,
-          shippingCountry,
-          shippingSubdivision
-        )
-      );
+      dispatch(fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision));
   }, [shippingSubdivision]);
 
   const formik = useFormik({
@@ -106,12 +71,7 @@ const AdressForm = () => {
       zip: shippingData.zip,
     },
     onSubmit: (data) => {
-      submitShippingData({
-        ...data,
-        shippingCountry,
-        shippingSubdivision,
-        shippingOption,
-      });
+      submitShippingData({ ...data, shippingCountry, shippingSubdivision, shippingOption });
       setShippingCountry("");
       setShippingSubdivision("");
       setShippingOption("");
@@ -223,7 +183,6 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="country"
                   required
-                  // defaultValue="fdfdf"
                   onChange={(e) => dispatch(setShippingCountry(e.target.value))}
                 >
                   <option value={shippingCountry}>Select...</option>
@@ -245,7 +204,6 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="state"
                   selected
-                  // value={shippingSubdivision}
                   required
                   onChange={(e) =>
                     dispatch(setShippingSubdivision(e.target.value))
@@ -270,7 +228,6 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="options"
                   required
-                  // value={shippingOption}
                   onChange={(e) => dispatch(setShippingOption(e.target.value))}
                 >
                   <option value={shippingOption}>Select...</option>

@@ -1,7 +1,4 @@
-import {
-  setHideNotification,
-  setShowNotification,
-} from "../../redux/notification.js";
+import { setHideNotification, setShowNotification } from "../../redux/notification.js";
 
 const showNotification = (type, message) => async (dispatch) => {
   const duration = 5000;

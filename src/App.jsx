@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setProducts, setProductsErrorMessage } from './redux/products.js';
 import { setCart, setCartErrorMessage } from './redux/cart.js';
-import showNotification from './components/ToastNotification/index.js';
 import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
 import { commerce } from './lib/commerce.js';
+import showNotification from './components/ToastNotification/index.js';
 import ProductDetails from './components/Products/ProductDetails';
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
+
 import './style.css';
 
 const fetchProducts = () => async (dispatch) => {
@@ -34,9 +35,7 @@ const handleAddToCart = (productId, quantity) => async (dispatch) => {
     dispatch(setCart(item.cart));
     dispatch(showNotification('success', 'Item was added to cart!'));
   } catch (e) {
-    dispatch(
-      showNotification('danger', 'Item was NOT added to cart! Try again!')
-    );
+    dispatch(showNotification('danger', 'Item was NOT added to cart! Try again!'));
   }
 };
 

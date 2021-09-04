@@ -13,10 +13,7 @@ const steps = {
 };
 
 const CheckoutForm = () => {
-  const currentStep = useSelector(
-    (state) => state.checkoutInfoReducer.currentStep
-  );
-
+  const currentStep = useSelector((state) => state.checkoutInfoReducer.currentStep);
   const Form = steps[currentStep];
 
   return (

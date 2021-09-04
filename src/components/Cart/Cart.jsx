@@ -1,14 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setCart,
-  setCartErrorMessage,
-  setCartStatus,
-} from '../../redux/cart.js';
-import showNotification from '../ToastNotification/index.js';
+import { setCart, setCartErrorMessage, setCartStatus } from '../../redux/cart.js';
 import { commerce } from '../../lib/commerce';
-
+import showNotification from '../ToastNotification/index.js';
 import CartItem from './CartItem';
 import Spinner from '../Spinner/Spinner';
 
@@ -23,9 +18,7 @@ const handleUpdateCartQty = (lineItemId, quantity) => async (dispatch) => {
   } catch (e) {
     dispatch(setCartStatus('rejected'));
     dispatch(setCartErrorMessage(e.message));
-    dispatch(
-      showNotification('danger', 'Item quantity was not updated! Try again!')
-    );
+    dispatch(showNotification('danger', 'Item quantity was not updated! Try again!'));
   }
 };
 
@@ -54,7 +47,6 @@ const handleEmptyCart = () => async (dispatch) => {
     dispatch(showNotification('success', 'Items removed!'));
   } catch (e) {
     dispatch(setCartStatus('rejected'));
-
     dispatch(setCartErrorMessage(e.message));
     dispatch(showNotification('danger', 'Items was not removed! Try again!'));
   }
@@ -62,7 +54,6 @@ const handleEmptyCart = () => async (dispatch) => {
 
 const Cart = ({ showNotification }) => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
-
   const dispatch = useDispatch();
 
   const renderEmptyCart = () => (

@@ -2,13 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PayButton = ({ stripe }) => {
-  const checkoutToken = useSelector(
-    (state) => state.checkoutInfoReducer.checkoutToken
-  );
-  const paymentStatus = useSelector(
-    (state) => state.paymentInfoReducer.paymentStatus
-  );
-  console.log(paymentStatus);
+  const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
+  const paymentStatus = useSelector((state) => state.paymentInfoReducer.paymentStatus);
 
   return paymentStatus === "processing" ? (
     <button className="btn btn-success" type="button" disabled>
