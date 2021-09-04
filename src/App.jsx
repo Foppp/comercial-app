@@ -1,22 +1,14 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setProducts, setProductsErrorMessage } from "./redux/products.js";
-import { setCart, setCartErrorMessage } from "./redux/cart.js";
-import showNotification from "./components/ToastNotification/index.js";
-import Navbar from "./components/Navbar/Navbar";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Contact from "./pages/Contact";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Footer from "./components/Footer/Footer";
-
-import "./style.css";
-
-import { commerce } from "./lib/commerce.js";
-import ProductDetails from "./components/Products/ProductDetails";
-import ToastMessage from "./components/ToastNotification/ToastNotification.jsx";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setProducts, setProductsErrorMessage } from './redux/products.js';
+import { setCart, setCartErrorMessage } from './redux/cart.js';
+import showNotification from './components/ToastNotification/index.js';
+import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
+import { commerce } from './lib/commerce.js';
+import ProductDetails from './components/Products/ProductDetails';
+import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
+import './style.css';
 
 const fetchProducts = () => async (dispatch) => {
   try {
@@ -40,10 +32,10 @@ const handleAddToCart = (productId, quantity) => async (dispatch) => {
   try {
     const item = await commerce.cart.add(productId, quantity);
     dispatch(setCart(item.cart));
-    dispatch(showNotification("success", "Item was added to cart!"));
+    dispatch(showNotification('success', 'Item was added to cart!'));
   } catch (e) {
     dispatch(
-      showNotification("danger", "Item was NOT added to cart! Try again!")
+      showNotification('danger', 'Item was NOT added to cart! Try again!')
     );
   }
 };
@@ -60,22 +52,22 @@ const App = () => {
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Home />
         </Route>
-        <Route exact path="/products">
+        <Route exact path='/products'>
           <Products onAddToCart={handleAddToCart} />
         </Route>
-        <Route exact path="/contact">
+        <Route exact path='/contact'>
           <Contact />
         </Route>
-        <Route exact path="/cart">
+        <Route exact path='/cart'>
           <Cart />
         </Route>
-        <Route exact path="/checkout">
+        <Route exact path='/checkout'>
           <Checkout />
         </Route>
-        <Route path="/products/:id">
+        <Route path='/products/:id'>
           <ProductDetails onAddToCart={handleAddToCart} />
         </Route>
       </Switch>

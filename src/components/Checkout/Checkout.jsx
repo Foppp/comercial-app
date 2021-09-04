@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   setCheckoutToken,
   setCurrentStep,
   setShippingData,
   setErrorMessage,
-} from "../redux/checkout.js";
-import { commerce } from "../lib/commerce.js";
-import Spinner from "../components/Spinner/Spinner";
-import CheckoutForm from "../components/Checkout/index.jsx";
+} from '../../redux/checkout.js';
+import { commerce } from '../../lib/commerce.js';
+import Spinner from '../Spinner/Spinner';
+import CheckoutForm from './index.jsx';
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
@@ -23,7 +23,7 @@ const Checkout = () => {
       const generateToken = () => async (dispatch) => {
         try {
           const token = await commerce.checkout.generateToken(cart.id, {
-            type: "cart",
+            type: 'cart',
           });
           dispatch(setCheckoutToken(token));
         } catch (e) {
@@ -37,8 +37,8 @@ const Checkout = () => {
   }, [dispatch]);
 
   return (
-    <div className="checkout-container">
-      <div className="m-3 d-flex justify-content-center">
+    <div className='checkout-container'>
+      <div className='m-3 d-flex justify-content-center'>
         {!checkoutToken ? <Spinner /> : <CheckoutForm />}
       </div>
     </div>
