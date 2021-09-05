@@ -43,6 +43,42 @@ export const cartInfo = createSlice({
     [addToCart.rejected]: (state, action) => {
       state.status = 'rejected';
       state.cartErrorMessage = action.payload;
+    },
+    [updateCartQty.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [updateCartQty.fulfilled]: (state, action) => {
+      state.cart = action.payload;
+      state.status = 'fulfilled';
+      state.cartErrorMessage = null;
+    },
+    [updateCartQty.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.cartErrorMessage = action.payload;
+    },
+    [removeFromCart.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [removeFromCart.fulfilled]: (state, action) => {
+      state.cart = action.payload;
+      state.status = 'fulfilled';
+      state.cartErrorMessage = null;
+    },
+    [removeFromCart.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.cartErrorMessage = action.payload;
+    },
+    [emptyCart.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [emptyCart.fulfilled]: (state, action) => {
+      state.cart = action.payload;
+      state.status = 'fulfilled';
+      state.cartErrorMessage = null;
+    },
+    [emptyCart.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.cartErrorMessage = action.payload;
     }
   }
 });

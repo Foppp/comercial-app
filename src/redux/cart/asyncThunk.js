@@ -13,11 +13,10 @@ export const fetchCart = createAsyncThunk(
 );
 
 export const addToCart = createAsyncThunk(
-  'cart/addToCart', async(product, { rejectWithValue }) => {
+  'cart/addToCart', async({productId, qty}, { rejectWithValue }) => {
     try {
-      const { productId, qty } = product;
-      const item = await commerce.cart.add(productId, qty);
-      return item.cart;
+      const response = await commerce.cart.add(productId, qty);
+      return response.cart;
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -25,10 +24,10 @@ export const addToCart = createAsyncThunk(
 );
 
 export const updateCartQty = createAsyncThunk(
-  'cart/updateCartQty', async({ productId, quantity }, { rejectWithValue }) => {
+  'cart/updateCartQty', async({ lineItemId, quantity }, { rejectWithValue }) => {
     try {
-      const cart = await commerce.cart.update(productId, { quantity });
-      return cart;
+      const response = await commerce.cart.update(lineItemId, { quantity } );
+      return response.cart;
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -38,8 +37,8 @@ export const updateCartQty = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   'cart/removeFromCart', async(productId, { rejectWithValue }) => {
     try {
-      const cart = await commerce.cart.remove(productId);
-      return cart;
+      const response = await commerce.cart.remove(productId);
+      return response.cart;
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -49,8 +48,8 @@ export const removeFromCart = createAsyncThunk(
 export const emptyCart = createAsyncThunk(
   'cart/emptyCart', async(_, { rejectWithValue }) => {
     try {
-      const cart = await commerce.cart.empty();
-      return cart;
+      const response = await commerce.cart.empty();
+      return response.cart;
     } catch (e) {
       return rejectWithValue(e.message);
     }

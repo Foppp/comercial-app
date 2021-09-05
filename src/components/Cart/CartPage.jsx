@@ -1,61 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart, setCartErrorMessage, setCartStatus } from '../../redux/cart/cart.js';
-import { commerce } from '../../lib/commerce';
-import showNotification from '../ToastNotification/index.js';
+import { emptyCart } from '../../redux/cart/asyncThunk';
 import CartItem from './CartItem';
 import Spinner from '../Spinner/Spinner';
 
-const handleUpdateCartQty = (lineItemId, quantity) => async (dispatch) => {
-  dispatch(setCartStatus('processing'));
-  try {
-    const response = await commerce.cart.update(lineItemId, { quantity });
-    dispatch(setCart(response.cart));
-    dispatch(setCartStatus('fulfilled'));
-    dispatch(setCartErrorMessage(null));
-    dispatch(showNotification('success', 'Item quantity was updated!'));
-  } catch (e) {
-    dispatch(setCartStatus('rejected'));
-    dispatch(setCartErrorMessage(e.message));
-    dispatch(showNotification('danger', 'Item quantity was not updated! Try again!'));
-  }
-};
-
-const handleRemoveFromCart = (lineItemId) => async (dispatch) => {
-  dispatch(setCartStatus('processing'));
-  try {
-    const response = await commerce.cart.remove(lineItemId);
-    dispatch(setCart(response.cart));
-    dispatch(setCartStatus('fulfilled'));
-    dispatch(setCartErrorMessage(null));
-    dispatch(showNotification('success', 'Item was removed from cart!'));
-  } catch (e) {
-    dispatch(setCartStatus('rejected'));
-    dispatch(setCartErrorMessage(e.message));
-    dispatch(showNotification('danger', 'Item was not removed! Try again!'));
-  }
-};
-
-const handleEmptyCart = () => async (dispatch) => {
-  dispatch(setCartStatus('processing'));
-  try {
-    const response = await commerce.cart.empty();
-    dispatch(setCart(response.cart));
-    dispatch(setCartStatus('fulfilled'));
-    dispatch(setCartErrorMessage(null));
-    dispatch(showNotification('success', 'Items removed!'));
-  } catch (e) {
-    dispatch(setCartStatus('rejected'));
-    dispatch(setCartErrorMessage(e.message));
-    dispatch(showNotification('danger', 'Items was not removed! Try again!'));
-  }
-};
-
-const Cart = ({ showNotification }) => {
+const Cart = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
-
   const renderEmptyCart = () => (
     <div className='container text-center mt-5'>
       <h1>Your cart is empty!</h1>
@@ -78,12 +30,7 @@ const Cart = ({ showNotification }) => {
     <>
       <div className='container'>
         {cart.line_items.map((lineItem) => (
-          <CartItem
-            key={lineItem.id}
-            item={lineItem}
-            onRemove={handleRemoveFromCart}
-            onUpdateQty={handleUpdateCartQty}
-          />
+          <CartItem key={lineItem.id} item={lineItem} />
         ))}
         <div className='d-flex flex-row-reverse text-center row mt-3'>
           <div className='col-md-2'>
@@ -100,7 +47,7 @@ const Cart = ({ showNotification }) => {
             <button
               className='btn btn-danger mx-3'
               type='button'
-              onClick={() => dispatch(handleEmptyCart())}
+              onClick={() => dispatch(emptyCart())}
             >
               Clear Cart
             </button>
