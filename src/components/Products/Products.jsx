@@ -6,7 +6,7 @@ const Products = ({ onAddToCart }) => {
   return (
     <div className='row products-container'>
       <Filters />
-      <ProductsList onAddToCart={onAddToCart} />
+      <ProductsList />
     </div>
   );
 };

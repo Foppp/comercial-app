@@ -1,11 +1,11 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import productsInfoReducer from './products.js';
-import cartInfoReducer from './cart.js';
-import filterProductsInfoReducer from "./filter.js";
-import checkoutInfoReducer from './checkout.js';
-import paymentInfoReducer from "./payment.js";
-import notificationInfoReducer from "./notification.js";
-import contactInfoReducer from "./contact.js";
+import productsInfoReducer from './products/products.js';
+import cartInfoReducer from './cart/cart.js';
+import filterProductsInfoReducer from "./filter/filter.js";
+import checkoutInfoReducer from './checkout/checkout.js';
+import paymentInfoReducer from "./payment/payment.js";
+import notificationInfoReducer from "./notifier/notifier.js";
+import contactInfoReducer from "./contact/contact.js";
 
 export default configureStore({
   reducer: {

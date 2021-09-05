@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCheckoutToken, setCurrentStep, setShippingData, setErrorMessage
-} from '../../redux/checkout.js';
+} from '../../redux/checkout/checkout.js';
 import { commerce } from '../../lib/commerce.js';
 import Spinner from '../Spinner/Spinner';
 import CheckoutForm from './index.jsx';

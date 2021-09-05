@@ -1,16 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { commerce } from "../lib/commerce";
-
-export const fetchCart = createAsyncThunk(
-  'cart/fetchCart', async(obj, { rejectWithValue }) => {
-    try {
-      const cart = await commerce.cart.retrieve();
-    return cart;
-    } catch (e) {
-      return rejectWithValue(e.message)
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchCart, addToCart, updateCartQty, removeFromCart, emptyCart } from './asyncThunk';
 
 export const cartInfo = createSlice({
   name: 'cart',
@@ -30,7 +19,7 @@ export const cartInfo = createSlice({
       state.cartStatus = action.payload;
     },
   },
-    extraReducers: {
+  extraReducers: {
     [fetchCart.pending]: (state, action) => {
       state.status = 'pending';
     },
@@ -40,6 +29,18 @@ export const cartInfo = createSlice({
       state.cartErrorMessage = null;
     },
     [fetchCart.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.cartErrorMessage = action.payload;
+    },
+    [addToCart.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [addToCart.fulfilled]: (state, action) => {
+      state.cart = action.payload;
+      state.status = 'fulfilled';
+      state.cartErrorMessage = null;
+    },
+    [addToCart.rejected]: (state, action) => {
       state.status = 'rejected';
       state.cartErrorMessage = action.payload;
     }

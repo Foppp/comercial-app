@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../redux/cart/asyncThunk";
 
-const ProductItem = ({ product, onAddToCart }) => {
+const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
@@ -29,7 +30,7 @@ const ProductItem = ({ product, onAddToCart }) => {
         <div className="card-footer pt-0 border-top-0 bg-transparent text-center">
           <button
             className="btn btn-outline-dark mt-auto"
-            onClick={() => dispatch(onAddToCart(product.id, 1))}
+            onClick={() => dispatch(addToCart({ productId: product.id, qty: 1}))}
           >
             Add to cart
           </button>

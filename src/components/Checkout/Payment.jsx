@@ -2,9 +2,9 @@ import React from "react";
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../../redux/cart.js";
-import { setOrder, nextStep, backStep } from "../../redux/checkout.js";
-import { setPaymentStatus, setPaymentErrorMessage } from "../../redux/payment.js";
+import { setCart } from "../../redux/cart/cart.js";
+import { setOrder, nextStep, backStep } from "../../redux/checkout/checkout.js";
+import { setPaymentStatus, setPaymentErrorMessage } from "../../redux/payment/payment.js";
 import { commerce } from "../../lib/commerce";
 import PayButton from './PayButton.jsx';
 

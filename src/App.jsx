@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchProducts } from './redux/products.js';
-import { setCart, fetchCart, setCartErrorMessage } from './redux/cart.js';
+import { fetchProducts } from './redux/products/asyncThunk'
+import { setCart } from './redux/cart/cart.js';
+import { fetchCart } from './redux/cart/asyncThunk.js';
 import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
 import { commerce } from './lib/commerce.js';
 import showNotification from './components/ToastNotification/index.js';
@@ -11,15 +12,15 @@ import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
 
 import './style.css';
 
-const handleAddToCart = (productId, quantity) => async (dispatch) => {
-  try {
-    const item = await commerce.cart.add(productId, quantity);
-    dispatch(setCart(item.cart));
-    dispatch(showNotification('success', 'Item was added to cart!'));
-  } catch (e) {
-    dispatch(showNotification('danger', 'Item was NOT added to cart! Try again!'));
-  }
-};
+// const handleAddToCart = (productId, quantity) => async (dispatch) => {
+//   try {
+//     const item = await commerce.cart.add(productId, quantity);
+//     dispatch(setCart(item.cart));
+//     dispatch(showNotification('success', 'Item was added to cart!'));
+//   } catch (e) {
+//     dispatch(showNotification('danger', 'Item was NOT added to cart! Try again!'));
+//   }
+// };
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const App = () => {
           <Home />
         </Route>
         <Route exact path='/products'>
-          <Products onAddToCart={handleAddToCart} />
+          <Products />
         </Route>
         <Route exact path='/contact'>
           <Contact />
@@ -49,7 +50,7 @@ const App = () => {
           <Checkout />
         </Route>
         <Route path='/products/:id'>
-          <ProductDetails onAddToCart={handleAddToCart} />
+          <ProductDetails />
         </Route>
       </Switch>
       <Footer />

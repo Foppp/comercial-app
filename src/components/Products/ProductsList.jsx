@@ -21,7 +21,6 @@ const Products = ({ onAddToCart }) => {
               <ProductItem
                 key={product.id}
                 product={product}
-                onAddToCart={onAddToCart}
               />
             ))}
           </div>

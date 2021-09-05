@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep, backStep } from "../../redux/checkout.js";
+import { nextStep, backStep } from "../../redux/checkout/checkout.js";
 
 const Review = () => {
   const dispatch = useDispatch();

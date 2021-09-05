@@ -12,7 +12,7 @@ import {
   setShippingSubdivision,
   setShippingOptions,
   setShippingOption,
-} from "../../redux/checkout.js";
+} from "../../redux/checkout/checkout.js";
 import { commerce } from "../../lib/commerce";
 
 const fetchShippingCountries = (checkoutTokenId) => async (dispatch) => {

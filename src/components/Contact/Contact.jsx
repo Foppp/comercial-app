@@ -1,7 +1,7 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSendErrorMessage, setMessageStatus } from '../../redux/contact';
+import { setSendErrorMessage, setMessageStatus } from '../../redux/contact/contact';
 import showNotification from '../ToastNotification/index.js';
 
 const sendEmail = (e) => (dispatch) => {
