@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchProducts } from './redux/products/asyncThunk'
-import { setCart } from './redux/cart/cart.js';
+import { fetchProducts } from './redux/products/asyncThunk';
 import { fetchCart } from './redux/cart/asyncThunk.js';
-import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
-import { commerce } from './lib/commerce.js';
-import showNotification from './components/ToastNotification/index.js';
+import {
+  Navbar,
+  Home,
+  Products,
+  Contact,
+  Cart,
+  Checkout,
+  Footer,
+} from './components/';
 import ProductDetails from './components/Products/ProductDetails';
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
 
 import './style.css';
-
-// const handleAddToCart = (productId, quantity) => async (dispatch) => {
-//   try {
-//     const item = await commerce.cart.add(productId, quantity);
-//     dispatch(setCart(item.cart));
-//     dispatch(showNotification('success', 'Item was added to cart!'));
-//   } catch (e) {
-//     dispatch(showNotification('danger', 'Item was NOT added to cart! Try again!'));
-//   }
-// };
 
 const App = () => {
   const dispatch = useDispatch();

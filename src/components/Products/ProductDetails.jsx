@@ -1,11 +1,11 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { addToCart } from "../../redux/cart/asyncThunk";
-import Spinner from "../Spinner/Spinner";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { addToCart } from '../../redux/cart/asyncThunk';
+import Spinner from '../Spinner/Spinner';
 
-const ProductDetails = ({ onAddToCart }) => {
+const ProductDetails = () => {
   const { id } = useParams();
   const products = useSelector((state) => state.productsInfoReducer.products);
   const [product] = products.filter((item) => item.permalink === id);
@@ -13,7 +13,7 @@ const ProductDetails = ({ onAddToCart }) => {
 
   if (products.length === 0)
     return (
-      <div className="product-container d-flex justify-content-center">
+      <div className='product-container d-flex justify-content-center'>
         <Spinner />
       </div>
     );

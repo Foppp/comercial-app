@@ -8,6 +8,7 @@ import Spinner from '../Spinner/Spinner';
 const Cart = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
+
   const renderEmptyCart = () => (
     <div className='container text-center mt-5'>
       <h1>Your cart is empty!</h1>

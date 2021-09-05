@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk(
       const { data } = await commerce.products.list();
       return data;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );

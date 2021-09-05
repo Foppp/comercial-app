@@ -1,23 +1,30 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSendErrorMessage, setMessageStatus } from '../../redux/contact/contact';
-import showNotification from '../ToastNotification/index.js';
+import {
+  setSendErrorMessage,
+  setMessageStatus,
+} from '../../redux/contact/contact';
 
 const sendEmail = (e) => (dispatch) => {
   e.preventDefault();
   dispatch(setMessageStatus('processing'));
   emailjs
-    .sendForm('service_slxhkgl', 'template_xxundmk', e.target, 'user_YMWIwXTCBxoyKXwb2L7tm')
-    .then((result) => {
+    .sendForm(
+      'service_slxhkgl',
+      'template_xxundmk',
+      e.target,
+      'user_YMWIwXTCBxoyKXwb2L7tm'
+    )
+    .then(
+      (result) => {
         dispatch(setMessageStatus('fulfilled'));
         dispatch(setSendErrorMessage(null));
-        dispatch(showNotification('success', 'Message was sent!'));
       },
       (error) => {
         dispatch(setMessageStatus('rejected'));
         dispatch(setSendErrorMessage(error.text));
-        dispatch(showNotification('danger', 'Message was not sent! Try again!'));
+        dispatch();
       }
     );
   e.target.reset();
@@ -25,7 +32,9 @@ const sendEmail = (e) => (dispatch) => {
 
 const Contact = () => {
   const dispatch = useDispatch();
-  const messageStatus = useSelector((state) => state.contactInfoReducer.messageStatus);
+  const messageStatus = useSelector(
+    (state) => state.contactInfoReducer.messageStatus
+  );
 
   return (
     <div className='container-fluid contact-container mt-5'>

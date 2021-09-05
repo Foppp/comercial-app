@@ -7,7 +7,7 @@ export const fetchCart = createAsyncThunk(
       const cart = await commerce.cart.retrieve();
       return cart;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );
@@ -18,7 +18,7 @@ export const addToCart = createAsyncThunk(
       const response = await commerce.cart.add(productId, qty);
       return response.cart;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );
@@ -29,7 +29,7 @@ export const updateCartQty = createAsyncThunk(
       const response = await commerce.cart.update(lineItemId, { quantity } );
       return response.cart;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );
@@ -40,7 +40,7 @@ export const removeFromCart = createAsyncThunk(
       const response = await commerce.cart.remove(productId);
       return response.cart;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );
@@ -51,7 +51,7 @@ export const emptyCart = createAsyncThunk(
       const response = await commerce.cart.empty();
       return response.cart;
     } catch (e) {
-      return rejectWithValue(e.message);
+      return rejectWithValue(e.data.error.message);
     }
   }
 );

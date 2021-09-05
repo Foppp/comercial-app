@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addToCart } from "../cart/asyncThunk";
 
 export const notificationInfo = createSlice({
   name: 'notification',
@@ -16,6 +17,18 @@ export const notificationInfo = createSlice({
     setHideNotification: (state) => {
       state.show = false;
     }
+  },
+  extraReducers: {
+    [addToCart.fulfilled]: (state, action) => {
+      state.type = 'success';
+      state.message = 'Product was added to cart!';
+      state.show = true;
+    },
+    [addToCart.rejected]: (state, action) => {
+      state.type = 'danger';
+      state.message = 'Ooops! Product was not added. Try again!';
+      state.show = true;
+    },
   }
 });
 
