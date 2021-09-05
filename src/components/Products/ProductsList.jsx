@@ -4,7 +4,6 @@ import ProductItem from "./ProductItem";
 
 const Products = ({ onAddToCart }) => {
   const products = useSelector((state) => state.productsInfoReducer.products);
-
   return (
     <div className="col-sm-6 col-md-8 col-lg-9">
       <section className="py-2">
