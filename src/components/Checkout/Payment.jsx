@@ -6,36 +6,24 @@ import { setOrder, nextStep, backStep } from "../../redux/checkout/checkout.js";
 import { setPaymentStatus, setPaymentErrorMessage } from "../../redux/payment/payment.js";
 import { captureCheckout } from "../../redux/checkout/asyncThunk.js";
 import { refreshCart } from "../../redux/cart/asyncThunk.js";
+import { createPayment } from "../../redux/payment/asyncThunk.js";
 import PayButton from './PayButton.jsx';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, { locale: "en" });
-
-
-// const handleCaptureCheckout = (checkoutTokenId, newOrder) => async (dispatch) => {
-//   try {
-//     const incomingOrder = await commerce.checkout.capture(checkoutTokenId,newOrder);
-//     dispatch(setOrder(incomingOrder));
-//     dispatch(refreshCart());
-//     dispatch(setPaymentStatus("fulfilled"));
-//     dispatch(setPaymentErrorMessage(null));
-//     dispatch(nextStep());
-//   } catch (e) {
-//     dispatch(setPaymentStatus("rejected"));
-//     dispatch(setPaymentErrorMessage(e.data.error.message));
-//   }
-// };
 
 const Payment = () => {
   const dispatch = useDispatch();
   const paymentErrorMessage = useSelector((state) => state.paymentInfoReducer.paymentErrorMessage);
   const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
   const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
+  
   const handleSubmit = (event, elements, stripe) => async (dispatch) => {
     event.preventDefault();
     if (!stripe || !elements) return;
     dispatch(setPaymentErrorMessage(null));
-    dispatch(setPaymentStatus('processing'));
+    dispatch(setPaymentStatus('pending'));
     const cardElement = elements.getElement(CardElement);
+
     try {
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
@@ -63,8 +51,10 @@ const Payment = () => {
             payment: { gateway: 'stripe', stripe: { payment_method_id: paymentMethod.id },
           },
         };
+        dispatch(setPaymentStatus('fulfilled'));
         dispatch(captureCheckout({ checkoutTokenId: checkoutToken.id, newOrder: orderData }));
         dispatch(refreshCart());
+        dispatch(nextStep());
       }
     } catch (e) {
       dispatch(setPaymentStatus('rejected'));
