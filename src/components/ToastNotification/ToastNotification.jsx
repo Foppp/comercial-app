@@ -8,6 +8,7 @@ const ToastMessage = () => {
   const show = useSelector((state) => state.notificationInfoReducer.show);
   const message = useSelector((state) => state.notificationInfoReducer.message);
   const dispatch = useDispatch();
+
   const className = cn('align-items-center text-white border-0 rounded ', {
     show: show,
     [`bg-${type}`]: show,

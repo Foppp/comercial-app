@@ -1,18 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { sendContactEmail } from "./asyncThync";
 
 export const contactInfo = createSlice({
   name: 'contact',
   initialState: {
-    messageStatus: null,
-    sendErrorMessage: null,
+    status: null,
+    error: null,
   },
-  reducers: {
-    setMessageStatus: (state, action) => {
-      state.messageStatus = action.payload;
+  reducers: {},
+  extraReducers: {
+    [sendContactEmail.pending]: (state, action) => {
+      state.status = 'pending';
     },
-    setSendErrorMessage: (state, action) => {
-      state.sendErrorMessage = action.payload;
+    [sendContactEmail.fulfilled]: (state, action) => {
+      state.status = 'fulfilled';
+      state.error = null;
     },
+    [sendContactEmail.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
+    }
   }
 });
 

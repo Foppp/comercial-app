@@ -1,41 +1,11 @@
 import React from 'react';
-import emailjs from 'emailjs-com';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setSendErrorMessage,
-  setMessageStatus,
-} from '../../redux/contact/contact';
-
-const sendEmail = (e) => (dispatch) => {
-  e.preventDefault();
-  dispatch(setMessageStatus('processing'));
-  emailjs
-    .sendForm(
-      'service_slxhkgl',
-      'template_xxundmk',
-      e.target,
-      'user_YMWIwXTCBxoyKXwb2L7tm'
-    )
-    .then(
-      (result) => {
-        dispatch(setMessageStatus('fulfilled'));
-        dispatch(setSendErrorMessage(null));
-      },
-      (error) => {
-        dispatch(setMessageStatus('rejected'));
-        dispatch(setSendErrorMessage(error.text));
-        dispatch();
-      }
-    );
-  e.target.reset();
-};
+import { sendContactEmail } from '../../redux/contact/asyncThync';
 
 const Contact = () => {
   const dispatch = useDispatch();
-  const messageStatus = useSelector(
-    (state) => state.contactInfoReducer.messageStatus
-  );
-
+  const messageStatus = useSelector((state) => state.contactInfoReducer.status);
+  
   return (
     <div className='container-fluid contact-container mt-5'>
       <div className='row m-3'>
@@ -71,7 +41,7 @@ const Contact = () => {
           </ul>
         </div>
         <div className='col-md-6'>
-          <form onSubmit={(e) => dispatch(sendEmail(e))}>
+          <form className="needs-validation" onSubmit={(e) => dispatch(sendContactEmail(e))} >
             <div className='row'>
               <div className='col-md-12 form-group'>
                 <label htmlFor='name' className='col-form-label'>
@@ -82,7 +52,7 @@ const Contact = () => {
                   className='form-control'
                   name='user_name'
                   id='name'
-                  disabled={messageStatus === 'processing'}
+                  disabled={messageStatus === 'pending'}
                 />
               </div>
             </div>
@@ -97,7 +67,7 @@ const Contact = () => {
                   name='user_email'
                   id='email'
                   required
-                  disabled={messageStatus === 'processing'}
+                  disabled={messageStatus === 'pending'}
                 />
               </div>
             </div>
@@ -112,7 +82,7 @@ const Contact = () => {
                   id='message'
                   cols='30'
                   rows='7'
-                  disabled={messageStatus === 'processing'}
+                  disabled={messageStatus === 'pending'}
                 ></textarea>
               </div>
             </div>
@@ -122,7 +92,7 @@ const Contact = () => {
                   type='submit'
                   value='Send Message'
                   className='btn btn-primary rounded-3'
-                  disabled={messageStatus === 'processing'}
+                  disabled={messageStatus === 'pending'}
                 />
                 <span className='submitting'></span>
               </div>
@@ -135,3 +105,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

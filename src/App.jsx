@@ -3,15 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchProducts } from './redux/products/asyncThunk';
 import { fetchCart } from './redux/cart/asyncThunk.js';
-import {
-  Navbar,
-  Home,
-  Products,
-  Contact,
-  Cart,
-  Checkout,
-  Footer,
-} from './components/';
+import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
 import ProductDetails from './components/Products/ProductDetails';
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
 

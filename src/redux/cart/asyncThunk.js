@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { commerce } from "../../lib/commerce";
 
 export const fetchCart = createAsyncThunk(
-  'cart/fetchCart', async(_, { rejectWithValue }) => {
+  'cart/fetchCart', async (_, { rejectWithValue }) => {
     try {
       const cart = await commerce.cart.retrieve();
       return cart;
@@ -13,7 +13,7 @@ export const fetchCart = createAsyncThunk(
 );
 
 export const addToCart = createAsyncThunk(
-  'cart/addToCart', async({productId, qty}, { rejectWithValue }) => {
+  'cart/addToCart', async ({productId, qty}, { rejectWithValue }) => {
     try {
       const response = await commerce.cart.add(productId, qty);
       return response.cart;
@@ -24,7 +24,7 @@ export const addToCart = createAsyncThunk(
 );
 
 export const updateCartQty = createAsyncThunk(
-  'cart/updateCartQty', async({ lineItemId, quantity }, { rejectWithValue }) => {
+  'cart/updateCartQty', async ({ lineItemId, quantity }, { rejectWithValue }) => {
     try {
       const response = await commerce.cart.update(lineItemId, { quantity } );
       return response.cart;
@@ -35,7 +35,7 @@ export const updateCartQty = createAsyncThunk(
 );
 
 export const removeFromCart = createAsyncThunk(
-  'cart/removeFromCart', async(productId, { rejectWithValue }) => {
+  'cart/removeFromCart', async (productId, { rejectWithValue }) => {
     try {
       const response = await commerce.cart.remove(productId);
       return response.cart;
@@ -46,7 +46,7 @@ export const removeFromCart = createAsyncThunk(
 );
 
 export const emptyCart = createAsyncThunk(
-  'cart/emptyCart', async(_, { rejectWithValue }) => {
+  'cart/emptyCart', async (_, { rejectWithValue }) => {
     try {
       const response = await commerce.cart.empty();
       return response.cart;
