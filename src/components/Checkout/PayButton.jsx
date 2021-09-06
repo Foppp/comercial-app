@@ -12,7 +12,7 @@ const PayButton = ({ stripe }) => {
         role="status"
         aria-hidden="true"
       ></span>
-      <span className="">Processing...</span>
+      <span className="">Checking cart...</span>
     </button>
   ) : (
     <button

@@ -12,6 +12,7 @@ import PayButton from './PayButton.jsx';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, { locale: "en" });
 
 const Payment = () => {
+  console.log('--------')
   const dispatch = useDispatch();
   const paymentErrorMessage = useSelector((state) => state.paymentInfoReducer.paymentErrorMessage);
   const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
@@ -20,46 +21,49 @@ const Payment = () => {
   const handleSubmit = (event, elements, stripe) => async (dispatch) => {
     event.preventDefault();
     if (!stripe || !elements) return;
-    dispatch(setPaymentErrorMessage(null));
-    dispatch(setPaymentStatus('pending'));
+    // dispatch(setPaymentErrorMessage(null));
+    // dispatch(setPaymentStatus('pending'));
     const cardElement = elements.getElement(CardElement);
-
-    try {
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-      });
-      if (error) {
-        throw error;
-      } else {
-        const orderData = {
-          line_items: checkoutToken.live.line_items,
-          customer: {
-            firstname: shippingData.firstName,
-            lastname: shippingData.lastName,
-            email: shippingData.email,
-          },
-          shipping: {
-            name: 'International',
-            street: shippingData.address1,
-            town_city: shippingData.city,
-            county_state: shippingData.shippingSubdivision,
-            postal_zip_code: shippingData.zip,
-            country: shippingData.shippingCountry,
-          },
-            fulfillment: { shipping_method: shippingData.shippingOption },
-            payment: { gateway: 'stripe', stripe: { payment_method_id: paymentMethod.id },
-          },
-        };
-        dispatch(setPaymentStatus('fulfilled'));
-        dispatch(captureCheckout({ checkoutTokenId: checkoutToken.id, newOrder: orderData }));
-        dispatch(refreshCart());
-        dispatch(nextStep());
-      }
-    } catch (e) {
-      dispatch(setPaymentStatus('rejected'));
-      dispatch(setPaymentErrorMessage(e.message));
-    }
+    const options = { stripe, method: {
+      type: 'card',
+      card: cardElement,
+    }}
+    dispatch(createPayment(options))
+    // try {
+    //   const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //     type: 'card',
+    //     card: cardElement,
+    //   });
+    //   if (error) {
+    //     throw error;
+    //   } else {
+        // const orderData = {
+        //   line_items: checkoutToken.live.line_items,
+        //   customer: {
+        //     firstname: shippingData.firstName,
+        //     lastname: shippingData.lastName,
+        //     email: shippingData.email,
+        //   },
+        //   shipping: {
+        //     name: 'International',
+        //     street: shippingData.address1,
+        //     town_city: shippingData.city,
+        //     county_state: shippingData.shippingSubdivision,
+        //     postal_zip_code: shippingData.zip,
+        //     country: shippingData.shippingCountry,
+        //   },
+        //     fulfillment: { shipping_method: shippingData.shippingOption },
+        //     payment: { gateway: 'stripe', stripe: { payment_method_id: paymentMethod.id },
+        //   },
+        // };
+        // dispatch(setPaymentStatus('fulfilled'));
+        // dispatch(captureCheckout({ checkoutTokenId: checkoutToken.id, newOrder: orderData }));
+        
+     // }
+    // } catch (e) {
+    //   dispatch(setPaymentStatus('rejected'));
+    //   dispatch(setPaymentErrorMessage(e.message));
+    // }
   };
 
   return (

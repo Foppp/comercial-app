@@ -6,6 +6,7 @@ import {
   generateToken,
   captureCheckout,
 } from './asyncThunk';
+import { createPayment } from "../payment/asyncThunk";
 
 export const checkoutInfo = createSlice({
   name: 'checkout',
@@ -22,6 +23,7 @@ export const checkoutInfo = createSlice({
       shippingOptions: [],
       shippingOption: '',
     },
+    checkoutData: null,
     status: null,
     errorMessage: '',
   },
@@ -130,6 +132,12 @@ export const checkoutInfo = createSlice({
     [captureCheckout.rejected]: (state, action) => {
       state.status = 'rejected';
       state.errorMessage = action.payload;
+    },
+    [createPayment.fulfilled]: (state, action) => {
+      state.paymentMethodId = action.payload;
+      state.paymentStatus = 'fulfilled';
+      state.paymentErrorMessage = null;
+      state.currentStep += 1;
     },
   }
 });

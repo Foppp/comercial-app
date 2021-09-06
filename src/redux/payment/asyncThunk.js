@@ -12,7 +12,6 @@ export const createPayment = createAsyncThunk(
     try {
       return payment(options);
     } catch (e) {
-      console.log(e)
       return rejectWithValue(e.message);
     }
   }
