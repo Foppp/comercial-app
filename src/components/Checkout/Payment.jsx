@@ -2,32 +2,28 @@ import React from "react";
 import { Elements, CardElement, ElementsConsumer } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../../redux/cart/cart.js";
 import { setOrder, nextStep, backStep } from "../../redux/checkout/checkout.js";
 import { setPaymentStatus, setPaymentErrorMessage } from "../../redux/payment/payment.js";
-import { commerce } from "../../lib/commerce";
+import { captureCheckout } from "../../redux/checkout/asyncThunk.js";
+import { refreshCart } from "../../redux/cart/asyncThunk.js";
 import PayButton from './PayButton.jsx';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, { locale: "en" });
 
-const refreshCart = () => async (dispatch) => {
-  const newCart = await commerce.cart.refresh();
-  dispatch(setCart(newCart));
-};
 
-const handleCaptureCheckout = (checkoutTokenId, newOrder) => async (dispatch) => {
-  try {
-    const incomingOrder = await commerce.checkout.capture(checkoutTokenId,newOrder);
-    dispatch(setOrder(incomingOrder));
-    dispatch(refreshCart());
-    dispatch(setPaymentStatus("fulfilled"));
-    dispatch(setPaymentErrorMessage(null));
-    dispatch(nextStep());
-  } catch (e) {
-    dispatch(setPaymentStatus("rejected"));
-    dispatch(setPaymentErrorMessage(e.data.error.message));
-  }
-};
+// const handleCaptureCheckout = (checkoutTokenId, newOrder) => async (dispatch) => {
+//   try {
+//     const incomingOrder = await commerce.checkout.capture(checkoutTokenId,newOrder);
+//     dispatch(setOrder(incomingOrder));
+//     dispatch(refreshCart());
+//     dispatch(setPaymentStatus("fulfilled"));
+//     dispatch(setPaymentErrorMessage(null));
+//     dispatch(nextStep());
+//   } catch (e) {
+//     dispatch(setPaymentStatus("rejected"));
+//     dispatch(setPaymentErrorMessage(e.data.error.message));
+//   }
+// };
 
 const Payment = () => {
   const dispatch = useDispatch();
@@ -67,7 +63,8 @@ const Payment = () => {
             payment: { gateway: 'stripe', stripe: { payment_method_id: paymentMethod.id },
           },
         };
-        dispatch(handleCaptureCheckout(checkoutToken.id, orderData));
+        dispatch(captureCheckout({ checkoutTokenId: checkoutToken.id, newOrder: orderData }));
+        dispatch(refreshCart());
       }
     } catch (e) {
       dispatch(setPaymentStatus('rejected'));

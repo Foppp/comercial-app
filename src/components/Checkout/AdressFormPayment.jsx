@@ -6,31 +6,13 @@ import { Link } from "react-router-dom";
 import {
   nextStep,
   setShippingData,
-  setShippingCountries,
   setShippingCountry,
-  setShippingSubdivisions,
   setShippingSubdivision,
-  setShippingOptions,
   setShippingOption,
 } from "../../redux/checkout/checkout.js";
-import { commerce } from "../../lib/commerce";
-
-const fetchShippingCountries = (checkoutTokenId) => async (dispatch) => {
-  const { countries } = await commerce.services.localeListShippingCountries(checkoutTokenId);
-  dispatch(setShippingCountries(countries));
-};
-
-const fetchSubdivisions = (countryCode) => async (dispatch) => {
-  const { subdivisions } = await commerce.services.localeListSubdivisions(countryCode);
-  dispatch(setShippingSubdivisions(subdivisions));
-};
-
-const fetchShippingOptions = (checkoutTokenId, country, stateProvince = null ) => async (dispatch) => {
-  const options = await commerce.checkout.getShippingOptions(
-    checkoutTokenId, { country, region: stateProvince }
-  );
-  dispatch(setShippingOptions(options));
-};
+import {
+  fetchShippingCountries, fetchSubdivisions, fetchShippingOptions,
+} from "../../redux/checkout/asyncThunk.js";
 
 const AdressForm = () => {
   const dispatch = useDispatch();
@@ -58,7 +40,11 @@ const AdressForm = () => {
 
   useEffect(() => {
     if (shippingSubdivision)
-      dispatch(fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision));
+      dispatch(fetchShippingOptions({
+        checkoutTokenId: checkoutToken.id,
+        country: shippingCountry,
+        stateProvince: shippingSubdivision,
+      }));
   }, [shippingSubdivision]);
 
   const formik = useFormik({

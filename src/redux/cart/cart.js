@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, addToCart, updateCartQty, removeFromCart, emptyCart } from './asyncThunk';
+import { fetchCart, addToCart, updateCartQty, removeFromCart, emptyCart, refreshCart } from './asyncThunk';
 
 export const cartInfo = createSlice({
   name: 'cart',
   initialState: {
     cart: {},
-    cartErrorMessage: null,
-    cartStatus: null,
+    error: null,
+    status: null,
   },
   reducers: {
     setCart: (state, action) => {
@@ -16,7 +16,7 @@ export const cartInfo = createSlice({
       state.errorMessage = action.payload;
     },
     setCartStatus: (state, action) => {
-      state.cartStatus = action.payload;
+      state.status = action.payload;
     },
   },
   extraReducers: {
@@ -26,11 +26,11 @@ export const cartInfo = createSlice({
     [fetchCart.fulfilled]: (state, action) => {
       state.cart = action.payload;
       state.status = 'fulfilled';
-      state.cartErrorMessage = null;
+      state.error = null;
     },
     [fetchCart.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.cartErrorMessage = action.payload;
+      state.error = action.payload;
     },
     [addToCart.pending]: (state, action) => {
       state.status = 'pending';
@@ -38,11 +38,11 @@ export const cartInfo = createSlice({
     [addToCart.fulfilled]: (state, action) => {
       state.cart = action.payload;
       state.status = 'fulfilled';
-      state.cartErrorMessage = null;
+      state.error = null;
     },
     [addToCart.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.cartErrorMessage = action.payload;
+      state.error = action.payload;
     },
     [updateCartQty.pending]: (state, action) => {
       state.status = 'pending';
@@ -50,11 +50,11 @@ export const cartInfo = createSlice({
     [updateCartQty.fulfilled]: (state, action) => {
       state.cart = action.payload;
       state.status = 'fulfilled';
-      state.cartErrorMessage = null;
+      state.error = null;
     },
     [updateCartQty.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.cartErrorMessage = action.payload;
+      state.error = action.payload;
     },
     [removeFromCart.pending]: (state, action) => {
       state.status = 'pending';
@@ -62,11 +62,11 @@ export const cartInfo = createSlice({
     [removeFromCart.fulfilled]: (state, action) => {
       state.cart = action.payload;
       state.status = 'fulfilled';
-      state.cartErrorMessage = null;
+      state.error = null;
     },
     [removeFromCart.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.cartErrorMessage = action.payload;
+      state.error = action.payload;
     },
     [emptyCart.pending]: (state, action) => {
       state.status = 'pending';
@@ -74,12 +74,24 @@ export const cartInfo = createSlice({
     [emptyCart.fulfilled]: (state, action) => {
       state.cart = action.payload;
       state.status = 'fulfilled';
-      state.cartErrorMessage = null;
+      state.error = null;
     },
     [emptyCart.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.cartErrorMessage = action.payload;
-    }
+      state.error = action.payload;
+    },
+    [refreshCart.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [refreshCart.fulfilled]: (state, action) => {
+      state.cart = action.payload;
+      state.status = 'fulfilled';
+      state.error = null;
+    },
+    [refreshCart.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
+    },
   }
 });
 

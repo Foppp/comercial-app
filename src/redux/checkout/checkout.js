@@ -1,4 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  fetchShippingCountries,
+  fetchSubdivisions,
+  fetchShippingOptions,
+  generateToken,
+  captureCheckout,
+} from './asyncThunk';
 
 export const checkoutInfo = createSlice({
   name: 'checkout',
@@ -15,6 +22,7 @@ export const checkoutInfo = createSlice({
       shippingOptions: [],
       shippingOption: '',
     },
+    status: null,
     errorMessage: '',
   },
   reducers: {
@@ -60,6 +68,69 @@ export const checkoutInfo = createSlice({
     setErrorMessage: (state, action) => {
       state.errorMessage = action.payload;
     }
+  },
+  extraReducers: {
+    [fetchShippingCountries.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [fetchShippingCountries.fulfilled]: (state, action) => {
+      state.shipping.shippingCountries = action.payload;
+      state.status = 'fulfilled';
+      state.errorMessage = null;
+    },
+    [fetchShippingCountries.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.errorMessage = action.payload;
+    },
+    [fetchSubdivisions.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [fetchSubdivisions.fulfilled]: (state, action) => {
+      state.shipping.shippingSubdivisions = action.payload;
+      state.status = 'fulfilled';
+      state.errorMessage = null;
+    },
+    [fetchSubdivisions.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.errorMessage = action.payload;
+    },
+    [fetchShippingOptions.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [fetchShippingOptions.fulfilled]: (state, action) => {
+      state.shipping.shippingOptions = action.payload;
+      state.status = 'fulfilled';
+      state.errorMessage = null;
+    },
+    [fetchShippingOptions.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.errorMessage = action.payload;
+    },
+    [generateToken.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [generateToken.fulfilled]: (state, action) => {
+      state.checkoutToken = action.payload;
+      state.status = 'fulfilled';
+      state.errorMessage = null;
+    },
+    [generateToken.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.errorMessage = action.payload;
+    },
+    [captureCheckout.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [captureCheckout.fulfilled]: (state, action) => {
+      state.order = action.payload;
+      state.status = 'fulfilled';
+      state.errorMessage = null;
+      state.currentStep += 1;
+    },
+    [captureCheckout.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.errorMessage = action.payload;
+    },
   }
 });
 

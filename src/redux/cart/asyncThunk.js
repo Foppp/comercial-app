@@ -55,3 +55,14 @@ export const emptyCart = createAsyncThunk(
     }
   }
 );
+
+export const refreshCart = createAsyncThunk(
+  'checkout/refreshCart', async (_, { rejectWithValue }) => {
+    try {
+      const newCart = await commerce.cart.refresh();
+      return newCart;
+    } catch (e) {
+      return rejectWithValue(e.data.error.message);
+    }
+  }
+);

@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setCheckoutToken, setCurrentStep, setShippingData, setErrorMessage
-} from '../../redux/checkout/checkout.js';
-import { commerce } from '../../lib/commerce.js';
+import { setCurrentStep, setShippingData } from '../../redux/checkout/checkout.js';
+import { generateToken } from '../../redux/checkout/asyncThunk.js';
 import Spinner from '../Spinner/Spinner';
 import CheckoutForm from './index.jsx';
 
@@ -15,18 +13,8 @@ const Checkout = () => {
 
   useEffect(() => {
     if (cart.id) {
-      const generateToken = () => async (dispatch) => {
-        try {
-          const token = await commerce.checkout.generateToken(cart.id, {
-            type: 'cart',
-          });
-          dispatch(setCheckoutToken(token));
-        } catch (e) {
-          dispatch(setErrorMessage(e.message));
-        }
-      };
       dispatch(setShippingData({}));
-      dispatch(generateToken());
+      dispatch(generateToken(cart.id));
       dispatch(setCurrentStep(1));
     }
   }, [dispatch]);
