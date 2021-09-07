@@ -23,9 +23,12 @@ export const checkoutInfo = createSlice({
       shippingOptions: [],
       shippingOption: '',
     },
-    checkoutData: null,
     status: null,
-    errorMessage: '',
+    errors: {
+      shippingError: '',
+      checkoutTokenError: '',
+      orderError: '',
+    },
   },
   reducers: {
     setSteps: (state, action) => {
@@ -78,11 +81,11 @@ export const checkoutInfo = createSlice({
     [fetchShippingCountries.fulfilled]: (state, action) => {
       state.shipping.shippingCountries = action.payload;
       state.status = 'fulfilled';
-      state.errorMessage = null;
+      state.errors.shippingError = null;
     },
     [fetchShippingCountries.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.errorMessage = action.payload;
+      state.errors.shippingError = action.payload;
     },
     [fetchSubdivisions.pending]: (state, action) => {
       state.status = 'pending';
@@ -90,11 +93,11 @@ export const checkoutInfo = createSlice({
     [fetchSubdivisions.fulfilled]: (state, action) => {
       state.shipping.shippingSubdivisions = action.payload;
       state.status = 'fulfilled';
-      state.errorMessage = null;
+      state.errors.shippingError = null;
     },
     [fetchSubdivisions.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.errorMessage = action.payload;
+      state.errors.shippingError = action.payload;
     },
     [fetchShippingOptions.pending]: (state, action) => {
       state.status = 'pending';
@@ -102,11 +105,11 @@ export const checkoutInfo = createSlice({
     [fetchShippingOptions.fulfilled]: (state, action) => {
       state.shipping.shippingOptions = action.payload;
       state.status = 'fulfilled';
-      state.errorMessage = null;
+      state.errors.shippingError = null;
     },
     [fetchShippingOptions.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.errorMessage = action.payload;
+      state.errors.shippingError = action.payload;
     },
     [generateToken.pending]: (state, action) => {
       state.status = 'pending';
@@ -114,11 +117,13 @@ export const checkoutInfo = createSlice({
     [generateToken.fulfilled]: (state, action) => {
       state.checkoutToken = action.payload;
       state.status = 'fulfilled';
-      state.errorMessage = null;
+      state.checkoutTokenError = null;
+      state.shipping.shippingData = {};
+      state.currentStep = 1;
     },
     [generateToken.rejected]: (state, action) => {
       state.status = 'rejected';
-      state.errorMessage = action.payload;
+      state.checkoutTokenError = action.payload;
     },
     [captureCheckout.pending]: (state, action) => {
       state.status = 'pending';
@@ -126,19 +131,27 @@ export const checkoutInfo = createSlice({
     [captureCheckout.fulfilled]: (state, action) => {
       state.order = action.payload;
       state.status = 'fulfilled';
-      state.errorMessage = null;
-      state.currentStep += 1;
+      state.orderError = null;
+      // state.currentStep += 1;
     },
     [captureCheckout.rejected]: (state, action) => {
+      console.log(action)
       state.status = 'rejected';
-      state.errorMessage = action.payload;
+      state.orderError = action.payload;
     },
-    [createPayment.fulfilled]: (state, action) => {
-      state.paymentMethodId = action.payload;
-      state.paymentStatus = 'fulfilled';
-      state.paymentErrorMessage = null;
-      state.currentStep += 1;
+    [createPayment.pending]: (state, action) => {
+      state.status = 'pending';
     },
+    [createPayment.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.orderError = action.payload;
+    }
+    // [createPayment.fulfilled]: (state, action) => {
+      // state.paymentMethodId = action.payload;
+      // state.paymentStatus = 'fulfilled';
+      // state.paymentErrorMessage = null;
+      // state.currentStep += 1;
+    // },
   }
 });
 

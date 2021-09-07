@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentStep, setShippingData } from '../../redux/checkout/checkout.js';
 import { generateToken } from '../../redux/checkout/asyncThunk.js';
 import Spinner from '../Spinner/Spinner';
 import CheckoutForm from './index.jsx';
@@ -13,11 +11,9 @@ const Checkout = () => {
 
   useEffect(() => {
     if (cart.id) {
-      dispatch(setShippingData({}));
       dispatch(generateToken(cart.id));
-      dispatch(setCurrentStep(1));
     }
-  }, [dispatch]);
+  }, [cart, dispatch]);
 
   return (
     <div className='checkout-container'>

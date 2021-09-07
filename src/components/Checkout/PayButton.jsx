@@ -3,22 +3,22 @@ import { useSelector } from "react-redux";
 
 const PayButton = ({ stripe }) => {
   const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
-  const paymentStatus = useSelector((state) => state.paymentInfoReducer.paymentStatus);
+  const paymentCheckoutStatus = useSelector((state) => state.paymentInfoReducer.paymentCheckoutStatus);
 
-  return paymentStatus === "processing" ? (
+  return paymentCheckoutStatus === 'pending' ? (
     <button className="btn btn-success" type="button" disabled>
       <span
         className="spinner-border spinner-border-sm"
         role="status"
         aria-hidden="true"
       ></span>
-      <span className="">Checking cart...</span>
+      <span className="">Processing...</span>
     </button>
   ) : (
     <button
       type="submit"
       className="btn btn-success"
-      disabled={!stripe || paymentStatus === "pending"}
+      disabled={!stripe || paymentCheckoutStatus === "pending"}
     >
       Pay {checkoutToken.live.subtotal.formatted_with_symbol}
     </button>
