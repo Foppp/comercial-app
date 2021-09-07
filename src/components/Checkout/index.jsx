@@ -11,8 +11,7 @@ const steps = {
   1: AdressForm,
   2: Review,
   3: Payment,
-  4: Order,
-  5: Confirmation
+  4: Confirmation,
 };
 
 const CheckoutForm = () => {

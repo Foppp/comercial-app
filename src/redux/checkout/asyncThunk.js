@@ -46,14 +46,3 @@ export const generateToken = createAsyncThunk(
   }
 );
 
-export const captureCheckout = createAsyncThunk(
-  'checkout/captureCheckout', async (checkoutData, { rejectWithValue }) => {
-    try {
-      const { checkoutTokenId, newOrder } = checkoutData;
-      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
-      return incomingOrder;
-    } catch (e) {
-      return rejectWithValue(e.data.error.message);
-    }
-  }
-);

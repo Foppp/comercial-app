@@ -4,9 +4,8 @@ import {
   fetchSubdivisions,
   fetchShippingOptions,
   generateToken,
-  captureCheckout,
 } from './asyncThunk';
-import { createPayment } from "../payment/asyncThunk";
+import { captureCheckout } from "../payment/asyncThunk";
 
 export const checkoutInfo = createSlice({
   name: 'checkout',
@@ -125,33 +124,9 @@ export const checkoutInfo = createSlice({
       state.status = 'rejected';
       state.checkoutTokenError = action.payload;
     },
-    [captureCheckout.pending]: (state, action) => {
-      state.status = 'pending';
-    },
     [captureCheckout.fulfilled]: (state, action) => {
-      state.order = action.payload;
-      state.status = 'fulfilled';
-      state.orderError = null;
-      // state.currentStep += 1;
+      state.currentStep += 1;
     },
-    [captureCheckout.rejected]: (state, action) => {
-      console.log(action)
-      state.status = 'rejected';
-      state.orderError = action.payload;
-    },
-    [createPayment.pending]: (state, action) => {
-      state.status = 'pending';
-    },
-    [createPayment.rejected]: (state, action) => {
-      state.status = 'rejected';
-      state.orderError = action.payload;
-    }
-    // [createPayment.fulfilled]: (state, action) => {
-      // state.paymentMethodId = action.payload;
-      // state.paymentStatus = 'fulfilled';
-      // state.paymentErrorMessage = null;
-      // state.currentStep += 1;
-    // },
   }
 });
 

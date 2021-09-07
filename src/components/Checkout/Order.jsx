@@ -4,7 +4,6 @@ import Spinner from '../Spinner/Spinner';
 import { captureCheckout } from '../../redux/checkout/asyncThunk';
 
 const Order = () => {
-  console.log('-----')
   // const paymentMethodId = useSelector((state) => state.paymentInfoReducer.paymentMethodId);
   // const order = useSelector((state) => state.checkoutInfoReducer.order);
   // const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);

@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { backStep } from "../../redux/checkout/checkout.js";
 import { createPayment } from "../../redux/payment/asyncThunk.js";
-import { captureCheckout } from '../../redux/checkout/asyncThunk';
+import { captureCheckout } from "../../redux/payment/asyncThunk.js";
 
 import PayButton from './PayButton.jsx';
 
@@ -12,8 +12,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, { loca
 
 const Payment = () => {
   const dispatch = useDispatch();
-  const paymentCheckoutError = useSelector((state) => state.paymentInfoReducer.paymentCheckoutError);
-  const paymentInfoError = useSelector((state) => state.paymentInfoReducer.paymentInfoError);
+  const paymentError = useSelector((state) => state.paymentInfoReducer.error);
   const paymentMethodId = useSelector((state) => state.paymentInfoReducer.paymentMethodId);
   const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
   const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
@@ -73,11 +72,8 @@ const Payment = () => {
           {({ elements, stripe }) => (
             <form onSubmit={(e) => dispatch(handleSubmit(e, elements, stripe))}>
               <CardElement />
-              {paymentInfoError && (
-                <p className='text-center text-danger mt-3'>Ooops! Something gone wrong. Try again</p>
-              )}
-              {paymentCheckoutError && (
-                <p className='text-center text-danger mt-3'>{paymentCheckoutError}</p>
+              {paymentError && (
+                <p className='text-center text-danger mt-3'>{paymentError}</p>
               )}
               <br /> <br />
               <div className='d-flex justify-content-between m-3'>
