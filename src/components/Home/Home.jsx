@@ -15,7 +15,7 @@ const Home = () => {
       </header>
       <main>
         <div className="d-lg-flex justify-content-around w-100 my-md-3 ps-md-3">
-          <div className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center d-flex align-items-end flex-column overflow-hidden">
             <div className="my-3 py-3">
               <h2 className="display-5">Electronic sound</h2>
               <p className="lead">
@@ -30,7 +30,7 @@ const Home = () => {
               </p>
             </div>
             <div
-              className="adv-l bg-light shadow-sm mx-auto"
+              className="adv-l bg-light shadow-sm mt-auto p-2"
               style={{
                 width: "100%",
                 height: "160px",
@@ -40,7 +40,7 @@ const Home = () => {
             <br />
           </div>
 
-          <div className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div className="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center d-flex align-items-end flex-column overflow-hidden">
             <div className="my-3 py-3">
               <h2 className="display-5">Music synthesizer</h2>
               <p className="lead">
@@ -56,7 +56,7 @@ const Home = () => {
               </p>
             </div>
             <div
-              className="adv-r bg-light shadow-sm mx-auto"
+              className="adv-r bg-light shadow-sm mt-auto p-2"
               style={{
                 width: "100%",
                 height: "160px",

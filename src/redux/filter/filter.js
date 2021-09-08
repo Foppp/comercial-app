@@ -6,10 +6,9 @@ export const filterProductsInfo = createSlice({
     filterBy: {
       price: {
         min: null,
-        max: null,
+        max: Infinity,
       },
-      manufacturer: [],
-      keys: [],
+      categories: [],
     },
   },
   reducers: {
@@ -17,20 +16,20 @@ export const filterProductsInfo = createSlice({
       state.filterBy.price.min = action.payload;
     },
     setMaxPrice: (state, action) => {
-      state.filterBy.price.max = action.payload;
+      state.filterBy.price.max = action.payload === 0 ? Infinity :  action.payload;
     },
     setManufacturer: (state, action) => {
-      state.filterBy.manufacturer = [...state.filterBy.manufacturer, action.payload];
+      state.filterBy.categories = [...state.filterBy.categories, action.payload];
     },
     removeManufacturer: (state, action) => {
-      state.filterBy.manufacturer = state.filterBy.manufacturer
-        .filter((manufacturer) => manufacturer.id !== action.payload.id);
+      state.filterBy.categories = state.filterBy.categories
+        .filter((category) => category !== action.payload);
     },
     setKeys: (state, action) => {
-      state.filterBy.keys = [...state.filterBy.keys, action.payload];
+      state.filterBy.categories = [...state.filterBy.categories, action.payload];
     },
     removeKeys: (state, action) => {
-      state.filterBy.keys = state.filterBy.keys
+      state.filterBy.categories = state.filterBy.categories
         .filter((keys) => keys.id !== action.payload.id);
     },
   },

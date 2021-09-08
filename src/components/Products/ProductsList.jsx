@@ -1,9 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ProductItem from './ProductItem';
+import filterProductList from '../../utils/filters';
 
 const Products = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
+  const filters = useSelector((state) => state.filterProductsInfoReducer.filterBy);
+  const updatedProductList = filterProductList(products, filters);
 
   return (
     <div className='col-sm-6 col-md-8 col-lg-9'>
@@ -18,7 +21,7 @@ const Products = () => {
                   </select> */}
           </div>
           <div className='row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 justify-content-center'>
-            {products.map((product) => (
+            {updatedProductList.map((product) => (
               <ProductItem key={product.id} product={product} />
             ))}
           </div>
@@ -29,3 +32,5 @@ const Products = () => {
 };
 
 export default Products;
+
+
