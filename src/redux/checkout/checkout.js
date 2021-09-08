@@ -11,10 +11,10 @@ export const checkoutInfo = createSlice({
   name: 'checkout',
   initialState: {
     steps: [
-      { id: 1, name: 'Shipping Address', finished: false },
-      { id: 2, name: 'Review Information', finished: false },
-      { id: 3, name: 'Payment', finished: false },
-      { id: 4, name: 'Confirmation', finished: false },
+      { id: 1, name: 'Shipping Address', finished: true },
+      { id: 2, name: 'Order Information', finished: true },
+      { id: 3, name: 'Payment Details', finished: false },
+      { id: 4, name: 'Confirm Order', finished: false },
     ],
     currentStepId: 1,
     checkoutToken: null,

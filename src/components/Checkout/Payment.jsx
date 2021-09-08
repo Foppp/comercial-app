@@ -66,7 +66,7 @@ const Payment = () => {
   return (
     <main>
       <div className='py-5 text-center'>
-        <h2>Order Payment</h2>
+        <h2>Payment Details</h2>
       </div>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>

@@ -6,6 +6,7 @@ import AdressForm from "./AdressFormPayment";
 import Review from "./Review";
 import Payment from "./Payment";
 import Confirmation from "./Confirmation";
+import Stepper from './Stepper.jsx';
 
 const steps = {
   1: AdressForm,
@@ -38,7 +39,8 @@ const Checkout = () => {
         {!checkoutToken ? (
           <Spinner />
         ) : (
-          <div className='card checkout-card shadow-sm'>
+            <div className='card checkout-card shadow-sm'>
+              <Stepper />
             <div className='container'>
               <Form />
             </div>

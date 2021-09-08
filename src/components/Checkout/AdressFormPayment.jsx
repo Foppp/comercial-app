@@ -66,7 +66,7 @@ const AdressForm = () => {
   return (
     <main>
       <div className="py-5 text-center">
-        <h2>Order Adress</h2>
+        <h2>Shipping Address</h2>
       </div>
 
       <div className="row g-3 border-bottom">
@@ -233,7 +233,7 @@ const AdressForm = () => {
                   Please provide a valid state.
                 </div>
               </div>
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end pb-3">
+              <div className="d-grid gap-2 d-md-flex justify-content-md-between pb-3">
                 <Link to="/cart" className="btn btn-secondary" type="button">
                   Back to cart
                 </Link>
