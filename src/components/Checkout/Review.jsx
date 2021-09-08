@@ -6,6 +6,10 @@ const Review = () => {
   const dispatch = useDispatch();
   const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
   const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
+  const countries = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountries);
+  const country = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountry);
+  const states = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivisions);
+  const state = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivision);
 
   return (
     <div className="col-lg-12 order-last">
@@ -36,6 +40,14 @@ const Review = () => {
         <div className="row border-bottom m-2">
           <div className="col">Email: </div>
           <div className="col">{shippingData.email}</div>
+        </div>
+        <div className="row border-bottom m-2">
+          <div className="col">Coutry: </div>
+          <div className="col">{countries[country]}</div>
+        </div>
+        <div className="row border-bottom m-2">
+          <div className="col">State: </div>
+          <div className="col">{states[state]}</div>
         </div>
       </div>
 
