@@ -10,7 +10,13 @@ import { captureCheckout } from "../payment/asyncThunk";
 export const checkoutInfo = createSlice({
   name: 'checkout',
   initialState: {
-    currentStep: 1,
+    steps: [
+      { id: 1, name: 'Shipping Address', finished: false },
+      { id: 2, name: 'Review Information', finished: false },
+      { id: 3, name: 'Payment', finished: false },
+      { id: 4, name: 'Confirmation', finished: false },
+    ],
+    currentStepId: 1,
     checkoutToken: null,
     order: null,
     shipping: {
@@ -34,13 +40,13 @@ export const checkoutInfo = createSlice({
       state.steps = action.payload;
     },
     setCurrentStep: (state, action) => {
-      state.currentStep = action.payload;
+      state.currentStepId = action.payload;
     },
     nextStep: (state) => {
-      state.currentStep += 1;
+      state.currentStepId += 1;
     },
     backStep: (state) => {
-      state.currentStep -= 1;
+      state.currentStepId -= 1;
     },
     setOrder: (state, action) => {
       state.order = action.payload;
@@ -118,14 +124,14 @@ export const checkoutInfo = createSlice({
       state.status = 'fulfilled';
       state.checkoutTokenError = null;
       state.shipping.shippingData = {};
-      state.currentStep = 1;
+      state.currentStepId = 1;
     },
     [generateToken.rejected]: (state, action) => {
       state.status = 'rejected';
       state.checkoutTokenError = action.payload;
     },
     [captureCheckout.fulfilled]: (state, action) => {
-      state.currentStep += 1;
+      state.currentStepId += 1;
     },
   }
 });
