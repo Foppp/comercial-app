@@ -5,12 +5,12 @@ const service = 'service_slxhkgl';
 const template = 'template_xxundmk';
 const user = 'user_YMWIwXTCBxoyKXwb2L7tm';
 
-const sendEmail = (e) => emailjs
-  .sendForm(service, template, e.target, user)
+const sendEmail = (values, formik) => emailjs
+  .send(service, template, values, user)
   .then(
-    (res) => {
-      console.log(res);
-      e.target.reset();
+    () => {
+      console.log('sent!');
+      formik.resetForm();
     },
     (error) => {
       throw error;
@@ -18,10 +18,10 @@ const sendEmail = (e) => emailjs
   );
 
 export const sendContactEmail = createAsyncThunk(
-  'contact/sendContactEmail', async (e, { rejectWithValue }) => {
-    e.preventDefault();
+  'contact/sendContactEmail', async (data, { rejectWithValue }) => {
     try {
-      return await sendEmail(e);
+      const { values, formik } = data;
+      return await sendEmail(values, formik);
     } catch (error) {
       return rejectWithValue(error.text)
     }
