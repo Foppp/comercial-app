@@ -5,7 +5,9 @@ import filterProductList from '../../utils/filters';
 
 const Products = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
-  const filters = useSelector((state) => state.filterProductsInfoReducer.filterBy);
+  const filters = useSelector(
+    (state) => state.filterProductsInfoReducer.filterBy
+  );
   const updatedProductList = filterProductList(products, filters);
 
   return (
@@ -32,5 +34,3 @@ const Products = () => {
 };
 
 export default Products;
-
-
