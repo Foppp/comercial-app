@@ -40,19 +40,19 @@ const Cart = () => {
         </div>
         <div className='shopping-cart-footer mt-3'>
           <div className='column float-start'>
-            <Link to='/products' className='btn btn-outline-secondary'>
+            <Link to='/products' className='btn btn-outline-secondary rounded-pill'>
               Back to Shopping
             </Link>
           </div>
           <div className='column float-end'>
             <button
-              className='btn btn-danger mx-3'
+              className='btn btn-warning mx-3 rounded-pill'
               type='button'
               onClick={() => dispatch(emptyCart())}
             >
               Clear Cart
             </button>
-            <Link to='/checkout' className='btn btn-success'>
+            <Link to='/checkout' className='btn btn-info rounded-pill'>
               Checkout
             </Link>
           </div>

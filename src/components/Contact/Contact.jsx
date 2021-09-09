@@ -125,7 +125,7 @@ const Contact = () => {
                 <input
                   type='submit'
                   value='Send Message'
-                  className='btn btn-primary rounded-3'
+                  className='btn btn-primary rounded-pill btn-info'
                   disabled={messageStatus === 'pending'}
                 />
                 <span className='submitting'></span>

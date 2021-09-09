@@ -17,7 +17,7 @@ const PayButton = ({ stripe }) => {
   ) : (
     <button
       type="submit"
-      className="btn btn-success"
+      className="btn btn-info"
       disabled={!stripe || paymentStatus === "pending"}
     >
       Pay {checkoutToken.live.subtotal.formatted_with_symbol}

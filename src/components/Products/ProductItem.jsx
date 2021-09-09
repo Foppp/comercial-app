@@ -27,9 +27,9 @@ const ProductItem = ({ product }) => {
             </div>
           </div>
         </Link>
-        <div className='card-footer pt-0 border-top-0 bg-transparent text-center'>
+        <div className='card-footer border-top-0 bg-transparent text-center'>
           <button
-            className='btn btn-outline-dark mt-auto'
+            className='btn btn-outline-dark rounded-pill mt-auto'
             onClick={() =>
               dispatch(addToCart({ productId: product.id, qty: 1 }))
             }

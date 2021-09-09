@@ -65,13 +65,13 @@ const AdressForm = () => {
   });
   return (
     <main>
-      <div className="py-5 text-center">
+      {/* <div className="py-5 text-center">
         <h2>Shipping Address</h2>
-      </div>
+      </div> */}
 
       <div className="row g-3 border-bottom">
         <div className="col-lg-12">
-          <form className="needs-validation" onSubmit={formik.handleSubmit}>
+          <form className="" onSubmit={formik.handleSubmit}>
             <div className="row g-3">
               <div className="form-floating col-sm-6">
                 <input
@@ -234,10 +234,10 @@ const AdressForm = () => {
                 </div>
               </div>
               <div className="d-grid gap-2 d-md-flex justify-content-md-between pb-3">
-                <Link to="/cart" className="btn btn-secondary" type="button">
+                <Link to="/cart" className="btn btn-outline-secondary rounded-pill" type="button">
                   Back to cart
                 </Link>
-                <button className="full-width btn btn-primary" type="submit">
+                <button className="full-width btn btn-info rounded-pill" type="submit">
                   Continue to payment
                 </button>
               </div>

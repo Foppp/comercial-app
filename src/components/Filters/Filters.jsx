@@ -49,7 +49,7 @@ const Filters = () => {
                         <label>Min</label>
                         <input
                           type='number'
-                          className='form-control'
+                          className='form-control rounded-pill'
                           id='inputEmail4'
                           placeholder='$0'
                           defaultValue={minPrice}
@@ -60,7 +60,7 @@ const Filters = () => {
                         <label>Max</label>
                         <input
                           type='number'
-                          className='form-control'
+                          className='form-control rounded-pill'
                           placeholder='$1,000'
                           defaultValue={maxPrice}
                           onChange={(e) => dispatch(setMaxPrice(Number(e.target.value)))}

@@ -25,9 +25,9 @@ const Review = () => {
 
   return (
     <div className='row'>
-      <div className='p-2 text-center'>
+      {/* <div className='p-2 text-center'>
         <h2>Order Information</h2>
-      </div>
+      </div> */}
       <div className="row py-5 mx-auto">
       <div className='row text-center'>
           <div className='row m-1'>
@@ -89,14 +89,14 @@ const Review = () => {
       </div>
       <div className='d-grid gap-2 d-md-flex justify-content-md-between pb-3'>
         <button
-          className='btn btn-secondary'
+          className='btn btn-outline-secondary rounded-pill'
           type='button'
           onClick={() => dispatch(backStep())}
         >
           Back
         </button>
         <button
-          className='full-width btn btn-primary'
+          className='full-width btn btn-info rounded-pill'
           type='submit'
           onClick={() => dispatch(nextStep())}
         >

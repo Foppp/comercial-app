@@ -65,9 +65,9 @@ const Payment = () => {
 
   return (
     <main>
-      <div className='py-5 text-center'>
+      {/* <div className='py-5 text-center'>
         <h2>Payment Details</h2>
-      </div>
+      </div> */}
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
@@ -79,7 +79,7 @@ const Payment = () => {
               <br /> <br />
               <div className='d-flex justify-content-between m-3'>
                 <button
-                  className='btn btn-secondary'
+                  className='btn btn-outline-secondary'
                   onClick={() => dispatch(backStep())}
                 >
                   Back
