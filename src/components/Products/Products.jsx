@@ -1,12 +1,16 @@
 import React from 'react';
-import SideMenu from '../SideMenu/SideMenu';
+import Filters from '../Filters/Filters';
 import ProductsList from './ProductsList';
+import Sort from '../Sort/Sort';
 
 const Products = () => {
   return (
     <div className='row products-container'>
-      <SideMenu />
-      <ProductsList />
+      <Filters />
+      <div className='col-sm-6 col-md-8 col-lg-9 py-3'>
+      <Sort />
+        <ProductsList />
+        </div>
     </div>
   );
 };
