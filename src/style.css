@@ -34,14 +34,16 @@ header {
 
 .product-card:hover {
     box-shadow: 1px 3px 7px rgb(163, 163, 163);
+    transform: scale(102%);
 }
-
 
 select.form-control {
     padding-right: 38px;
     background-position: center right 17px;
     background-repeat: no-repeat;
     background-size: 9px 9px;
+    border-radius: 25px;
+
 }
 
 .form-control:not(textarea) {
@@ -51,7 +53,7 @@ select.form-control {
 .form-control {
     padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
-    border-radius: 10px;
+    border-radius: 25px;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -103,5 +105,3 @@ select.form-control {
     max-width: 700px;
     min-width: 350px;
 }
-
-      
