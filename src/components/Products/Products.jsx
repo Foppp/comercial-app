@@ -1,11 +1,11 @@
 import React from 'react';
-import Filters from '../Filters/Filters';
+import SideMenu from '../SideMenu/SideMenu';
 import ProductsList from './ProductsList';
 
 const Products = () => {
   return (
     <div className='row products-container'>
-      <Filters />
+      <SideMenu />
       <ProductsList />
     </div>
   );

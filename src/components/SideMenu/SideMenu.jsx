@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import cn from 'classnames';
 import {
   setMinPrice,
   setMaxPrice,
@@ -7,6 +8,7 @@ import {
   removeManufacturer,
   setKeys,
   removeKeys,
+  setActiveFilter,
 } from '../../redux/filter/filter';
 
 const manufactures = ['Analog', 'Digital', 'Modular', 'Desktop'];
@@ -29,11 +31,22 @@ const handleKeysFilter = (e) => (dispatch) => {
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const minPrice = useSelector(state => state.filterProductsInfoReducer.filterBy.price.min);
-  const maxPrice = useSelector(state => state.filterProductsInfoReducer.filterBy.price.max);
+  const minPrice = useSelector(
+    (state) => state.filterProductsInfoReducer.filterBy.price.min
+  );
+  const maxPrice = useSelector(
+    (state) => state.filterProductsInfoReducer.filterBy.price.max
+  );
+  const filters = useSelector(
+    (state) => state.filterProductsInfoReducer.filters
+  );
 
   return (
     <div className='col-sm-6 col-md-4 col-lg-3'>
+      <div className='container px-3 px-lg-3 mt-3'>
+        </div>
+      
+
       <section className='py-2'>
         <div className='container px-3 px-lg-3 mt-2'>
           <div className='justify-content-center'>
