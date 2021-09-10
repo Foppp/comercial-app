@@ -23,14 +23,6 @@ export const paginationInfo = createSlice({
     setPrevPage: (state) => {
       state.currentPage -= 1;
     }
-    // setNextPage: (state) => {
-    //   state.currentPage = (state.currentPage > state.totalPages)
-    //     ? state.totalPages
-    //     : state.currentPage + 1;
-    // },
-    // setPrevPage: (state) => {
-    //   state.currentPage = (state.currentPage < 1) ? 1 : state.currentPage - 1;
-    // }
   },
 });
 
