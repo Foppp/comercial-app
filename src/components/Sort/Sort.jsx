@@ -12,7 +12,7 @@ const Sort = () => {
           <select
             className='form-select form-select-sm'
             aria-label='Default select example'
-            value="noSort"
+            defaultValue="noSort"
             onChange={(e) => dispatch(setSortOption(e.target.value))}
           >
             <option disabled value="noSort">Sort Products</option>
@@ -27,13 +27,14 @@ const Sort = () => {
           <select
             className='form-select form-select-sm'
             aria-label='Default select example'
-            value="perPage"
+            defaultValue="perPage"
             onChange={(e) => dispatch(setPerPage(e.target.value))}
           >
             <option disabled value="perPage">Per Page</option>
+            <option value={5}>5</option>
             <option value={10}>10</option>
+            <option value={15}>15</option>
             <option value={20}>20</option>
-            <option value={30}>30</option>
           </select>
         </div>
       </div>

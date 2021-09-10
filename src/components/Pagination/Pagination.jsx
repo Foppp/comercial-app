@@ -1,10 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setCurrentPage,
-  setNextPage,
-  setPrevPage,
-} from '../../redux/pagination/pagination';
+import cn from 'classnames';
+import { setCurrentPage, setNextPage, setPrevPage } from '../../redux/pagination/pagination';
+import { Link } from 'react-router-dom';
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -25,6 +23,7 @@ const Pagination = () => {
     if (currentPage === 1) return;
     dispatch(setPrevPage());
   };
+  
   return (
     <div className='btn-group' role='group' aria-label='Basic example'>
       <button
@@ -34,16 +33,22 @@ const Pagination = () => {
       >
         <span aria-hidden='true'>&laquo;</span>
       </button>
-      {pagNavigation.map((page) => (
-        <button
-          key={page}
-          type='button'
-          className='btn btn-outline-secondary'
-          onClick={() => dispatch(setCurrentPage(page))}
-        >
-          {page}
-        </button>
-      ))}
+      {pagNavigation.map((page) => {
+        const className = cn('btn', {
+          'btn-outline-secondary': currentPage !== page,
+          'btn-secondary': currentPage === page,
+        })
+        return (
+          <button
+            key={page}
+            type='button'
+            className={className}
+            onClick={() => dispatch(setCurrentPage(page))}
+          >
+            {page}
+          </button>
+        )
+      })}
       <button
         type='button'
         className='btn btn-outline-secondary'
