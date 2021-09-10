@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
+import { ListGroup } from 'react-bootstrap';
 import {
   setMinPrice,
   setMaxPrice,
