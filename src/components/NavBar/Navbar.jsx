@@ -22,6 +22,7 @@ const Navbar = () => {
 
   const navToggleClass = cn("collapse navbar-collapse", {
     show: showNav,
+    'text-center': showNav,
   });
 
   useEffect(() => {
@@ -73,12 +74,13 @@ const Navbar = () => {
               );
             })}
           </ul>
-          {/* <div className="d-flex me-5 input-group-sm">
+          <div className="d-flex input-group-sm">
             <input
               className="form-control rounded me-2"
               type="text"
               placeholder="Search"
               aria-label="Search"
+              onChange={(e) => console.log(e.target.value)}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,8 +92,9 @@ const Navbar = () => {
             >
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
-          </div> */}
-          <Link to="/cart" className="btn btn-outline-dark rounded-pill">
+          </div>
+          <div className="ms-5 mt-3"></div>
+          <Link to="/cart" className="btn btn-outline-dark rounded-pill ms-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
