@@ -43,7 +43,6 @@ const App = () => {
       <Footer />
       <ToastMessage />
     </Router>
-    
   );
 };
 
