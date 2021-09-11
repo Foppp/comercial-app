@@ -7,7 +7,8 @@ import paymentInfoReducer from "./payment/payment.js";
 import notificationInfoReducer from "./notifier/notifier.js";
 import contactInfoReducer from "./contact/contact.js";
 import sortProductsInfoReducer from "./sort/sort.js";
-import paginationInfoReducer from './pagination/pagination.js'
+import paginationInfoReducer from './pagination/pagination.js';
+import modalInfoReducer from "./modal/modal.js";
 
 export default configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export default configureStore({
     notificationInfoReducer,
     contactInfoReducer,
     paginationInfoReducer,
+    modalInfoReducer,
   },
   middleware: getDefaultMiddleware(),
   devTools: true,

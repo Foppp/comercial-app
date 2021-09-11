@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
-
+import ModalWindow from "../Modal/Modal";
 const navbarMenuItems = [
   { id: 1, title: "Home", path: "/" },
   { id: 2, title: "Products", path: "/products" },
@@ -112,6 +112,8 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
+      <ModalWindow />
+
     </nav>
   );
 };
