@@ -9,6 +9,7 @@ import contactInfoReducer from "./contact/contact.js";
 import sortProductsInfoReducer from "./sort/sort.js";
 import paginationInfoReducer from './pagination/pagination.js';
 import modalInfoReducer from "./modal/modal.js";
+import navbarInfoReducer from "./navBar/navbar.js";
 
 export default configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export default configureStore({
     contactInfoReducer,
     paginationInfoReducer,
     modalInfoReducer,
+    navbarInfoReducer,
   },
   middleware: getDefaultMiddleware(),
   devTools: true,
