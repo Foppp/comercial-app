@@ -29,7 +29,7 @@ const Contact = () => {
   return (
     <div className='container-fluid contact-container mt-5'>
       <div className='row m-3'>
-        <div className='col-md-5 mr-auto'>
+        <div className='col-md-6 mr-auto'>
           <h2>Contact Us</h2>
           <p className='mb-5'>
             SynthMaster. is a family-run musical instrument retailer. With over
