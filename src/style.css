@@ -41,14 +41,14 @@ header {
     text-shadow: 0px 5px 6px rgb(148, 148, 148);
 }
 
-select.form-control {
+/* select.form-control {
     padding-right: 38px;
     background-position: center right 17px;
     background-repeat: no-repeat;
     background-size: 9px 9px;
     border-radius: 25px;
 
-}
+} */
 
 .form-control:not(textarea) {
     height: 44px;
@@ -57,7 +57,7 @@ select.form-control {
 .form-control {
     padding: 0 18px 3px;
     border: 1px solid #dbe2e8;
-    border-radius: 25px;
+    border-radius: 20px;
     background-color: #fff;
     color: #606975;
     font-family: "Maven Pro",Helvetica,Arial,sans-serif;
@@ -90,12 +90,12 @@ select.form-control {
     }
 }
 
-.coupon-form .form-control {
+/* .coupon-form .form-control {
     display: inline-block;
     width: 100%;
     max-width: 235px;
     margin-right: 12px;
-}
+} */
 
 .form-control-sm:not(textarea) {
     height: 36px;
