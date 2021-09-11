@@ -73,7 +73,7 @@ const Navbar = () => {
           <div className="d-flex input-group-sm">
           </div>
           <div className="d-sm-flex">
-          <button className="btn search" type="button">
+          <button className="btn search" type="button" onClick={() => dispatch(setModalOpen('search'))}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -86,7 +86,7 @@ const Navbar = () => {
             </svg>
             </button>
             <div className="ms-5 mt-3"></div>
-          <button type="button" className="btn cart btn-outline-dark rounded-pill" onClick={() => dispatch(setModalOpen())}>
+          <button type="button" className="btn cart btn-outline-dark rounded-pill" onClick={() => dispatch(setModalOpen('cart'))}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

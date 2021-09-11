@@ -79,10 +79,10 @@ const Home = () => {
               Show in 2021 is a little different.
             </p>
             <a
-              className='btn btn-outline-secondary rounded-pill'
+              className='btn btn-outline-light btn-lg rounded-pill'
               href='https://www.namm.org/'
             >
-              Explore
+              Find Out
             </a>
           </div>
           <div className='product-device shadow-sm d-none d-md-block'></div>

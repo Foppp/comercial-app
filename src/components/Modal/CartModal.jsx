@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import CartItem from './CartItem';
+import CartItem from '../Cart/CartItem';
 import Spinner from '../Spinner/Spinner';
 import { setModalClose } from '../../redux/modal/modal';
 
