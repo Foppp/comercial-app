@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyCart } from '../../redux/cart/asyncThunk';
 import CartItem from './CartItem';
 import Spinner from '../Spinner/Spinner';
+import { setModalClose } from '../../redux/modal/modal';
 
-const CartQuickView = ({ onClose }) => {
+const CartQuickView = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ const CartQuickView = ({ onClose }) => {
           <Link
             to='/products'
             className='btn btn-outline-secondary rounded-pill'
-            onClick={() => onClose()}
+            onClick={() => dispatch(setModalClose())}
           >
             Back to Shopping
           </Link>
@@ -51,14 +51,14 @@ const CartQuickView = ({ onClose }) => {
           <Link
             to='/cart'
             className='btn btn-warning mx-3 rounded-pill'
-            onClick={() => onClose()}
+            onClick={() => dispatch(setModalClose())}
           >
             Go to cart
           </Link>
           <Link
             to='/checkout'
             className='btn btn-info rounded-pill'
-            onClick={() => onClose()}
+            onClick={() => dispatch(setModalClose())}
           >
             Checkout
           </Link>

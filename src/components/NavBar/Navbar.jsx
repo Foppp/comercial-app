@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
 import ModalWindow from "../Modal/Modal";
+import { setModalOpen } from "../../redux/modal/modal";
+
 const navbarMenuItems = [
   { id: 1, title: "Home", path: "/" },
   { id: 2, title: "Products", path: "/products" },
@@ -12,6 +14,7 @@ const navbarMenuItems = [
 ];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [showNav, setShowNav] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
@@ -94,7 +97,7 @@ const Navbar = () => {
             </svg>
           </div>
           <div className="ms-5 mt-3"></div>
-          <Link to="/cart" className="btn btn-outline-dark rounded-pill ms-3">
+          <button type="button" className="btn btn-outline-dark rounded-pill ms-3" onClick={() => dispatch(setModalOpen())}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -109,7 +112,7 @@ const Navbar = () => {
             <span className="badge bg-danger text-white ms-1 rounded-pill">
               {totalItems ?? 0}
             </span>
-          </Link>
+          </button>
         </div>
       </div>
       <ModalWindow />

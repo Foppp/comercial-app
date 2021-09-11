@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setModalOpen, setModalClose } from '../../redux/modal/modal';
 import { Modal, Button } from 'react-bootstrap';
 import CartQuickView from '../Cart/CartQuickView';
 
 const ModalWindow = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
+  const isOpened = useSelector(state => state.modalInfoReducer.isOpened);
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
-        Launch demo modal
-      </Button>
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={isOpened} onHide={() => dispatch(setModalClose())} size="lg">
         <Modal.Body>
-          <CartQuickView onClose={handleClose}/>
+          <CartQuickView />
         </Modal.Body>
       </Modal>
     </>
