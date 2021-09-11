@@ -1,40 +1,77 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchQuery } from '../../redux/search/search';
+import { setModalClose } from '../../redux/modal/modal';
+import { Link, useLocation } from 'react-router-dom';
+
+const searchProducts = (text, data) =>
+  data.filter(
+    ({ name }) =>
+      text.length > 2 && name.toLowerCase().includes(text.toLowerCase())
+  );
 
 const SearchModal = () => {
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
+  const searchQuery = useSelector(
+    (state) => state.searchInfoReducer.searchQuery
+  );
+  const products = useSelector((state) => state.productsInfoReducer.products);
+  const searchResult = searchProducts(searchQuery, products);
+  const location = useLocation();
+
+  const { from } = location.state || { from: { pathname: '/' } };
 
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   return (
-    <div className='container'>
-      <div class='input-group'>
-        <button
-          class='btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill mx-2'
-          type='button'
-          disabled
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='25'
-            height='25'
-            fill='currentColor'
-            className='bi bi-search'
-            viewBox='0 0 16 16'
-          >
-            <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
-          </svg>
-        </button>
-        <input
-          ref={inputRef}
-          class='form-control border-end-0 border rounded-pill'
-          type='search'
-          placeholder='Search for product...'
-          id='example-search-input'
-        />
+    <div className='card'>
+      <div className='card-header'>
+        <div className='input-group'>
+          <input
+            ref={inputRef}
+            className='form-control border-end-0 border rounded-pill'
+            type='search'
+            placeholder='Search for product...'
+            id='example-search-input'
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+          />
+        </div>
       </div>
-      <p>No results....</p>
+      <div className='card-body text-center'>
+        {searchResult.length === 0 ? (
+          <p>No results...</p>
+        ) : (
+          searchResult.map((product) => (
+            <div
+              key={product.id}
+              className='row search-item text-center m-1 border rounded p-2'
+            >
+              <div className='col-2'>
+                <img
+                  src={product.media.source}
+                  alt='Product'
+                  width='30'
+                  height='30'
+                />
+              </div>
+              <div className='col-10'>
+                <span className='product-title mt-2'>
+                  <Link
+                    to={`${from.pathname}products/${product.permalink}`}
+                    className='text-decoration-none text-black'
+                    onClick={() => dispatch(setModalClose())}
+                  >
+                    {product.name}
+                  </Link>
+                </span>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

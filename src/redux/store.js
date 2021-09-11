@@ -10,6 +10,7 @@ import sortProductsInfoReducer from "./sort/sort.js";
 import paginationInfoReducer from './pagination/pagination.js';
 import modalInfoReducer from "./modal/modal.js";
 import navbarInfoReducer from "./navBar/navbar.js";
+import searchInfoReducer from "./search/search.js";
 
 export default configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export default configureStore({
     paginationInfoReducer,
     modalInfoReducer,
     navbarInfoReducer,
+    searchInfoReducer,
   },
   middleware: getDefaultMiddleware(),
   devTools: true,

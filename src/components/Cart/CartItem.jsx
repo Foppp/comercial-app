@@ -11,14 +11,14 @@ const CartItem = ({ item }) => {
         <img src={item.media.source} alt='Product' width='40' height='40' />
       </div>
       <div className='col-md-4'>
-        <h5 className='product-title mt-2'>
+        <h6 className='product-title mt-2'>
           <Link
             to={`products/${item.permalink}`}
             className='text-decoration-none text-black'
           >
             {item.name}
           </Link>
-        </h5>
+        </h6>
       </div>
       <div className='col-md-3'>
         <div className='d-flex justify-content-around'>

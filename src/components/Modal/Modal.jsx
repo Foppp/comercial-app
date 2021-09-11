@@ -16,15 +16,10 @@ const ModalWindow = () => {
   };
 
   const ModalComponent = modals[type];
-
   return (
-    <>
-      <Modal show={isOpened} onHide={() => dispatch(setModalClose())} size='lg'>
-        <Modal.Body>
-          <ModalComponent />
-        </Modal.Body>
-      </Modal>
-    </>
+    <Modal show={isOpened} onHide={() => dispatch(setModalClose())} >
+      <Modal.Body>{type && <ModalComponent />}</Modal.Body>
+    </Modal>
   );
 };
 

@@ -34,7 +34,7 @@ const Cart = () => {
           <CartItem key={lineItem.id} item={lineItem} />
         ))}
         <div className='d-flex flex-row-reverse text-center row mt-3'>
-          <div className='col-md-2'>
+          <div className='col-md-4'>
             <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
           </div>
         </div>

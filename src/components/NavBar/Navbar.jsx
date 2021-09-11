@@ -70,9 +70,7 @@ const Navbar = () => {
               );
             })}
           </ul>
-          <div className="d-flex input-group-sm">
-          </div>
-          <div className="d-sm-flex">
+          <div className="d-sm-flex justify-content-center">
           <button className="btn search" type="button" onClick={() => dispatch(setModalOpen('search'))}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   const [product] = products.filter((item) => item.permalink === id);
   const dispatch = useDispatch();
-
+  console.log(product)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);

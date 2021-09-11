@@ -38,7 +38,7 @@ header {
 }
 
 .nav-link.active {
-    text-shadow: 0px 5px 6px rgb(148, 148, 148);
+    font-weight: 500;
 }
 
 /* select.form-control {

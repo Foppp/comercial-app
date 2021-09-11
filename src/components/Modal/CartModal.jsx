@@ -13,7 +13,7 @@ const CartQuickView = () => {
     <div className='container text-center mt-5'>
       <h1>Your cart is empty!</h1>
       <h3>
-        <Link to='/products' type='button' className='btn btn-secondary'>
+        <Link to='/products' type='button' className='btn btn-secondary' onClick={() => dispatch(setModalClose())}>
           Start shopping now
         </Link>
       </h3>
@@ -33,7 +33,7 @@ const CartQuickView = () => {
         <CartItem key={lineItem.id} item={lineItem} />
       ))}
       <div className='d-flex flex-row-reverse text-center row mt-3'>
-        <div className='col-md-2'>
+        <div className='col-md-4'>
           <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
         </div>
       </div>
