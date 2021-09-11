@@ -37,6 +37,10 @@ header {
     transform: scale(102%);
 }
 
+.nav-link.active {
+    text-shadow: 0px 5px 6px rgb(148, 148, 148);
+}
+
 select.form-control {
     padding-right: 38px;
     background-position: center right 17px;

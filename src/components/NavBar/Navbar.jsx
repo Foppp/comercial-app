@@ -1,36 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
 import ModalWindow from "../Modal/Modal";
+import { toggleNavbar, setActivePath } from '../../redux/navBar/navbar'
 import { setModalOpen } from "../../redux/modal/modal";
-
-const navbarMenuItems = [
-  { id: 1, title: "Home", path: "/" },
-  { id: 2, title: "Products", path: "/products" },
-  { id: 3, title: "Contact", path: "/contact" },
-];
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [showNav, setShowNav] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
+  const navbarMenuItems = useSelector(state => state.navbarInfoReducer.menuItems);
+  const isOpened = useSelector((state) => state.navbarInfoReducer.isOpened);
+  const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
+  const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
   const location = useLocation();
 
-  const totalItems = useSelector(
-    (state) => state.cartInfoReducer.cart.total_items
-  );
-
   const navToggleClass = cn("collapse navbar-collapse", {
-    show: showNav,
-    'text-center': showNav,
+    show: isOpened,
+    'text-center': isOpened,
   });
 
   useEffect(() => {
-    setActiveMenu(location.pathname);
-  }, [location]);
+    dispatch(setActivePath(location.pathname));
+  }, [dispatch, location]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,20 +51,20 @@ const Navbar = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          onClick={() => setShowNav(!showNav)}
+          onClick={() => dispatch(toggleNavbar(!isOpened))}
         >
           <span className="navbar-toggler-icon" />
         </button>
         <div className={navToggleClass} id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            {navbarMenuItems.map(({ id, title, path, active }) => {
+            {navbarMenuItems.map(({ id, title, path }) => {
               const navMenuClass = cn("nav-link", {
-                active: path === activeMenu,
+                active: path === activePath,
               });
               return (
                 <li key={id} className="nav-item">
                   <Link to={path} className={navMenuClass} aria-current="page">
-                    {title}
+                    <span>{title}</span>
                   </Link>
                 </li>
               );
