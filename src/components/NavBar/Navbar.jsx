@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
-import ModalWindow from "../Modal/Modal";
 import { Collapse } from 'bootstrap';
 import { setActivePath } from '../../redux/navBar/navbar'
 import { setModalOpen } from "../../redux/modal/modal";
@@ -104,7 +103,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <ModalWindow />
     </nav>
   );
 };
