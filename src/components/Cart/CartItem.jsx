@@ -5,6 +5,7 @@ import { updateCartQty, removeFromCart } from '../../redux/cart/asyncThunk';
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
+  
   return (
     <div className='row text-center m-1 border rounded p-2'>
       <div className='col-md-2'>
