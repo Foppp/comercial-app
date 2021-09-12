@@ -1,3 +1,8 @@
+body {
+    font-family: system-ui;
+    font-variant: small-caps;
+}
+
 header {
     background-image: url('../src/assets/background-image-synths.jpeg.png');
 }
@@ -40,15 +45,6 @@ header {
 .nav-link.active {
     font-weight: 500;
 }
-
-/* select.form-control {
-    padding-right: 38px;
-    background-position: center right 17px;
-    background-repeat: no-repeat;
-    background-size: 9px 9px;
-    border-radius: 25px;
-
-} */
 
 .form-control:not(textarea) {
     height: 44px;
