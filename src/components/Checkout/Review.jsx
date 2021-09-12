@@ -25,11 +25,12 @@ const Review = () => {
 
   return (
     <div className='row'>
-      {/* <div className='p-2 text-center'>
+      <div className='p-2 text-center'>
         <h2>Order Information</h2>
-      </div> */}
-      <div className="row py-5 mx-auto">
-      <div className='row text-center'>
+        <hr />
+      </div>
+      <div className="row mx-auto">
+      <div className='row text-center fs-4'>
           <div className='row m-1'>
             <div className='col'>
               {shippingData.firstName}{' '}
@@ -51,7 +52,7 @@ const Review = () => {
           </div>
       </div>
 
-      <div className='col text-center align-items-center'>
+      <div className='col text-center align-items-center mt-5'>
         <ul className='list-group border-top list-group-flush m-sm-0'>
             {checkoutToken.live.line_items.map((item) => (
               <li key={item.id} className='list-group-item lh-sm align-items-center'>
@@ -78,7 +79,7 @@ const Review = () => {
                 </div>
               </li>
             ))}
-            <li className='list-group-item d-flex justify-content-between'>
+            <li className='list-group-item d-flex justify-content-between mt-3'>
               <span>Total: </span>
               <strong>
                 {checkoutToken.live.subtotal.formatted_with_symbol}
@@ -87,7 +88,7 @@ const Review = () => {
         </ul>
       </div>
       </div>
-      <div className='d-grid gap-2 d-md-flex justify-content-md-between pb-3'>
+      <div className='d-grid gap-2 d-md-flex justify-content-md-between pb-3 mt-3'>
         <button
           className='btn btn-outline-secondary rounded-pill'
           type='button'

@@ -65,9 +65,9 @@ const AdressForm = () => {
   });
   return (
     <main>
-      {/* <div className="py-5 text-center">
+      <div className="py-2 text-center">
         <h2>Shipping Address</h2>
-      </div> */}
+      </div>
 
       <div className="row g-3 border-bottom">
         <div className="col-lg-12">

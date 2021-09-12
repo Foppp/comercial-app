@@ -64,10 +64,10 @@ const Payment = () => {
   }, [paymentMethodId]);
 
   return (
-    <main>
-      {/* <div className='py-5 text-center'>
+    <div className='col text-center align-items-center mt-3'>
+      <div className='py-2 text-center'>
         <h2>Payment Details</h2>
-      </div> */}
+      </div>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
@@ -90,7 +90,7 @@ const Payment = () => {
           )}
         </ElementsConsumer>
       </Elements>
-    </main>
+    </div>
   );
 };
 
