@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { addToCart } from '../../redux/cart/asyncThunk';
 import Spinner from '../Spinner/Spinner';
 
@@ -10,10 +10,11 @@ const ProductDetails = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   const [product] = products.filter((item) => item.permalink === id);
   const dispatch = useDispatch();
-  console.log(product)
+  const history = useHistory();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
   if (products.length === 0)
     return (
@@ -47,13 +48,13 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className='p-2 d-flex justify-content-around text-center'>
-                <Link
-                  to='/products'
+                <button
                   className='btn btn-outline-dark'
                   type='button'
+                  onClick={() => history.goBack()}
                 >
                   Back
-                </Link>
+                </button>
                 <button
                   className='btn btn-outline-dark mt-auto'
                   onClick={() =>
