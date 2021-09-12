@@ -74,7 +74,7 @@ const Payment = () => {
             <form onSubmit={(e) => dispatch(handleSubmit(e, elements, stripe))}>
               <CardElement />
               {paymentError && (
-                <p className='text-center text-danger mt-3'>{paymentError}</p>
+                <p className='text-center text-danger mt-3'>Ooops...! Payment was not completed. Check your card or try again!</p>
               )}
               <br /> <br />
               <div className='d-flex justify-content-between m-3'>
