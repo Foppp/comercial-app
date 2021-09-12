@@ -26,6 +26,10 @@ const Checkout = () => {
   );
 
   const Form = steps[currentStepId];
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentStepId]);
 
   useEffect(() => {
     if (cart.id) {
