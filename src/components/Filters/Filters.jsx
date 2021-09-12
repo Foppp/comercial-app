@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import cn from 'classnames';
-import { ListGroup } from 'react-bootstrap';
+import { Collapse } from 'bootstrap';
 import {
   setMinPrice,
   setMaxPrice,
@@ -9,7 +8,6 @@ import {
   removeManufacturer,
   setKeys,
   removeKeys,
-  setActiveFilter,
 } from '../../redux/filter/filter';
 
 const manufactures = ['Analog', 'Digital', 'Modular', 'Desktop'];
@@ -22,6 +20,7 @@ const handleManufactureFilter = (e) => (dispatch) => {
     : dispatch(removeManufacturer(id));
   return setFilter;
 };
+
 const handleKeysFilter = (e) => (dispatch) => {
   const id = e.target.id;
   const setFilter = e.target.checked
@@ -30,33 +29,33 @@ const handleKeysFilter = (e) => (dispatch) => {
   return setFilter;
 };
 
+const toggleCollapse = (ref) => new Collapse(ref);
+
 const Filters = () => {
   const dispatch = useDispatch();
-  const minPrice = useSelector(
-    (state) => state.filterProductsInfoReducer.filterBy.price.min
-  );
-  const maxPrice = useSelector(
-    (state) => state.filterProductsInfoReducer.filterBy.price.max
-  );
-  const filters = useSelector(
-    (state) => state.filterProductsInfoReducer.filters
-  );
+  const priceRef = useRef(null);
+  const manufacturerRef = useRef(null);
+  const keysRef = useRef(null);
+  const minPrice = useSelector((state) => state.filterProductsInfoReducer.filterBy.price.min);
+  const maxPrice = useSelector((state) => state.filterProductsInfoReducer.filterBy.price.max);
 
   return (
     <div className='col-sm-6 col-md-4 col-lg-3 py-3'>
-      <div className='container px-3 px-lg-3'>
-        </div>
       <section className='py-2'>
         <div className='container px-3 px-lg-3 mt-2'>
           <div className='justify-content-center'>
             <div className='card'>
               <article className='card-group-item'>
-                <div className='card-header'>
+                <div
+                  className='card-header text-center'
+                  type='button'
+                  onClick={() => toggleCollapse(priceRef.current)}
+                >
                   <h6 className='title'>Price Range</h6>
                 </div>
                 <div className='filter-content'>
-                  <div className='card-body'>
-                    <div className='form-row'>
+                  <div ref={priceRef} className='card-body collapse show'>
+                    <div className='form-row text-center'>
                       <div className='form-group input-group-sm'>
                         <label>Min</label>
                         <input
@@ -65,7 +64,9 @@ const Filters = () => {
                           id='inputEmail4'
                           placeholder='$0'
                           defaultValue={minPrice}
-                          onChange={(e) => dispatch(setMinPrice(Number(e.target.value)))}
+                          onChange={(e) =>
+                            dispatch(setMinPrice(Number(e.target.value)))
+                          }
                         />
                       </div>
                       <div className='form-group text-right input-group-sm'>
@@ -75,7 +76,9 @@ const Filters = () => {
                           className='form-control rounded-pill'
                           placeholder='$1,000'
                           defaultValue={maxPrice}
-                          onChange={(e) => dispatch(setMaxPrice(Number(e.target.value)))}
+                          onChange={(e) =>
+                            dispatch(setMaxPrice(Number(e.target.value)))
+                          }
                         />
                       </div>
                     </div>
@@ -83,11 +86,15 @@ const Filters = () => {
                 </div>
               </article>
               <article className='card-group-item'>
-                <div className='card-header'>
+                <div
+                  className='card-header text-center'
+                  type='button'
+                  onClick={() => toggleCollapse(manufacturerRef.current)}
+                >
                   <h6 className='title'>Manufactures</h6>
                 </div>
                 <div className='filter-content'>
-                  <div className='card-body'>
+                  <div ref={manufacturerRef} className='card-body collapse show'>
                     {manufactures.map((value) => (
                       <div
                         key={value}
@@ -111,11 +118,15 @@ const Filters = () => {
                 </div>
               </article>
               <article className='card-group-item'>
-                <div className='card-header'>
+                <div
+                  className='card-header text-center'
+                  type='button'
+                  onClick={() => toggleCollapse(keysRef.current)}
+                >
                   <h6 className='title'>Keys</h6>
                 </div>
                 <div className='filter-content'>
-                  <div className='card-body'>
+                  <div ref={keysRef} className='card-body collapse show'>
                     {keys.map((value) => (
                       <div
                         key={value}
