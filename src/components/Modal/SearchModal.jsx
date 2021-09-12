@@ -4,18 +4,13 @@ import { setSearchQuery } from '../../redux/search/search';
 import { setModalClose } from '../../redux/modal/modal';
 import { Link, useLocation } from 'react-router-dom';
 
-const searchProducts = (text, data) =>
-  data.filter(
-    ({ name }) =>
-      text.length > 2 && name.toLowerCase().includes(text.toLowerCase())
-  );
+const searchProducts = (text, data) => data
+  .filter(({ name }) => text.length > 2 && name.toLowerCase().includes(text.toLowerCase()));
 
 const SearchModal = () => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const searchQuery = useSelector(
-    (state) => state.searchInfoReducer.searchQuery
-  );
+  const searchQuery = useSelector((state) => state.searchInfoReducer.searchQuery);
   const products = useSelector((state) => state.productsInfoReducer.products);
   const searchResult = searchProducts(searchQuery, products);
   const location = useLocation();
@@ -27,18 +22,16 @@ const SearchModal = () => {
   }, []);
 
   return (
-    <div className='card'>
-      <div className='card-header'>
-        <div className='input-group'>
-          <input
-            ref={inputRef}
-            className='form-control border-end-0 border rounded-pill'
-            type='search'
-            placeholder='Search for product...'
-            id='example-search-input'
-            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-          />
-        </div>
+    <div className='search-modal-content'>
+      <div className='input-group'>
+        <input
+          ref={inputRef}
+          className='form-control border-end-0 border rounded-pill'
+          type='search'
+          placeholder='Search for product...'
+          id='example-search-input'
+          onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+        />
       </div>
       <div className='card-body text-center'>
         {searchResult.length === 0 ? (
@@ -72,6 +65,12 @@ const SearchModal = () => {
           ))
         )}
       </div>
+      <button
+        className='btn btn-outline-secondary rounded-pill'
+        onClick={() => dispatch(setModalClose())}
+      >
+        Back
+      </button>
     </div>
   );
 };
