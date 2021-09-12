@@ -8,7 +8,6 @@ export const navbarInfo = createSlice({
       { id: 2, title: "Products", path: "/products" },
       { id: 3, title: "Contact", path: "/contact" },
     ],
-    isOpened: false,
     activePath: '/',
   },
   reducers: {
