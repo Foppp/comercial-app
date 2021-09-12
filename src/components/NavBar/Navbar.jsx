@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import cn from "classnames";
 import logo from "../../assets/synthmaster_logo_black2.png";
 import logo2 from "../../assets/synthmaster_logo_black.png";
 import ModalWindow from "../Modal/Modal";
-import { toggleNavbar, setActivePath } from '../../redux/navBar/navbar'
+import { Collapse } from 'bootstrap';
+import { setActivePath } from '../../redux/navBar/navbar'
 import { setModalOpen } from "../../redux/modal/modal";
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navBarRef = useRef(null);
   const navbarMenuItems = useSelector(state => state.navbarInfoReducer.menuItems);
-  const isOpened = useSelector((state) => state.navbarInfoReducer.isOpened);
   const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
   const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
   const location = useLocation();
-
-  const navToggleClass = cn("collapse navbar-collapse", {
-    show: isOpened,
-    'text-center': isOpened,
-  });
 
   useEffect(() => {
     dispatch(setActivePath(location.pathname));
@@ -46,16 +43,16 @@ const Navbar = () => {
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
+          data-bs-toggle="collapse navbar-collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+          aria-expanded="true"
           aria-label="Toggle navigation"
-          onClick={() => dispatch(toggleNavbar(!isOpened))}
+          onClick={() => new Collapse(navBarRef.current)}
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className={navToggleClass} id="navbarSupportedContent">
+        <div ref={navBarRef} className='collapse navbar-collapse text-center' id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             {navbarMenuItems.map(({ id, title, path }) => {
               const navMenuClass = cn("nav-link", {
