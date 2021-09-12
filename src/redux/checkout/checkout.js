@@ -6,15 +6,16 @@ import {
   generateToken,
 } from './asyncThunk';
 import { captureCheckout } from "../payment/asyncThunk";
+import { createPayment } from "../payment/asyncThunk";
 
 export const checkoutInfo = createSlice({
   name: 'checkout',
   initialState: {
     steps: [
-      { id: 1, name: 'Shipping Address' },
-      { id: 2, name: 'Order Information' },
-      { id: 3, name: 'Payment Details' },
-      { id: 4, name: 'Confirmation' },
+      { id: 1, name: 'Shipping Address', completed: false },
+      { id: 2, name: 'Order Information', completed: false },
+      { id: 3, name: 'Payment Details', completed: false },
+      { id: 4, name: 'Complete', completed: false },
     ],
     currentStepId: 1,
     checkoutToken: null,
@@ -43,9 +44,17 @@ export const checkoutInfo = createSlice({
       state.currentStepId = action.payload;
     },
     nextStep: (state) => {
+      state.steps = state.steps
+        .map((step) => step.id === state.currentStepId
+          ? { ...step, completed: true }
+          : step);
       state.currentStepId += 1;
     },
     backStep: (state) => {
+      state.steps = state.steps
+        .map((step) => step.id === state.currentStepId - 1
+          ? { ...step, completed: false }
+          : step);
       state.currentStepId -= 1;
     },
     setOrder: (state, action) => {
@@ -117,6 +126,7 @@ export const checkoutInfo = createSlice({
       state.errors.shippingError = action.payload;
     },
     [generateToken.pending]: (state, action) => {
+      state.steps = state.steps.map((step) => ({ ...step, completed: false }));
       state.status = 'pending';
     },
     [generateToken.fulfilled]: (state, action) => {
@@ -130,10 +140,21 @@ export const checkoutInfo = createSlice({
       state.status = 'rejected';
       state.checkoutTokenError = action.payload;
     },
-    [captureCheckout.fulfilled]: (state, action) => {
+    [captureCheckout.fulfilled]: (state) => {
       state.currentStepId += 1;
+      state.steps = state.steps
+      .map((step) => step.id === state.currentStepId
+        ? { ...step, completed: true }
+        : step);
+      
     },
-  }
+    [createPayment.fulfilled]: (state) => {
+      state.steps = state.steps
+        .map((step) => step.id === state.currentStepId
+          ? { ...step, completed: true }
+          : step);
+    },
+  },
 });
 
 export const {
