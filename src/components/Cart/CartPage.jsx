@@ -33,11 +33,14 @@ const Cart = () => {
         {cart.line_items.map((lineItem) => (
           <CartItem key={lineItem.id} item={lineItem} />
         ))}
-        <div className='d-flex flex-row-reverse text-center row mt-3'>
-          <div className='col-md-4'>
-            <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
-          </div>
+              <div className='d-flex text-center row mt-3'>
+      <div className='col-md-6'>
+          <h5 className=''>Items in cart: {cart.line_items.length}</h5>
         </div>
+      <div className='col-md-6'>
+          <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
+        </div>
+      </div>
         <div className='shopping-cart-footer mt-3'>
           <div className='column float-start'>
             <Link to='/products' className='btn btn-outline-secondary rounded-pill'>
