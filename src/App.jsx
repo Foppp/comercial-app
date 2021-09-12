@@ -6,6 +6,7 @@ import { fetchCart } from './redux/cart/asyncThunk.js';
 import { Navbar, Home, Products, Contact, Cart, Checkout, Footer } from './components/';
 import ProductDetails from './components/Products/ProductDetails';
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
+import ModalWindow from "./components/Modal/Modal";
 import './style.css';
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
       </Switch>
       <Footer />
       <ToastMessage />
+      <ModalWindow />
     </Router>
   );
 };
