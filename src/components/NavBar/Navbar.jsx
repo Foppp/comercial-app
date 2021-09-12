@@ -9,7 +9,6 @@ import { Collapse } from 'bootstrap';
 import { setActivePath } from '../../redux/navBar/navbar'
 import { setModalOpen } from "../../redux/modal/modal";
 
-
 const Navbar = () => {
   const dispatch = useDispatch();
   const navBarRef = useRef(null);
@@ -21,6 +20,11 @@ const Navbar = () => {
   useEffect(() => {
     dispatch(setActivePath(location.pathname));
   }, [dispatch, location]);
+
+  useEffect(() => {
+    const navButton = new Collapse(navBarRef.current, { toggle: false });
+    navButton.hide();
+  }, [navBarRef, activePath, location]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,7 +50,7 @@ const Navbar = () => {
           data-bs-toggle="collapse navbar-collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
-          aria-expanded="true"
+          aria-expanded="false"
           aria-label="Toggle navigation"
           onClick={() => new Collapse(navBarRef.current)}
         >
