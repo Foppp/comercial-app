@@ -13,7 +13,12 @@ const CartQuickView = () => {
     <div className='container text-center mt-5'>
       <h1>Your cart is empty!</h1>
       <h3>
-        <Link to='/products' type='button' className='btn btn-secondary' onClick={() => dispatch(setModalClose())}>
+        <Link
+          to='/products'
+          type='button'
+          className='btn btn-secondary'
+          onClick={() => dispatch(setModalClose())}
+        >
           Start shopping now
         </Link>
       </h3>
@@ -29,23 +34,51 @@ const CartQuickView = () => {
 
   const renderCart = () => (
     <>
-      {cart.line_items.map((lineItem) => (
-        <CartItem key={lineItem.id} item={lineItem} />
+      {cart.line_items.map((item) => (
+        <div key={item.id} className='row text-center m-1 border rounded p-2'>
+        <div className='col-md-2'>
+          <img src={item.media.source} alt='Product' width='40' height='40' />
+        </div>
+        <div className='col-md-6'>
+          <h6 className='product-title mt-2'>
+            <Link
+              to={`products/${item.permalink}`}
+              className='text-decoration-none text-black'
+            >
+              {item.name}
+            </Link>
+          </h6>
+        </div>
+        <div className='col-md-2'>
+          <div className='d-flex justify-content-around'>
+            
+            <span className='mt-2'>{item.quantity}</span>
+            
+            
+          </div>
+        </div>
+        <div className='col-md-2 mt-2'>
+          {item.line_total.formatted_with_symbol}
+        </div>
+      </div>
+        // <CartItem key={lineItem.id} item={lineItem} />
       ))}
-      <div className='d-flex flex-row-reverse text-center row mt-3'>
-        <div className='col-md-4'>
+      <div className='d-flex text-center row mt-3'>
+      <div className='col-md-6'>
+          <h5 className=''>Items in cart: {cart.line_items.length}</h5>
+        </div>
+      <div className='col-md-6'>
           <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
         </div>
       </div>
       <div className='shopping-cart-footer mt-3'>
         <div className='column float-start'>
-          <Link
-            to='/products'
+          <button
             className='btn btn-outline-secondary rounded-pill'
             onClick={() => dispatch(setModalClose())}
           >
-            Back to Shopping
-          </Link>
+            Back
+          </button>
         </div>
         <div className='column float-end'>
           <Link

@@ -16,6 +16,7 @@ const ModalWindow = () => {
   };
 
   const ModalComponent = modals[type];
+  
   return (
     <Modal show={isOpened} onHide={() => dispatch(setModalClose())} >
       <Modal.Body>{type && <ModalComponent />}</Modal.Body>
