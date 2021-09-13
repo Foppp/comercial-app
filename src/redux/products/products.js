@@ -5,16 +5,12 @@ export const productsInfo = createSlice({
   name: 'products',
   initialState: {
     products: [],
-    filteredProducts: [],
     status: null,
     productsErrorMessage: null,
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
-    },
-    setFilteredProducts: (state, action) => {
-      state.filteredProducts = action.payload;
     },
     setProductsErrorMessage: (state, action) => {
       state.errorMessage = action.payload;
