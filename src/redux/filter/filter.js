@@ -18,36 +18,21 @@ export const filterProductsInfo = createSlice({
     setMaxPrice: (state, action) => {
       state.filterBy.price.max = action.payload === 0 ? Infinity :  action.payload;
     },
-    setManufacturer: (state, action) => {
+    setCategory: (state, action) => {
       state.filterBy.categories = [...state.filterBy.categories, action.payload];
     },
-    removeManufacturer: (state, action) => {
+    removeCategory: (state, action) => {
       state.filterBy.categories = state.filterBy.categories
         .filter((category) => category !== action.payload);
     },
-    setKeys: (state, action) => {
-      state.filterBy.categories = [...state.filterBy.categories, action.payload];
-    },
-    removeKeys: (state, action) => {
-      state.filterBy.categories = state.filterBy.categories
-        .filter((keys) => keys.id !== action.payload.id);
-    },
-    setActiveFilter: (state, action) => {
-      state.filters = state.filters.map((filter) => filter.id === action.payload
-        ? ({ ...filter, active: !filter.active })
-        : filter);
-    }
   },
 });
 
 export const {
   setMinPrice,
   setMaxPrice,
-  setManufacturer,
-  setKeys,
-  removeManufacturer,
-  removeKeys,
-  setActiveFilter,
+  setCategory,
+  removeCategory,
 } = filterProductsInfo.actions;
 
 export default filterProductsInfo.reducer;
