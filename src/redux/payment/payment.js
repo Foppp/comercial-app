@@ -29,6 +29,7 @@ export const paymentInfo = createSlice({
       state.order = action.payload;
       state.status = 'fulfilled';
       state.error = null;
+      state.paymentMethodId = null;
     },
     [captureCheckout.rejected]: (state, action) => {
       state.error = action.payload;
