@@ -1,31 +1,17 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Collapse } from 'bootstrap';
-import {
-  setMinPrice,
-  setMaxPrice,
-  setManufacturer,
-  removeManufacturer,
-  setKeys,
-  removeKeys,
-} from '../../redux/filter/filter';
+import { setMinPrice, setMaxPrice, setCategory, removeCategory } from '../../redux/filter/filter';
 
+const categories = ['Analog', 'Digital', 'Modular', 'Desktop'];
 const manufactures = ['Analog', 'Digital', 'Modular', 'Desktop'];
 const keys = ['25', '49', '61', '88'];
 
-const handleManufactureFilter = (e) => (dispatch) => {
+const handleCategoryFilter = (e) => (dispatch) => {
   const id = e.target.id;
   const setFilter = e.target.checked
-    ? dispatch(setManufacturer(id))
-    : dispatch(removeManufacturer(id));
-  return setFilter;
-};
-
-const handleKeysFilter = (e) => (dispatch) => {
-  const id = e.target.id;
-  const setFilter = e.target.checked
-    ? dispatch(setKeys(id))
-    : dispatch(removeKeys(id));
+    ? dispatch(setCategory(id))
+    : dispatch(removeCategory(id));
   return setFilter;
 };
 
@@ -36,6 +22,7 @@ const Filters = () => {
   const priceRef = useRef(null);
   const manufacturerRef = useRef(null);
   const keysRef = useRef(null);
+  const categoriesRef = useRef(null);
   const minPrice = useSelector((state) => state.filterProductsInfoReducer.filterBy.price.min);
   const maxPrice = useSelector((state) => state.filterProductsInfoReducer.filterBy.price.max);
 
@@ -104,7 +91,7 @@ const Filters = () => {
                           type='checkbox'
                           className='custom-control-input'
                           id={value}
-                          onChange={(e) => dispatch(handleManufactureFilter(e))}
+                          onChange={(e) => dispatch(handleCategoryFilter(e))}
                         />
                         <label
                           className='custom-control-label ms-2'
@@ -136,7 +123,39 @@ const Filters = () => {
                           type='checkbox'
                           className='custom-control-input'
                           id={value}
-                          onChange={(e) => dispatch(handleKeysFilter(e))}
+                          onChange={(e) => dispatch(handleCategoryFilter(e))}
+                        />
+                        <label
+                          className='custom-control-label ms-2'
+                          htmlFor='Check1'
+                        >
+                          {value}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+              <article className='card-group-item'>
+                <div
+                  className='card-header text-center'
+                  type='button'
+                  onClick={() => toggleCollapse(categoriesRef.current)}
+                >
+                  <h6 className='title'>categories</h6>
+                </div>
+                <div className='filter-content'>
+                  <div ref={categoriesRef} className='card-body collapse show'>
+                    {categories.map((value) => (
+                      <div
+                        key={value}
+                        className='custom-control custom-checkbox'
+                      >
+                        <input
+                          type='checkbox'
+                          className='custom-control-input'
+                          id={value}
+                          onChange={(e) => dispatch(handleCategoryFilter(e))}
                         />
                         <label
                           className='custom-control-label ms-2'
