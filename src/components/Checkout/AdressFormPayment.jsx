@@ -169,9 +169,10 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="country"
                   required
+                  defaultValue='select'
                   onChange={(e) => dispatch(setShippingCountry(e.target.value))}
                 >
-                  <option value={shippingCountry}>Select...</option>
+                  <option value='select'>Select...</option>
                   {Object.entries(shippingCountries)
                     .map(([code, name]) => ({ id: code, label: name }))
                     .map((item) => (
@@ -191,11 +192,12 @@ const AdressForm = () => {
                   id="state"
                   selected
                   required
+                  defaultValue="select"
                   onChange={(e) =>
                     dispatch(setShippingSubdivision(e.target.value))
                   }
                 >
-                  <option value={shippingSubdivision}>Select...</option>
+                  <option value='select'>Select...</option>
                   {Object.entries(shippingSubdivisions)
                     .map(([code, name]) => ({ id: code, label: name }))
                     .map((item) => (
@@ -214,9 +216,10 @@ const AdressForm = () => {
                   className="form-select form-control"
                   id="options"
                   required
+                  defaultValue="select"
                   onChange={(e) => dispatch(setShippingOption(e.target.value))}
                 >
-                  <option value={shippingOption}>Select...</option>
+                  <option value='select'>Select...</option>
                   {shippingOptions
                     .map((sO) => ({
                       id: sO.id,
