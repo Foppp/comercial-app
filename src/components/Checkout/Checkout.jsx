@@ -38,7 +38,7 @@ const Checkout = () => {
   }, [cart, dispatch]);
 
   return (
-    <div className='checkout-container'>
+    <div className='checkout-container container container-fuid h-100'>
       <div className='m-3 d-flex justify-content-center'>
         {!checkoutToken ? (
           <Spinner />
