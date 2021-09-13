@@ -64,9 +64,9 @@ const Payment = () => {
   }, [paymentMethodId]);
 
   return (
-    <div className='col text-center align-items-center mt-3'>
-      <div className='py-2 text-center'>
-        <h2>Payment Details</h2>
+    <div className='col text-center align-items-center mt-5'>
+      <div className='py-2 text-center' >
+        <h2 className="mb-5">Payment Details</h2>
       </div>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
@@ -74,7 +74,7 @@ const Payment = () => {
             <form onSubmit={(e) => dispatch(handleSubmit(e, elements, stripe))}>
               <CardElement />
               {paymentError && (
-                <p className='text-center text-danger mt-3'>Ooops...! Payment was not completed. Check your card or try again!</p>
+                <p className='text-center text-danger mt-3'>{paymentError}</p>
               )}
               <br /> <br />
               <div className='d-flex justify-content-between m-3'>
