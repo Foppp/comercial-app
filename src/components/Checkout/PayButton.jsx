@@ -6,7 +6,7 @@ const PayButton = ({ stripe }) => {
   const paymentStatus = useSelector((state) => state.paymentInfoReducer.status);
 
   return paymentStatus === 'pending' ? (
-    <button className="btn btn-success" type="button" disabled>
+    <button className="btn btn-info" type="button" disabled>
       <span
         className="spinner-border spinner-border-sm"
         role="status"
