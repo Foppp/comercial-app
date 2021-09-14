@@ -7,7 +7,11 @@ export const contactInfo = createSlice({
     status: null,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    }
+  },
   extraReducers: {
     [sendContactEmail.pending]: (state, action) => {
       state.status = 'pending';
@@ -24,8 +28,7 @@ export const contactInfo = createSlice({
 });
 
 export const {
-  setMessageStatus,
-  setSendErrorMessage,
+  setStatus,
 } = contactInfo.actions;
 
 export default contactInfo.reducer;
