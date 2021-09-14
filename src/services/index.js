@@ -1,3 +1,5 @@
+export { getPaymentMethodId } from './stripeServices';
+export { sendEmail } from './mailjsServices';
 export {
   getProductList,
   getCart,
@@ -12,5 +14,3 @@ export {
   getNewToken,
   capture,
 } from './comerseServices';
-
-export { getPaymentMethodId } from './stripeServices';
