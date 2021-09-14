@@ -30,16 +30,6 @@ export const notificationInfo = createSlice({
       state.message = 'Ooops! Product was not added. Try again!';
       state.show = true;
     },
-    [sendContactEmail.fulfilled]: (state, action) => {
-      state.type = 'success';
-      state.message = 'Your message was sent!';
-      state.show = true;
-    },
-    [sendContactEmail.rejected]: (state, action) => {
-      state.type = 'danger';
-      state.message = 'Ooops! Message was not sent. Try again!';
-      state.show = true;
-    }
   }
 });
 
