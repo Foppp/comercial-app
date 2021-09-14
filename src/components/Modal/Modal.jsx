@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setModalClose } from '../../redux/modal/modal';
+import { setModalClose } from '../../redux/modalReducer/modal';
 import { Modal } from 'react-bootstrap';
-import CartQuickView from './CartModal';
-import SearchModal from './SearchModal';
+import CartQuickView from '../../pages/Cart/components/CartViewModal';
+import SearchModal from '../Search/SearchModal';
 
 const ModalWindow = () => {
   const dispatch = useDispatch();

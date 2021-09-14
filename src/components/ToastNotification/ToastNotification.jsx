@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import { setHideNotification } from '../../redux/notifier/notifier';
+import { setHideNotification } from '../../redux/notifierReducer/notifier';
 
 const ToastMessage = () => {
   const type = useSelector((state) => state.notificationInfoReducer.type);
@@ -16,7 +16,9 @@ const ToastMessage = () => {
 
   useEffect(() => {
     const duration = 3000;
-    const timer = setTimeout(() => dispatch(setHideNotification()), duration);
+    const timer = show
+      ? setTimeout(() => dispatch(setHideNotification()), duration)
+      : null;
     return () => {
       clearTimeout(timer);
     };
