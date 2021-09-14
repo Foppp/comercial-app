@@ -31,7 +31,7 @@ const Filters = () => {
       <section className='py-2'>
         <div className='container px-3 px-lg-3 mt-2'>
           <div className='justify-content-center'>
-            <div className='card'>
+            <div className='card shadow-sm'>
               <article className='card-group-item'>
                 <div
                   className='card-header text-center'
