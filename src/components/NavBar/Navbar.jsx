@@ -26,7 +26,7 @@ const Navbar = () => {
   }, [navBarRef, activePath, location]);
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+    <nav className='navbar navbar-expand-lg navbar-light bg-light shadow-sm'>
       <div className='container px-2 px-lg-6'>
         <Link to='/' className='navbar-brand'>
           <img
