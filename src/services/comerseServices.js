@@ -111,3 +111,26 @@ export const getNewToken = (cartId) => {
       });
   });
 };
+
+export const capture = (checkoutData) => {
+  return new Promise((resolve, reject) => {
+    const { checkoutTokenId, newOrder } = checkoutData;
+    commerce.checkout.capture(checkoutTokenId, newOrder)
+      .then((order) => {
+        resolve(order);
+      }).catch((err) => {
+        reject(err.data.error);
+      });
+  });
+};
+
+export const getProductList = () => {
+  return new Promise((resolve, reject) => {
+    commerce.products.list()
+      .then(({ data }) => {
+        resolve(data);
+      }).catch((err) => {
+        reject(err.data.error);
+      });
+  });
+};

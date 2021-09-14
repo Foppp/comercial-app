@@ -1,13 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { commerce } from "../../lib/commerce";
+import { getProductList } from "../../services";
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts', async(_, { rejectWithValue }) => {
     try {
-      const { data } = await commerce.products.list();
-      return data;
+      return await getProductList();
     } catch (e) {
-      return rejectWithValue(e.data.error.message);
+      return rejectWithValue(e.message);
     }
   }
 );

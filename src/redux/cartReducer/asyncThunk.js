@@ -11,9 +11,9 @@ import {
 export const fetchCart = createAsyncThunk(
   'cart/fetchCart', async (_, { rejectWithValue }) => {
     try {
-      return getCart();
+      return await getCart();
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -21,9 +21,9 @@ export const fetchCart = createAsyncThunk(
 export const addToCart = createAsyncThunk(
   'cart/addToCart', async ({productId, qty}, { rejectWithValue }) => {
     try {
-      return addProduct(productId, qty);
+      return await addProduct(productId, qty);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -31,9 +31,9 @@ export const addToCart = createAsyncThunk(
 export const updateCartQty = createAsyncThunk(
   'cart/updateCartQty', async ({ lineItemId, quantity }, { rejectWithValue }) => {
     try {
-      return updateProductQty(lineItemId, quantity);
+      return await updateProductQty(lineItemId, quantity);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -41,9 +41,9 @@ export const updateCartQty = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   'cart/removeFromCart', async (productId, { rejectWithValue }) => {
     try {
-      return removeProduct(productId);
+      return await removeProduct(productId);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -51,9 +51,9 @@ export const removeFromCart = createAsyncThunk(
 export const emptyCart = createAsyncThunk(
   'cart/emptyCart', async (_, { rejectWithValue }) => {
     try {
-      return removeAllProducts();
+      return await removeAllProducts();
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -61,9 +61,9 @@ export const emptyCart = createAsyncThunk(
 export const refreshCart = createAsyncThunk(
   'cart/refreshCart', async (_, { rejectWithValue }) => {
     try {
-      return refresh();
+      return await refresh();
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );

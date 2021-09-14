@@ -4,9 +4,9 @@ import { getCountries, getSubdivisions, getOptions, getNewToken } from "../../se
 export const fetchShippingCountries = createAsyncThunk(
   'checkout/fetchShippingCountries', async (checkoutTokenId, { rejectWithValue }) => {
     try {
-      return getCountries(checkoutTokenId);
+      return await getCountries(checkoutTokenId);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -14,9 +14,9 @@ export const fetchShippingCountries = createAsyncThunk(
 export const fetchSubdivisions = createAsyncThunk(
   'checkout/fetchSubdivisions', async (countryCode, { rejectWithValue }) => {
     try {
-      return getSubdivisions(countryCode);
+      return await getSubdivisions(countryCode);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -24,9 +24,9 @@ export const fetchSubdivisions = createAsyncThunk(
 export const fetchShippingOptions = createAsyncThunk(
   'checkout/fetchShippingOptions', async (countriesData, { rejectWithValue }) => {
     try {
-      return getOptions(countriesData);
+      return await getOptions(countriesData);
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -34,9 +34,9 @@ export const fetchShippingOptions = createAsyncThunk(
 export const generateToken = createAsyncThunk(
   'checkout/generateToken', async (cartId, { rejectWithValue }) => {
     try {
-      return getNewToken(cartId, { type: 'cart' });
+      return await getNewToken(cartId, { type: 'cart' });
     } catch (e) {
-      return rejectWithValue(e);
+      return rejectWithValue(e.message);
     }
   }
 );
