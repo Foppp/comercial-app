@@ -79,8 +79,14 @@ const Review = () => {
                 </div>
               </li>
             ))}
-            <li className='list-group-item d-flex justify-content-between mt-3'>
-              <span>Total: </span>
+            <li className='list-group-item d-flex justify-content-end mt-3'>
+              <span className="mx-2">Shipping: </span>
+              <strong>
+                {checkoutToken.live.shipping.price.formatted_with_symbol}
+              </strong>
+            </li>
+            <li className='list-group-item d-flex justify-content-end mt-3'>
+              <span className="mx-2">Total: </span>
               <strong>
                 {checkoutToken.live.subtotal.formatted_with_symbol}
               </strong>
