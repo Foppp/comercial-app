@@ -10,7 +10,7 @@ const Sort = () => {
       <div className='container px-3 px-lg-3 mt-2'>
         <div className='sort-items d-flex justify-content-around'>
           <select
-            className='form-select form-select-sm'
+            className='form-select form-select-sm shadow-sm'
             aria-label='Default select example'
             defaultValue="noSort"
             onChange={(e) => dispatch(setSortOption(e.target.value))}
@@ -25,7 +25,7 @@ const Sort = () => {
           </select>
           <div className="mx-2"></div>
           <select
-            className='form-select form-select-sm'
+            className='form-select form-select-sm shadow-sm'
             aria-label='Default select example'
             defaultValue="perPage"
             onChange={(e) => dispatch(setPerPage(e.target.value))}
