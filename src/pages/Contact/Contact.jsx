@@ -16,7 +16,7 @@ const Contact = () => {
   }, [dispatch]);
 
   return (
-    <div className='container-fluid contact-container mt-5'>
+    <div className='container-fluid contact-container mt-2'>
       <div className='row m-3'>
         <ContactInfo />
         { messageStatus !== 'fulfilled' ? <MessageForm /> : <Confirmation /> }

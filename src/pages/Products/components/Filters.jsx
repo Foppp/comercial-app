@@ -27,7 +27,7 @@ const Filters = () => {
   const maxPrice = useSelector((state) => state.filterProductsInfoReducer.filterBy.price.max);
 
   return (
-    <div className='col-sm-6 col-md-4 col-lg-3 py-3'>
+    <div className='col-sm-6 col-md-4 col-lg-3'>
       <section className='py-2'>
         <div className='container px-3 px-lg-3 mt-2'>
           <div className='justify-content-center'>
