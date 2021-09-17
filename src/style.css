@@ -36,7 +36,7 @@ header {
 
 
 .product-card:hover {
-    transform: scale(105%);
+    transform: scale(102%);
 }
 
 .nav-link.active {
@@ -89,6 +89,10 @@ header {
     max-width: 235px;
     margin-right: 12px;
 } */
+.accordion-button:not(.collapsed) {
+    color: black;
+    background-color: white;
+}
 
 .form-control-sm:not(textarea) {
     height: 36px;

@@ -22,8 +22,10 @@ export const filterProductsInfo = createSlice({
       state.filterBy.categories = [...state.filterBy.categories, action.payload];
     },
     removeCategory: (state, action) => {
+      
       state.filterBy.categories = state.filterBy.categories
         .filter((category) => category !== action.payload);
+
     },
   },
 });

@@ -3,17 +3,23 @@ import Filters from './components/Filters';
 import ProductsList from './components/ProductsList';
 import Sort from './components/Sort';
 import Pagination from './components/Pagination';
-
+import { Container, Row, Col } from 'react-bootstrap';
 const Products = () => {
   return (
-    <div className='row products-container'>
-      <Filters />
-      <div className='col-sm-6 col-md-8 col-lg-9 py-3 text-center'>
-        <Sort />
-        <ProductsList />
-        <Pagination />
-      </div>
-    </div>
+    <Container fluid>
+      <Row className='mt-3'>
+        <Col md={12} lg={3}>
+          <Filters />
+        </Col>
+        <Col>
+          <Container fluid className="p-0">
+            <Sort />
+            <ProductsList />
+            <Pagination />
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

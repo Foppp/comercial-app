@@ -2,13 +2,40 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../../../redux/cartReducer/asyncThunk';
+import { Col, Card, Button } from 'react-bootstrap';
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className='col mb-5'>
-      <div className='card product-card h-100 d-flex flex-column justify-content-between'>
+    <Col className='mb-3'>
+      <Card className="h-100">
+  <Card.Img variant="top" alt={`${product.name}`} src={product.media.source} />
+  <Card.Body className="text-center d-flex flex-column justify-content-between">
+          <Card.Title>
+          <Link
+            to={`products/${product.permalink}`}
+            className='product-info text-decoration-none'
+          >
+            <div>
+              <p className='card-title mt-2 text-dark'>{product.name}</p>
+            </div>
+          </Link>
+    </Card.Title>
+          <footer>
+          <Button
+            variant="light"
+            className='rounded-pill mt-auto'
+            onClick={() =>
+              dispatch(addToCart({ productId: product.id, qty: 1 }))
+            }
+          >
+            Add to cart
+          </Button>
+</footer>
+  </Card.Body>
+</Card>
+      {/* <div className='card product-card h-100 d-flex flex-column justify-content-between'>
         <div className='card-header'>
           <img
             className='card-img-top'
@@ -42,8 +69,8 @@ const ProductItem = ({ product }) => {
             Add to cart
           </button>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </Col>
   );
 };
 

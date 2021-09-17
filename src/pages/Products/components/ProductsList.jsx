@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import filterProductList from '../../../utils/filters';
 import sortProducts from '../../../utils/sort';
 import paginate from '../../../utils/pagination';
+import { Row } from 'react-bootstrap';
 
 const Products = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
@@ -20,11 +21,11 @@ const Products = () => {
   }, [currentPage]);
 
   return (
-    <div className='row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 justify-content-center mt-3 px-3'>
+    <Row lg={3} md={2} sm={1} xs={1} className="mt-2">
       {paginatedProductList.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}
-    </div>
+      </Row>
   );
 };
 
