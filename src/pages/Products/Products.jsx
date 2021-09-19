@@ -13,7 +13,7 @@ const Products = () => {
           <Filters />
         </Col>
         <Col>
-          <Container className='p-1'>
+          <Container className='products-container p-1'>
             <Sort />
             <ProductsList />
             <PagePagination />

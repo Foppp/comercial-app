@@ -1,13 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setMinPrice, setMaxPrice, setCategory, removeCategory,
 } from '../../../redux/filterReducer/filter';
-import { Container, Row, Col, Accordion, Form, FloatingLabel } from 'react-bootstrap';
-
-const categories = ['Analog', 'Digital', 'Modular', 'Desktop'];
-const manufactures = ['Analog', 'Digital', 'Modular', 'Desktop'];
-const keys = ['25', '49', '61', '88'];
+import { Row, Accordion, Form, FloatingLabel } from 'react-bootstrap';
 
 const handleCategoryFilter = (e) => (dispatch) => {
   const id = e.target.id;
@@ -19,6 +15,9 @@ const handleCategoryFilter = (e) => (dispatch) => {
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.filterProductsInfoReducer.filtersData.categories);
+  const manufactures = useSelector((state) => state.filterProductsInfoReducer.filtersData.manufactures);
+  const keys = useSelector((state) => state.filterProductsInfoReducer.filtersData.keys);
 
   return (
     <Row>

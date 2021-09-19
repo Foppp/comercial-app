@@ -10,6 +10,11 @@ export const filterProductsInfo = createSlice({
       },
       categories: [],
     },
+    filtersData: {
+      categories: ['Analog', 'Digital', 'Modular', 'Desktop'],
+      manufactures: ['Moog', 'Korg', 'Behringer', 'Sequential'],
+      keys: ['25', '32', '37', '49'],
+    },
   },
   reducers: {
     setMinPrice: (state, action) => {
