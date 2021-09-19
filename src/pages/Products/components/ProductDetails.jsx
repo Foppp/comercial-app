@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Container, Col, Row, Button, Card } from 'react-bootstrap';
 import { addToCart } from '../../../redux/cartReducer/asyncThunk';
-import Spinner from '../../../components/Spinner/Spinner';
+import LoadSpinner from '../../../components/Spinner/Spinner';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -16,78 +16,83 @@ const ProductDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (products.length === 0)
+  if (products.length === 0) {
     return (
-      <div className='product-container d-flex justify-content-center'>
-        <Spinner />
-      </div>
+      <Container className='product-container text-center py-5'>
+        <LoadSpinner />
+      </Container>
     );
+  }
 
   return product ? (
-    <section>
-      <div className='container product-container px-4 px-lg-5'>
-        <div className='col mt-5 gx-4 gx-lg-5 p-3 align-items-center border rounded'>
-          <div className='row'>
-            <div className='col-md-6 zoom-without-container'>
-              <img
-                className='card-img-top mb-5 mb-md-3 p-5'
-                src={product.media.source}
-                alt={`${product.name}`}
-              />
-            </div>
-            <div className=' col-md-6 d-flex flex-column justify-content-around bd-highlight mb-3'>
-              <div className='p-2 text-center'>
-                <div className='small mb-1'>{product.sku}</div>
-                <h1 className='display-5 fw-bolder'>{product.name}</h1>
-              </div>
-              <div className='p-2 text-center'>
-                <div className='fs-5'>
-                  <span className='fs-3'>
-                    {product.price.formatted_with_symbol}
-                  </span>
-                </div>
-              </div>
-              <div className='p-2 d-flex justify-content-around text-center'>
-                <button
-                  className='btn btn-outline-dark'
-                  type='button'
+    <Container className='product-container py-5'>
+      <Card>
+        <Row md={1}>
+          <Col lg={7}>
+            <Card.Img className='p-3' src={product.media.source} />
+          </Col>
+          <Col
+            lg={5}
+            className='d-flex flex-column justify-content-around align-items-center p-3'
+          >
+            <Row>
+              <small>{product.sku}</small>
+            </Row>
+            <Row>
+              <h3>{product.name}</h3>
+            </Row>
+            <Row className='mt-3'>
+              <h4>{product.price.formatted_with_symbol}</h4>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-around align-items-center p-3'>
+                <Button
+                  variant='outline-dark'
+                  className='ms-5'
                   onClick={() => history.goBack()}
                 >
                   Back
-                </button>
-                <button
-                  className='btn btn-outline-dark mt-auto'
+                </Button>
+                <Button
+                  variant='outline-dark'
+                  className='mx-5'
                   onClick={() =>
                     dispatch(addToCart({ productId: product.id, qty: 1 }))
                   }
                 >
-                  Add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className='row-md-4 mt-5'>
-            {
-              <small
-                className='lead'
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
-            }
-          </div>
-        </div>
-      </div>
-    </section>
+                  Add to Cart
+                </Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card.Footer className='p-3'>
+              {
+                <small
+                  className='lead'
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+              }
+            </Card.Footer>
+          </Col>
+        </Row>
+      </Card>
+    </Container>
   ) : (
-    <section>
-      <div className='container product-container px-4'>
-        <div className='row mt-5 p-3 text-center border rounded'>
+    <Container className='product-container mt-5'>
+      <Col className='text-center'>
+        <Row>
           <h1>There is no such product</h1>
-          <Link to='/products' className='btn btn-secondary m-3' type='button'>
+        </Row>
+        <Row className='d-inline-flex'>
+          <Button as={Link} to='/products' className='btn btn-secondary'>
             Back to Shopping
-          </Link>
-        </div>
-      </div>
-    </section>
+          </Button>
+        </Row>
+      </Col>
+    </Container>
   );
 };
 
