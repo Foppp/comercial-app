@@ -4,24 +4,12 @@ import { nextStep, backStep } from '../../../redux/checkoutReducer/checkout';
 
 const Review = () => {
   const dispatch = useDispatch();
-  const checkoutToken = useSelector(
-    (state) => state.checkoutInfoReducer.checkoutToken
-  );
-  const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingData
-  );
-  const countries = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingCountries
-  );
-  const country = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingCountry
-  );
-  const states = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingSubdivisions
-  );
-  const state = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingSubdivision
-  );
+  const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
+  const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
+  const countries = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountries);
+  const country = useSelector((state) => state.checkoutInfoReducer.shipping.shippingCountry);
+  const states = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivisions);
+  const state = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivision);
 
   return (
     <div className='row'>
