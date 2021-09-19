@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Home = () => {
   return (
@@ -10,6 +12,11 @@ const Home = () => {
             <p className='lead fw-normal text-white-50 mb-0'>
               Choose your perfect synthesizer
             </p>
+            <Link
+              as={Button}
+              to='/products'
+              className="btn btn-outline-light mt-5"
+            >Explore Products</Link>
           </div>
         </div>
       </header>
@@ -29,14 +36,15 @@ const Home = () => {
                 available sound or to achieve total control of their music.
               </p>
             </div>
-            <div
+            <Link
+              to='/products'
               className='adv-l bg-light shadow-sm mt-auto p-2'
               style={{
                 width: '100%',
                 height: '160px',
                 borderRadius: '15px 15px 15px 15px',
               }}
-            ></div>
+            />
             <br />
           </div>
 
@@ -55,14 +63,15 @@ const Home = () => {
                 beyond the range and versatility of musical instruments.
               </p>
             </div>
-            <div
+            <Link
+              to='/products'
               className='adv-r bg-light shadow-sm mt-auto p-2'
               style={{
                 width: '100%',
                 height: '160px',
                 borderRadius: '15px 15px 15px 15px',
               }}
-            ></div>
+            />
             <br />
           </div>
         </div>
