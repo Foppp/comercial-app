@@ -1,21 +1,22 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import Filters from './components/Filters';
 import ProductsList from './components/ProductsList';
 import Sort from './components/Sort';
-import Pagination from './components/Pagination';
-import { Container, Row, Col } from 'react-bootstrap';
+import PagePagination from './components/PagePagination';
+
 const Products = () => {
   return (
-    <Container fluid>
+    <Container>
       <Row className='mt-3'>
         <Col md={12} lg={3}>
           <Filters />
         </Col>
         <Col>
-          <Container fluid className="p-0">
+          <Container className='p-1'>
             <Sort />
             <ProductsList />
-            <Pagination />
+            <PagePagination />
           </Container>
         </Col>
       </Row>
