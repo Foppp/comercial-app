@@ -22,7 +22,7 @@ const Filters = () => {
 
   return (
     <Row>
-      <Accordion defaultActiveKey={null} flush>
+      <Accordion defaultActiveKey='0' flush>
         <Accordion.Item eventKey='0'>
           <Accordion.Header>Price Range</Accordion.Header>
           <Accordion.Body>
@@ -46,8 +46,6 @@ const Filters = () => {
             </FloatingLabel>
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
-      <Accordion defaultActiveKey={null} flush>
         <Accordion.Item eventKey='1'>
           <Accordion.Header>Manufacturers</Accordion.Header>
           <Accordion.Body>
@@ -62,9 +60,7 @@ const Filters = () => {
             ))}
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
-      <Accordion defaultActiveKey={null} flush>
-        <Accordion.Item eventKey='1'>
+        <Accordion.Item eventKey='2'>
           <Accordion.Header>Category</Accordion.Header>
           <Accordion.Body>
             {categories.map((category) => (
@@ -78,9 +74,7 @@ const Filters = () => {
             ))}
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
-      <Accordion defaultActiveKey={null} flush>
-        <Accordion.Item eventKey='1'>
+        <Accordion.Item eventKey='3'>
           <Accordion.Header>Keys</Accordion.Header>
           <Accordion.Body>
             {keys.map((key) => (
