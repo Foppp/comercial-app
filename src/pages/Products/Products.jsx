@@ -5,6 +5,8 @@ import ProductsList from './components/ProductsList';
 import Sort from './components/Sort';
 import PagePagination from './components/PagePagination';
 
+import './products.style.css';
+
 const Products = () => {
   return (
     <Container>

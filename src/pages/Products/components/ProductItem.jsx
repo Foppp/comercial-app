@@ -9,7 +9,7 @@ const ProductItem = ({ product }) => {
 
   return (
     <Col className='mb-3'>
-      <Card className='h-100 shadow-sm'>
+      <Card className='product-card h-100'>
         <Link
           to={`products/${product.permalink}`}
           className='product-info text-decoration-none'

@@ -1,0 +1,30 @@
+header {
+  background-image: url('../../assets/background-image-synths.jpeg.png');
+}
+
+.adv-r {
+  background-image: url('../../assets/adv-left.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.adv-l {
+  background-image: url('../../assets/adv-right.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.adv-c {
+  background-image: url('../../assets/Korg-Arp-2600m-hero@1400x1050.jpeg.png');
+
+}
+
+.headerLogo {
+  position: absolute; 
+  top: 150px;
+  transform: translateY(-75%);
+}
+
+.explore {
+  margin-top: 0px;
+}

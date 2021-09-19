@@ -27,7 +27,7 @@ const MessageForm = () => {
     },
   });
   return (
-    <div className='col-md-6'>
+    <div className='mail-form col-md-6'>
       <form className='needs-validation' onSubmit={formik.handleSubmit}>
         <div className='row'>
           <div className='col-md-12 form-group'>

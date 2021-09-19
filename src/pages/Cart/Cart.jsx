@@ -5,6 +5,8 @@ import { emptyCart } from '../../redux/cartReducer/asyncThunk';
 import CartItem from './components/CartItem';
 import Spinner from '../../components/Spinner/Spinner';
 
+import './cart.styles.css';
+
 const Cart = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
@@ -65,7 +67,7 @@ const Cart = () => {
   );
 
   return (
-    <div className='cart-container'>
+    <div className='cart-container mt-5'>
       {!cart.line_items.length ? renderEmptyCart() : renderCart()}
     </div>
   );

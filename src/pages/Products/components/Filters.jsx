@@ -31,6 +31,7 @@ const Filters = () => {
               className='mb-3'
             >
               <Form.Control
+                className="price-range-form"
                 type='number'
                 placeholder='name@example.com'
                 onChange={(e) => dispatch(setMinPrice(Number(e.target.value)))}
@@ -38,6 +39,7 @@ const Filters = () => {
             </FloatingLabel>
             <FloatingLabel controlId='floatingPassword' label='Max'>
               <Form.Control
+                className="price-range-form"
                 type='number'
                 placeholder='Password'
                 onChange={(e) => dispatch(setMaxPrice(Number(e.target.value)))}

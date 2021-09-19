@@ -8,6 +8,8 @@ import { Collapse } from 'bootstrap';
 import { setActivePath } from '../../redux/navBarReducer/navbar'
 import { setModalOpen } from "../../redux/modalReducer/modal";
 
+import './navbar.styles.css';
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const navBarRef = useRef(null);

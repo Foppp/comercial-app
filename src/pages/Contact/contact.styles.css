@@ -1,0 +1,18 @@
+.mail-form .form-control:not(textarea) {
+  height: 44px;
+}
+
+.contact-container {
+  min-height: 1000px;
+}
+
+.mail-form .form-control {
+  padding: 0 18px 3px;
+  border: 1px solid #dbe2e8;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #2c2c2c;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
