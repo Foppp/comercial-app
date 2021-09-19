@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addToCart } from "../cartReducer/asyncThunk";
-import { sendContactEmail } from "../contactReducer/asyncThync";
 
 export const notificationInfo = createSlice({
   name: 'notification',
