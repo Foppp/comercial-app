@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
 
-const Spinner = () => {
+const LoadSpinner = () => {
   return (
-    <div
-      className="spinner-border mt-5 text-center"
-      style={{ width: "5rem", height: "5rem" }}
-      role="status"
+    <Spinner
+      animation='border'
+      role='status'
+      className='spinner-border mt-5 text-center'
+      style={{ width: '5rem', height: '5rem' }}
     >
-      <span className="visually-hidden">Loading...</span>
-    </div>
+      <span className='visually-hidden'>Loading...</span>
+    </Spinner>
   );
 };
 
-export default Spinner;
+export default LoadSpinner;
