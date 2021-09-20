@@ -17,12 +17,12 @@ const Sort = () => {
           <option disabled value='noSort'>
             Sort Products:
           </option>
-          <option value='LH'>Price: Low -> Hi</option>
-          <option value='HL'>Price: Hi -> Low</option>
-          <option value='AZ'>Name: A -> Z</option>
-          <option value='ZA'>Name: Z -> A</option>
-          <option value='NO'>Date: Newest -> Oldest</option>
-          <option value='ON'>Date: Oldest -> Newest</option>
+          <option value='LH'>Price: Low - Hi</option>
+          <option value='HL'>Price: Hi - Low</option>
+          <option value='AZ'>Name: A - Z</option>
+          <option value='ZA'>Name: Z - A</option>
+          <option value='NO'>Date: Newest - Oldest</option>
+          <option value='ON'>Date: Oldest - Newest</option>
         </Form.Select>
       </Col>
       <Col>
