@@ -10,8 +10,6 @@ import ProductDetails from './pages/Products/components/ProductDetails'
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
 import ModalWindow from "./components/Modal/Modal";
 
-import './main.css';
-
 const App = () => {
   const dispatch = useDispatch();
 

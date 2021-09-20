@@ -5,8 +5,6 @@ import { emptyCart } from '../../redux/cartReducer/asyncThunk';
 import CartItem from './components/CartItem';
 import Spinner from '../../components/Spinner/Spinner';
 
-import './cart.styles.css';
-
 const Cart = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();

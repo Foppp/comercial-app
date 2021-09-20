@@ -6,7 +6,6 @@ import ContactInfo from './components/ContactInfo';
 import MessageForm from './components/MessageForm';
 import { setStatus } from '../../redux/contactReducer/contact';
 
-import './contact.styles.css';
 
 const Contact = () => {
   const dispatch = useDispatch();

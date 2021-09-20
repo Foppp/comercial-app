@@ -1,9 +1,0 @@
-.checkout-container {
-  min-height: 1000px;
-}
-
-@media (min-width: 900px) {
-  .checkout-card {
-    width: 700px;
-  }
-}
