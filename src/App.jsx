@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { fetchProducts } from './redux/productsReducer/asyncThunk';
 import { fetchCart } from './redux/cartReducer/asyncThunk.js';
 import { Home, Products, Contact, Cart, Checkout } from './pages';
-import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer';
+import Navbar from './components/Navbar/Navbar.jsx';
+import Footer from './components/Footer/Footer.jsx';
 import ProductDetails from './pages/Products/components/ProductDetails'
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
-import ModalWindow from "./components/Modal/Modal";
+import ModalWindow from "./components/Modal/Modal.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
