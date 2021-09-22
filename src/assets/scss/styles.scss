@@ -1,7 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
 body {
-  background-color: rgb(241, 239, 239);
   font-family: system-ui;
   font-variant: small-caps;
 }
@@ -11,25 +10,25 @@ body {
 }
 
 header {
-  background-image: url('../../assets/background-image-synths.png');
+  background: url('../images/header_synths.png');
 }
 
-.adv-r {
-  background-image: url('../../assets/adv-left.jpeg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+// .adv-r {
+//   background-image: url('./assets/adv-left.jpeg');
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
 
-.adv-l {
-  background-image: url('../../assets/adv-right.jpeg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+// .adv-l {
+//   background-image: url('./assets/adv-right.jpeg');
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
 
-.adv-c {
-  background-image: url('../../assets/Korg-Arp-2600m-hero@1400x1050.png');
+// .adv-c {
+//   background-image: url('./assets/Korg-Arp-2600m-hero@1400x1050.png');
 
-}
+// }
 
 .headerLogo {
   position: absolute; 
@@ -84,7 +83,7 @@ header {
   min-height: 1000px;
 }
 
-.mail-form .form-control {
+.form-control {
   padding: 0 18px 3px;
   border: 1px solid #dbe2e8;
   border-radius: 20px;

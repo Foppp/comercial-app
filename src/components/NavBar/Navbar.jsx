@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import cn from "classnames";
-import logo from "../../assets/synthmaster_logo_black2.png";
-import logo2 from "../../assets/synthmaster_logo_black.png";
+import logo from "../../assets/images/synthmaster_logo_black2.png";
+import logo2 from "../../assets/images/synthmaster_logo_black.png";
 import { Collapse } from 'bootstrap';
 import { setActivePath } from '../../redux/navBarReducer/navbar'
 import { setModalOpen } from "../../redux/modalReducer/modal";
