@@ -12,10 +12,9 @@ import {
 import leftImage from '../../assets/images/left-s.png';
 import rightImage from '../../assets/images/right-s.png';
 import centerImage from '../../assets/images/center-s.png';
-import slide1 from '../../assets/images/slide1.png';
-import slide2 from '../../assets/images/slide2.png';
-import slide3 from '../../assets/images/slide3.png';
-import slide4 from '../../assets/images/slide4.png';
+import slide1 from '../../assets/images/slice1.jpg';
+import slide2 from '../../assets/images/slice2.jpg';
+import slide3 from '../../assets/images/slice3.jpg';
 
 const Home = () => {
   return (
@@ -29,9 +28,6 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item interval={2000}>
           <img className='d-block w-100' src={slide3} alt='Third slide' />
-        </Carousel.Item>
-        <Carousel.Item interval={2000} >
-          <img className='d-block w-100' src={slide4} alt='Fourth slide' />
         </Carousel.Item>
       </Carousel>
       <Row className='m-2'>
