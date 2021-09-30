@@ -1,104 +1,97 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import {
+  Button,
+  Row,
+  Col,
+  Container,
+  Card,
+  Image,
+  Carousel,
+} from 'react-bootstrap';
+import leftImage from '../../assets/images/left-s.png';
+import rightImage from '../../assets/images/right-s.png';
+import centerImage from '../../assets/images/center-s.png';
+import slide1 from '../../assets/images/slide1.png';
+import slide2 from '../../assets/images/slide2.png';
+import slide3 from '../../assets/images/slide3.png';
+import slide4 from '../../assets/images/slide4.png';
 
 const Home = () => {
   return (
-    <div className='home-container'>
-      <header className='bg-dark py-5'>
-        <div className='container px-4 px-lg-5 my-5'>
-          <div className='text-center text-white'>
-            <h1 className='display-4 fw-bolder'>SYNTHMASTER</h1>
-            <p className='lead fw-normal text-white-50 mb-0'>
-              Choose your perfect synthesizer
-            </p>
-            <Link
-              as={Button}
-              to='/products'
-              className="btn btn-outline-light mt-5"
-            >Explore Products</Link>
-          </div>
-        </div>
-      </header>
-      <main>
-        <div className='d-lg-flex justify-content-around w-100 my-md-3 ps-md-3'>
-          <div className='bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center d-flex align-items-end flex-column overflow-hidden'>
-            <div className='my-3 py-3'>
-              <h2 className='display-5'>Electronic sound</h2>
-              <p className='lead'>
-                The first electronic sound synthesizer, an instrument of awesome
-                dimensions, was developed by the American acoustical engineers
-                Harry Olson and Herbert Belar in 1955 at the Radio Corporation
-                of America RCA laboratories at Princeton, New Jersey. The
-                information was fed to the synthesizer encoded on a punched
-                paper tape. It was designed for research into the properties of
-                sound and attracted composers seeking to extend the range of
-                available sound or to achieve total control of their music.
-              </p>
-            </div>
-            <Link
-              to='/products'
-              className='adv-l bg-light shadow-sm mt-auto p-2'
-              style={{
-                width: '100%',
-                height: '160px',
-                borderRadius: '15px 15px 15px 15px',
-              }}
-            />
-            <br />
-          </div>
+    <Container fluid className='p-0'>
+      <Carousel fade>
+      <Carousel.Item interval={2000}>
+          <img className='d-block w-100' src={slide1} alt='First slide' />
+        </Carousel.Item>
+        <Carousel.Item interval={2000}>
+          <img className='d-block w-100' src={slide2} alt='Second slide' />
+        </Carousel.Item>
+        <Carousel.Item interval={2000}>
+          <img className='d-block w-100' src={slide3} alt='Third slide' />
+        </Carousel.Item>
+        <Carousel.Item interval={2000} >
+          <img className='d-block w-100' src={slide4} alt='Fourth slide' />
+        </Carousel.Item>
+      </Carousel>
+      <Row className='m-2'>
+        <Col className='text-center d-flex flex-column'>
+          <h2 className='display-5'>Welcome to Synthmaster!</h2>
+          <p className=''>
+            Experience our unique combination of music stores and webshop,
+            premium brands and competitive prices, professional advice and
+            personal service. Making music is something you do with your heart.
+            We at Synthmaster share your love of music and your passion for
+            making music.
+          </p>
+        </Col>
+      </Row>
+      {/* <Row className='text-center'>
+      <h2 className='display-5'>Our Brands</h2>
+        <Col className='d-flex justify-content-around'>
+          <Image src={korgTmb} width="100" height="100" thumbnail />
+          <Image src={moogTmb} width="100" height="100" thumbnail />
+          <Image src={berTmb} width="100" height="100" thumbnail />
+          <Image src={seqTmb} width="100" height="100" thumbnail />
+        </Col>
+      </Row> */}
+      <Row className='m-2'>
+        <Col sm className='text-center d-flex flex-column border m-2 p-2 rounded'>
+        <img
+            className='img-fluid mt-2 rounded'
+            src={rightImage}
+            alt='synth-right'
+          />
+          <h2 className='display-5 mt-2'>Music synthesizer</h2>
+          <p className='lead'>
+            Also called electronic sound synthesizer, machine that
+            electronically generates and modifies sounds, frequently with the
+            use of a digital computer. Synthesizers are used for the composition
+            of electronic music and in live performance. The intricate apparatus
+            of the sound synthesizer generates wave forms and then subjects them
+            to alteration in intensity, duration, frequency, and timbre, as
+            selected by the composer or musician. Synthesizers are capable of
+            producing sounds far beyond the range and versatility of musical
+            instruments.
+          </p>
+        </Col>
+        <Col sm className='text-center d-flex flex-column border m-2 p-2 rounded'>
+        <img className='img-fluid mt-2 rounded' src={leftImage} alt='' />
 
-          <div className='bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center d-flex align-items-end flex-column overflow-hidden'>
-            <div className='my-3 py-3'>
-              <h2 className='display-5'>Music synthesizer</h2>
-              <p className='lead'>
-                Also called electronic sound synthesizer, machine that
-                electronically generates and modifies sounds, frequently with
-                the use of a digital computer. Synthesizers are used for the
-                composition of electronic music and in live performance. The
-                intricate apparatus of the sound synthesizer generates wave
-                forms and then subjects them to alteration in intensity,
-                duration, frequency, and timbre, as selected by the composer or
-                musician. Synthesizers are capable of producing sounds far
-                beyond the range and versatility of musical instruments.
-              </p>
-            </div>
-            <Link
-              to='/products'
-              className='adv-r bg-light shadow-sm mt-auto p-2'
-              style={{
-                width: '100%',
-                height: '160px',
-                borderRadius: '15px 15px 15px 15px',
-              }}
-            />
-            <br />
-          </div>
-        </div>
-        <div className=' adv-c position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-light bg-light'>
-          <div className='col-md-5 p-lg-5 mx-auto my-5'>
-            <h1 className='display-4 fw-normal'>
-              NAMM 2022: The best synths and music tech gear releases this yeare
-            </h1>
-            <p className='lead fw-normal'>
-              January is normally a month reserved for an insane number of gear
-              launches. Last year, we visited Anaheim in California to check out
-              all the latest and greatest synths, plug-ins, studio hardware and
-              more from big brands and boutique makers. However, the Winter NAMM
-              Show in 2021 is a little different.
-            </p>
-            <a
-              className='btn btn-outline-light btn-lg rounded-pill'
-              href='https://www.namm.org/'
-            >
-              Find Out
-            </a>
-          </div>
-          <div className='product-device shadow-sm d-none d-md-block'></div>
-          <div className='product-device product-device-2 shadow-sm d-none d-md-block'></div>
-        </div>
-      </main>
-    </div>
+          <h2 className='display-5 mt-2'>Electronic sound</h2>
+          <p className='lead'>
+            The first electronic sound synthesizer, an instrument of awesome
+            dimensions, was developed by the American acoustical engineers Harry
+            Olson and Herbert Belar in 1955 at the Radio Corporation of America
+            RCA laboratories at Princeton, New Jersey. The information was fed
+            to the synthesizer encoded on a punched paper tape. It was designed
+            for research into the properties of sound and attracted composers
+            seeking to extend the range of available sound or to achieve total
+            control of their music.
+          </p>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

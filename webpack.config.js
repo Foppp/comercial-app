@@ -1,4 +1,5 @@
 const path = require('path');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -25,6 +26,7 @@ module.exports = {
     },
   },
   plugins: [
+    // new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
@@ -36,16 +38,22 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, 'node_modules'),
         use: 'babel-loader',
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.css$/i,
         use: [
+          // { loader: MiniCssExtractPlugin.loader },
           { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'resolve-url-loader' },
-          { loader: 'sass-loader'},
+          {
+            loader: 'css-loader',
+            options: {
+              url: true,
+            },
+          },
+          // { loader: 'postcss-loader' },
+          // { loader: 'sass-loader' },
         ],
       },
       {

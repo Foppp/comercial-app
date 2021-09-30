@@ -51,3 +51,13 @@ const Stepper = () => {
 };
 
 export default Stepper;
+
+{/* <div className="position-relative m-4">
+<div className="progress" style={{ height: '1px' }}>
+  <div className="progress-bar" role="progressbar" style={{ width: '25 %'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<button type="button" className="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style={{ width: '2rem', height: '2rem' }}>1</button>
+<button type="button" className="position-absolute top-0 start-25 translate-middle btn btn-sm btn-primary rounded-pill" style={{ width: '2rem', height: '2rem' }}>2</button>
+<button type="button" className="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill" style={{ width: '2rem', height: '2rem' }}>4</button>
+
+</div> */}

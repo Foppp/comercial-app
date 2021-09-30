@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { fetchProducts } from './redux/productsReducer/asyncThunk';
 import { fetchCart } from './redux/cartReducer/asyncThunk.js';
 import { Home, Products, Contact, Cart, Checkout } from './pages';
-// import Navbar from './components/Navbar/Navbar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ProductDetails from './pages/Products/components/ProductDetails.jsx'
 import ToastMessage from './components/ToastNotification/ToastNotification.jsx';
@@ -20,21 +20,21 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route exact path='/products'>
+        <Route path='/products'>
           <Products />
         </Route>
-        <Route exact path='/contact'>
+        <Route path='/contact'>
           <Contact />
         </Route>
-        <Route exact path='/cart'>
+        <Route path='/cart'>
           <Cart />
         </Route>
-        <Route exact path='/checkout'>
+        <Route path='/checkout'>
           <Checkout />
         </Route>
         <Route path='/products/:id'>
