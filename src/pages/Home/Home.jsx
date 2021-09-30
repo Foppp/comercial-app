@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap';
 import leftImage from '../../assets/images/left-s.png';
 import rightImage from '../../assets/images/right-s.png';
-import centerImage from '../../assets/images/center-s.png';
 import slide1 from '../../assets/images/slice1.jpg';
 import slide2 from '../../assets/images/slice2.jpg';
 import slide3 from '../../assets/images/slice3.jpg';
@@ -20,7 +19,7 @@ const Home = () => {
   return (
     <Container fluid className='p-0'>
       <Carousel fade>
-      <Carousel.Item interval={2000}>
+        <Carousel.Item interval={2000}>
           <img className='d-block w-100' src={slide1} alt='First slide' />
         </Carousel.Item>
         <Carousel.Item interval={2000}>
@@ -43,9 +42,12 @@ const Home = () => {
         </Col>
       </Row>
       <Row className='m-2'>
-        <Col sm className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'>
-        <img
-            className='img-fluid mt-2 rounded'
+        <Col
+          sm
+          className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
+        >
+          <img
+            className='img-fluid mt-2 rounded-pill'
             src={rightImage}
             alt='synth-right'
           />
@@ -62,9 +64,11 @@ const Home = () => {
             instruments.
           </p>
         </Col>
-        <Col sm className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'>
-        <img className='img-fluid mt-2 rounded' src={leftImage} alt='' />
-
+        <Col
+          sm
+          className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
+        >
+          <img className='img-fluid mt-2 rounded-pill' src={leftImage} alt='' />
           <h2 className='display-5 mt-2'>Electronic sound</h2>
           <p className='lead'>
             The first electronic sound synthesizer, an instrument of awesome
