@@ -19,7 +19,6 @@ const ProductItem = ({ product }) => {
             className='p-2'
             alt={`${product.name}`}
             src={product.media.source}
-            loading="lazy"
           />
         </Link>
         <Card.Body className='text-center d-flex flex-column justify-content-between'>

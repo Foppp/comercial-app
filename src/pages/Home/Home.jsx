@@ -46,17 +46,8 @@ const Home = () => {
           </p>
         </Col>
       </Row>
-      {/* <Row className='text-center'>
-      <h2 className='display-5'>Our Brands</h2>
-        <Col className='d-flex justify-content-around'>
-          <Image src={korgTmb} width="100" height="100" thumbnail />
-          <Image src={moogTmb} width="100" height="100" thumbnail />
-          <Image src={berTmb} width="100" height="100" thumbnail />
-          <Image src={seqTmb} width="100" height="100" thumbnail />
-        </Col>
-      </Row> */}
       <Row className='m-2'>
-        <Col sm className='text-center d-flex flex-column border m-2 p-2 rounded'>
+        <Col sm className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'>
         <img
             className='img-fluid mt-2 rounded'
             src={rightImage}
@@ -75,7 +66,7 @@ const Home = () => {
             instruments.
           </p>
         </Col>
-        <Col sm className='text-center d-flex flex-column border m-2 p-2 rounded'>
+        <Col sm className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'>
         <img className='img-fluid mt-2 rounded' src={leftImage} alt='' />
 
           <h2 className='display-5 mt-2'>Electronic sound</h2>

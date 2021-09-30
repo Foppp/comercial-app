@@ -25,19 +25,19 @@ const App = () => {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/products'>
+        <Route exact path='/products'>
           <Products />
         </Route>
-        <Route path='/contact'>
+        <Route exact path='/contact'>
           <Contact />
         </Route>
-        <Route path='/cart'>
+        <Route exact path='/cart'>
           <Cart />
         </Route>
-        <Route path='/checkout'>
+        <Route exact path='/checkout'>
           <Checkout />
         </Route>
-        <Route path='/products/:id'>
+        <Route exact path='/products/:id'>
           <ProductDetails />
         </Route>
       </Switch>
