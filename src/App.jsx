@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchProducts } from './redux/productsReducer/asyncThunk';
+import { fetchProducts, fetchCategories } from './redux/productsReducer/asyncThunk';
 import { fetchCart } from './redux/cartReducer/asyncThunk.js';
 import { Home, Products, Contact, Cart, Checkout } from './pages';
 import Navbar from './components/Navbar/Navbar.jsx';
@@ -15,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(fetchCategories());
     dispatch(fetchCart());
   }, [dispatch]);
 

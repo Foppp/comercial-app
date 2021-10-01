@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   Button,
   Row,
@@ -16,17 +17,19 @@ import slide2 from '../../assets/images/slice2.jpg';
 import slide3 from '../../assets/images/slice3.jpg';
 
 const Home = () => {
+  const categories = useSelector(state => state.productsInfoReducer.categoryList);
+  const mainCategories = categories.filter((c) => c.assets.length !== 0);
   return (
     <Container fluid className='p-0'>
       <Carousel fade>
         <Carousel.Item interval={2000}>
-          <img className='d-block w-100' src={slide1} alt='First slide' />
+          <Image className='d-block w-100' src={slide1} alt='First slide' />
         </Carousel.Item>
         <Carousel.Item interval={2000}>
-          <img className='d-block w-100' src={slide2} alt='Second slide' />
+          <Image className='d-block w-100' src={slide2} alt='Second slide' />
         </Carousel.Item>
         <Carousel.Item interval={2000}>
-          <img className='d-block w-100' src={slide3} alt='Third slide' />
+          <Image className='d-block w-100' src={slide3} alt='Third slide' />
         </Carousel.Item>
       </Carousel>
       <Row className='m-2'>
@@ -41,16 +44,27 @@ const Home = () => {
           </p>
         </Col>
       </Row>
+      <Row className='mx-0'>
+        {mainCategories.map((category) => {
+          const [{ url }] = category.assets;
+          return (
+            <Col sm key={category.id}>
+              <Card as={Link} to="/products" className='bg-dark text-white text-center mt-1 category-card'>
+                <Card.Img src={url} alt='Card image' className="category-card-image" />
+                <Card.ImgOverlay>
+                  <Card.Title className="category-card-title">{ category.name}</Card.Title>
+                </Card.ImgOverlay>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
       <Row className='m-2'>
         <Col
           sm
           className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
         >
-          <img
-            className='img-fluid mt-2 rounded-pill'
-            src={rightImage}
-            alt='synth-right'
-          />
+          
           <h2 className='display-5 mt-2'>Music synthesizer</h2>
           <p className='lead'>
             Also called electronic sound synthesizer, machine that
@@ -63,12 +77,16 @@ const Home = () => {
             producing sounds far beyond the range and versatility of musical
             instruments.
           </p>
+          {/* <Image
+            className='img-fluid mb-auto rounded'
+            src={rightImage}
+            alt='synth-right'
+          /> */}
         </Col>
         <Col
           sm
           className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
         >
-          <img className='img-fluid mt-2 rounded-pill' src={leftImage} alt='' />
           <h2 className='display-5 mt-2'>Electronic sound</h2>
           <p className='lead'>
             The first electronic sound synthesizer, an instrument of awesome
@@ -80,6 +98,8 @@ const Home = () => {
             seeking to extend the range of available sound or to achieve total
             control of their music.
           </p>
+          {/* <Image className='img-fluid mb-auto rounded' src={leftImage} alt='' /> */}
+
         </Col>
       </Row>
     </Container>

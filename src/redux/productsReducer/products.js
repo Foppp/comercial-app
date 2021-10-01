@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts } from "./asyncThunk";
+import { fetchProducts, fetchCategories, fetchCategoryProducts } from "./asyncThunk";
 import filterProductList from '../../utils/filters';
 import sortProducts from '../../utils/sort';
 import paginate from '../../utils/pagination';
@@ -8,6 +8,7 @@ export const productsInfo = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    categoryList: [],
     filteredProducts: [],
     paginatedProducts: [],
     filter: {
@@ -114,6 +115,20 @@ export const productsInfo = createSlice({
       state.productsErrorMessage = null;
     },
     [fetchProducts.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.productsErrorMessage = action.payload;
+    },
+    [fetchCategories.pending]: (state, action) => {
+      state.status = 'pending';
+    },
+    [fetchCategories.fulfilled]: (state, action) => {
+      state.categoryList = action.payload;
+      // state.filteredProducts = action.payload;
+      // state.paginatedProducts = action.payload;
+      state.status = 'fulfilled';
+      state.productsErrorMessage = null;
+    },
+    [fetchCategories.rejected]: (state, action) => {
       state.status = 'rejected';
       state.productsErrorMessage = action.payload;
     }
