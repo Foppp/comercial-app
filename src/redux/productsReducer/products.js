@@ -11,7 +11,7 @@ export const productsInfo = createSlice({
     filteredProducts: [],
     paginatedProducts: [],
     filter: {
-      filterBy: {
+      type: {
         price: {
           min: null,
           max: Infinity,
@@ -41,30 +41,30 @@ export const productsInfo = createSlice({
       state.filteredProducts = action.payload;
     },
     setMinPrice: (state, action) => {
-      state.filter.filterBy.price.min = action.payload;
-      const filterType = state.filter.filterBy;
+      state.filter.type.price.min = action.payload;
+      const filterType = state.filter.type;
       const { currentPage, perPage } = state.pagination;
       state.filteredProducts = filterProductList(state.products, filterType);
       state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
     },
     setMaxPrice: (state, action) => {
-      state.filter.filterBy.price.max = action.payload === 0 ? Infinity : action.payload;
-      const filterType = state.filter.filterBy;
+      state.filter.type.price.max = action.payload === 0 ? Infinity : action.payload;
+      const filterType = state.filter.type;
       const { currentPage, perPage } = state.pagination;
       state.filteredProducts = filterProductList(state.products, filterType);
       state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
     },
     setCategory: (state, action) => {
-      state.filter.filterBy.categories = [...state.filter.filterBy.categories, action.payload];
-      const filterType = state.filter.filterBy;
+      state.filter.type.categories = [...state.filter.type.categories, action.payload];
+      const filterType = state.filter.type;
       const { currentPage, perPage } = state.pagination;
       state.filteredProducts = filterProductList(state.products, filterType);
       state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
     },
     removeCategory: (state, action) => {
-      state.filter.filterBy.categories = state.filter.filterBy.categories
+      state.filter.type.categories = state.filter.type.categories
         .filter((category) => category !== action.payload);
-      const filterType = state.filter.filterBy;
+      const filterType = state.filter.type;
       const { currentPage, perPage } = state.pagination;
       state.filteredProducts = filterProductList(state.products, filterType);
       state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
