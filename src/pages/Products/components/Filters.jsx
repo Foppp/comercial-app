@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setMinPrice, setMaxPrice, setCategory, removeCategory,
-} from '../../../redux/filterReducer/filter';
+} from '../../../redux/productsReducer/products';
 import { Row, Accordion, Form, FloatingLabel } from 'react-bootstrap';
 
 const handleCategoryFilter = (e) => (dispatch) => {
@@ -15,9 +15,9 @@ const handleCategoryFilter = (e) => (dispatch) => {
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.filterProductsInfoReducer.filtersData.categories);
-  const manufactures = useSelector((state) => state.filterProductsInfoReducer.filtersData.manufactures);
-  const keys = useSelector((state) => state.filterProductsInfoReducer.filtersData.keys);
+  const categories = useSelector((state) => state.productsInfoReducer.filter.filtersData.categories);
+  const manufactures = useSelector((state) => state.productsInfoReducer.filter.filtersData.manufactures);
+  const keys = useSelector((state) => state.productsInfoReducer.filter.filtersData.keys);
 
   return (
     <Row>

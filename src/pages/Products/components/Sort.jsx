@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Form } from 'react-bootstrap';
-import { setSortOption } from '../../../redux/sortReducer/sort';
-import { setPerPage } from '../../../redux/paginationReducer/pagination';
+import { setSortOption, setPerPage } from '../../../redux/productsReducer/products';
 
 const Sort = () => {
   const dispatch = useDispatch();

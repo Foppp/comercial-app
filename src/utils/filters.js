@@ -9,14 +9,16 @@ const filterByCategory = (data, values) => {
   if (values.length === 0) {
     return data;
   }
-  return data.filter((product) => {
+  const [current, ...rest] = values;
+  const filteredData = data.filter((product) => {
     if (product.categories.length === 0) {
       return false;
     }
     const categories = product.categories.map(({ name }) => name);
-    return values.some((value) => categories.includes(value));
+    return categories.includes(current);
   })
-}; 
+  return filterByCategory(filteredData, rest)
+};
 
 const mappings = {
   price: (data, priceRange) => filterByPrice(data, priceRange),

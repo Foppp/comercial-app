@@ -5,16 +5,16 @@ import {
   setCurrentPage,
   setNextPage,
   setPrevPage,
-} from '../../../redux/paginationReducer/pagination';
+} from '../../../redux/productsReducer/products';
 
 const PagePagination = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.productsInfoReducer.products);
-  const totalProducts = products.length;
-  const perPage = useSelector((state) => state.paginationInfoReducer.perPage);
-  const currentPage = useSelector((state) => state.paginationInfoReducer.currentPage);
-  const totalPages = Math.ceil(totalProducts / perPage);
-  const pagNavigation = Array.from({ length: totalPages }, (_, x) => x + 1);
+  const updatedProducts = useSelector((state) => state.productsInfoReducer.filteredProducts);
+  const totalProducts = updatedProducts.length;
+  const perPage = useSelector((state) => state.productsInfoReducer.pagination.perPage);
+  const currentPage = useSelector((state) => state.productsInfoReducer.pagination.currentPage);
+  const totalPages = useSelector((state) => state.productsInfoReducer.pagination.totalPages);
+  const pageNavigation = Array.from({ length: totalPages }, (_, x) => x + 1);
 
   const handleNextPage = () => {
     if (currentPage === totalPages) return;
@@ -28,7 +28,7 @@ const PagePagination = () => {
   return (
     <Pagination className='justify-content-center'>
       <Pagination.Prev onClick={() => handlePrevPage()} />
-      {pagNavigation.map((page) => (
+      {pageNavigation.map((page) => (
         <Pagination.Item
           key={page}
           active={currentPage === page}

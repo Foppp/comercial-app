@@ -1,16 +1,102 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchProducts } from "./asyncThunk";
+import filterProductList from '../../utils/filters';
+import sortProducts from '../../utils/sort';
+import paginate from '../../utils/pagination';
 
 export const productsInfo = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    filteredProducts: [],
+    paginatedProducts: [],
+    filter: {
+      filterBy: {
+        price: {
+          min: null,
+          max: Infinity,
+        },
+        categories: [],
+      },
+      filtersData: {
+        categories: ['Analog', 'Digital', 'Modular', 'Desktop'],
+        manufactures: ['Moog', 'Korg', 'Behringer', 'Sequential'],
+        keys: ['25', '32', '37', '49'],
+      },
+    },
+    pagination: {
+      currentPage: 1,
+      perPage: 10,
+      totalPages: null,
+    },
+    sortOption: null,
     status: null,
     productsErrorMessage: null,
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
+    },
+    setFilteredProducts: (state, action) => {
+      state.filteredProducts = action.payload;
+    },
+    setMinPrice: (state, action) => {
+      state.filter.filterBy.price.min = action.payload;
+      const filterType = state.filter.filterBy;
+      const { currentPage, perPage } = state.pagination;
+      state.filteredProducts = filterProductList(state.products, filterType);
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setMaxPrice: (state, action) => {
+      state.filter.filterBy.price.max = action.payload === 0 ? Infinity : action.payload;
+      const filterType = state.filter.filterBy;
+      const { currentPage, perPage } = state.pagination;
+      state.filteredProducts = filterProductList(state.products, filterType);
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setCategory: (state, action) => {
+      state.filter.filterBy.categories = [...state.filter.filterBy.categories, action.payload];
+      const filterType = state.filter.filterBy;
+      const { currentPage, perPage } = state.pagination;
+      state.filteredProducts = filterProductList(state.products, filterType);
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    removeCategory: (state, action) => {
+      state.filter.filterBy.categories = state.filter.filterBy.categories
+        .filter((category) => category !== action.payload);
+      const filterType = state.filter.filterBy;
+      const { currentPage, perPage } = state.pagination;
+      state.filteredProducts = filterProductList(state.products, filterType);
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setSortOption: (state, action) => {
+      state.sortOption = action.payload;
+      const { currentPage, perPage } = state.pagination;
+      state.filteredProducts = sortProducts(state.filteredProducts, state.sortOption);
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setTotalPages: (state, action) => {
+      state.pagination.totalPages = action.payload;
+    },
+    setCurrentPage: (state, action) => {
+      state.pagination.currentPage = action.payload;
+      const { currentPage, perPage } = state.pagination;
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setPerPage: (state, action) => {
+      state.pagination.perPage = action.payload;
+      const { currentPage, perPage } = state.pagination;
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setNextPage: (state) => {
+      state.pagination.currentPage += 1;
+      const { currentPage, perPage } = state.pagination;
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
+    },
+    setPrevPage: (state) => {
+      state.pagination.currentPage -= 1;
+      const { currentPage, perPage } = state.pagination;
+      state.paginatedProducts = paginate(currentPage, perPage, state.filteredProducts);
     },
     setProductsErrorMessage: (state, action) => {
       state.errorMessage = action.payload;
@@ -22,6 +108,8 @@ export const productsInfo = createSlice({
     },
     [fetchProducts.fulfilled]: (state, action) => {
       state.products = action.payload;
+      state.filteredProducts = action.payload;
+      state.paginatedProducts = action.payload;
       state.status = 'fulfilled';
       state.productsErrorMessage = null;
     },
@@ -35,6 +123,16 @@ export const productsInfo = createSlice({
 export const {
   setProducts,
   setFilteredProducts,
+  setMinPrice,
+  setMaxPrice,
+  setCategory,
+  removeCategory,
+  setSortOption,
+  setTotalPages,
+  setCurrentPage,
+  setPerPage,
+  setNextPage,
+  setPrevPage,
   setProductsErrorMessage,
 } = productsInfo.actions;
 
