@@ -70,7 +70,12 @@ header {
 }
 
 .mail-form .form-control:not(textarea) {
-  height: 44px;
+  height: 46px;
+}
+
+.price {
+  border-radius: 5px;
+  height: 38px;
 }
 
 .contact-container {

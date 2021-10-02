@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Row, Col, Form } from 'react-bootstrap';
+import { Row, Col, Form , InputGroup, FormControl } from 'react-bootstrap';
 import { setSortOption, setPerPage } from '../../../redux/productsReducer/products';
 
 const Sort = () => {
   const dispatch = useDispatch();
   return (
-    <Row className='mt-2 d-flex justify-content-between' sm={2} xs={1}>
+    <Row className='mt-2 d-flex justify-content-between' md={3} sm={1} xs={1}>
       <Col className='mb-2'>
         <Form.Select
           defaultValue='noSort'
@@ -25,6 +25,12 @@ const Sort = () => {
         </Form.Select>
       </Col>
       <Col>
+      <InputGroup className='price mb-2'>
+          <FormControl aria-label='First name' className="shadow-sm" placeholder="0$" />
+          <FormControl aria-label='Last name' className="shadow-sm" placeholder="1000$"/>
+        </InputGroup>
+      </Col>
+      <Col>
         <Form.Select
           defaultValue='noPer'
           className='shadow-sm'
@@ -37,7 +43,7 @@ const Sort = () => {
           <option value={10}>10</option>
           <option value={15}>15</option>
           <option value={20}>20</option>
-        </Form.Select>      
+        </Form.Select>
       </Col>
     </Row>
   );

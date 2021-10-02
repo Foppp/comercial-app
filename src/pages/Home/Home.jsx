@@ -20,8 +20,8 @@ const Home = () => {
   const mainCategories = categories.filter((c) => c.assets.length !== 0);
   return (
     <Container fluid className='p-0'>
-      <Row className='p-0'>
-        <Image src={main} fluid />
+              <Image src={main} fluid />
+      <Row className='p-3'>
         <Col className='text-center d-flex flex-column'>
           <h2 className='display-5'>Welcome to Synthmaster!</h2>
           <small>
@@ -37,7 +37,7 @@ const Home = () => {
         {mainCategories.map((category) => {
           const [{ url }] = category.assets;
           return (
-            <Col lg={3} sm={6} xs={6} key={category.id}>
+            <Col lg={3} sm={6} key={category.id}>
               <Card
                 as={Link}
                 to='/products'
