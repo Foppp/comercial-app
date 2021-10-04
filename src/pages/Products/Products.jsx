@@ -9,9 +9,6 @@ const Products = () => {
   return (
     <Container>
       <Row className='mt-3'>
-        {/* <Col md={12} lg={3}>
-          <Filters />
-        </Col> */}
         <Col>
           <Container className='products-container p-1'>
             <Sort />

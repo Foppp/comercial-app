@@ -1,19 +1,23 @@
-import React, { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import cn from "classnames";
-import logo from "../../assets/images/synthmaster_logo_black2.png";
-import logo2 from "../../assets/images/synthmaster_logo_black.png";
+import React, { useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import cn from 'classnames';
+import logo from '../../assets/images/synthmaster_logo_black2.png';
+import logo2 from '../../assets/images/synthmaster_logo_black.png';
 import { Collapse } from 'bootstrap';
-import { setActivePath } from '../../redux/navBarReducer/navbar'
-import { setModalOpen } from "../../redux/modalReducer/modal";
+import { setActivePath } from '../../redux/navBarReducer/navbar';
+import { setModalOpen } from '../../redux/modalReducer/modal';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navBarRef = useRef(null);
-  const navbarMenuItems = useSelector(state => state.navbarInfoReducer.menuItems);
+  const navbarMenuItems = useSelector(
+    (state) => state.navbarInfoReducer.menuItems
+  );
   const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
-  const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
+  const totalItems = useSelector(
+    (state) => state.cartInfoReducer.cart.total_items
+  );
   const location = useLocation();
 
   useEffect(() => {

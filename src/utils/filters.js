@@ -5,24 +5,20 @@ const filterByPrice = (data, priceRange) => {
     .filter(({ price }) => price.raw <= max);
 };
 
-const filterByCategory = (data, values) => {
-  if (values.length === 0) {
-    return data;
-  }
-  const [current, ...rest] = values;
-  const filteredData = data.filter((product) => {
+const filterByCategory = (data, value) => {
+  if (value === '') return data;
+  return data.filter((product) => {
     if (product.categories.length === 0) {
       return false;
     }
     const categories = product.categories.map(({ name }) => name);
-    return categories.includes(current);
+    return categories.includes(value);
   })
-  return filterByCategory(filteredData, rest)
 };
 
 const mappings = {
   price: (data, priceRange) => filterByPrice(data, priceRange),
-  categories: (data, values) => filterByCategory(data, values),
+  category: (data, value) => filterByCategory(data, value),
 };
 
 const filterProductList = (data, filterTypes) => {

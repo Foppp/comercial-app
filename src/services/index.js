@@ -2,8 +2,6 @@ export { getPaymentMethodId } from './stripeServices';
 export { sendEmail } from './mailjsServices';
 export {
   getProductList,
-  getCategories,
-  getCategoryProducts,
   getCart,
   addProduct,
   updateProductQty,

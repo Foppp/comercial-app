@@ -1,12 +1,48 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Row, Col, Form , InputGroup, FormControl } from 'react-bootstrap';
-import { setSortOption, setPerPage } from '../../../redux/productsReducer/products';
+import { Row, Col, Form, InputGroup, FormControl } from 'react-bootstrap';
+import {
+  setSortOption,
+  setPerPage,
+  setMinPrice,
+  setMaxPrice,
+  setCategory,
+} from '../../../redux/productsReducer/products';
 
 const Sort = () => {
   const dispatch = useDispatch();
+
   return (
-    <Row className='mt-2 d-flex justify-content-between' md={3} sm={1} xs={1}>
+    <Row className='mt-2 d-flex justify-content-between' md={4} sm={2} xs={1}>
+      <Col>
+        <InputGroup className='price mb-2'>
+          <FormControl
+            aria-label='First name'
+            className='shadow-sm'
+            placeholder='0$'
+            onChange={(e) => dispatch(setMinPrice(Number(e.target.value)))}
+          />
+          <FormControl
+            aria-label='Last name'
+            className='shadow-sm'
+            placeholder='1000$'
+            onChange={(e) => dispatch(setMaxPrice(Number(e.target.value)))}
+          />
+        </InputGroup>
+      </Col>
+      <Col>
+        <Form.Select
+          defaultValue=''
+          className='shadow-sm mb-2'
+          onChange={(e) => dispatch(setCategory(e.target.value))}
+        >
+          <option value=''>All Categories</option>
+          <option value='Analog'>Analog</option>
+          <option value='Digital'>Digital</option>
+          <option value='Desktop'>Desktop</option>
+          <option value='Modular'>Modular</option>
+        </Form.Select>
+      </Col>
       <Col className='mb-2'>
         <Form.Select
           defaultValue='noSort'
@@ -24,12 +60,7 @@ const Sort = () => {
           <option value='ON'>Date: Oldest - Newest</option>
         </Form.Select>
       </Col>
-      <Col>
-      <InputGroup className='price mb-2'>
-          <FormControl aria-label='First name' className="shadow-sm" placeholder="0$" />
-          <FormControl aria-label='Last name' className="shadow-sm" placeholder="1000$"/>
-        </InputGroup>
-      </Col>
+
       <Col>
         <Form.Select
           defaultValue='noPer'

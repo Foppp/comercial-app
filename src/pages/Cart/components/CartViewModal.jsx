@@ -35,37 +35,34 @@ const CartQuickView = () => {
     <>
       {cart.line_items.map((item) => (
         <div key={item.id} className='row text-center m-1 border rounded p-2'>
-        <div className='col-md-2'>
-          <img src={item.media.source} alt='Product' width='40' height='40' />
-        </div>
-        <div className='col-md-6'>
-          <h6 className='product-title mt-2'>
-            <Link
-              to={`products/${item.permalink}`}
-              className='text-decoration-none text-black'
-            >
-              {item.name}
-            </Link>
-          </h6>
-        </div>
-        <div className='col-md-2'>
-          <div className='d-flex justify-content-around'>
-            
-            <span className='mt-2'>{item.quantity}</span>
-            
-            
+          <div className='col-md-2'>
+            <img src={item.media.source} alt='Product' width='40' height='40' />
+          </div>
+          <div className='col-md-6'>
+            <h6 className='product-title mt-2'>
+              <Link
+                to={`products/${item.permalink}`}
+                className='text-decoration-none text-black'
+              >
+                {item.name}
+              </Link>
+            </h6>
+          </div>
+          <div className='col-md-2'>
+            <div className='d-flex justify-content-around'>
+              <span className='mt-2'>{item.quantity}</span>
+            </div>
+          </div>
+          <div className='col-md-2 mt-2'>
+            {item.line_total.formatted_with_symbol}
           </div>
         </div>
-        <div className='col-md-2 mt-2'>
-          {item.line_total.formatted_with_symbol}
-        </div>
-      </div>
       ))}
       <div className='d-flex text-center row mt-3'>
-      <div className='col-md-6'>
+        <div className='col-md-6'>
           <h5 className=''>Items in cart: {cart.line_items.length}</h5>
         </div>
-      <div className='col-md-6'>
+        <div className='col-md-6'>
           <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
         </div>
       </div>

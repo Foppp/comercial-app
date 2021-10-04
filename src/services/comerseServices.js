@@ -134,25 +134,3 @@ export const getProductList = () => {
       });
   });
 };
-
-export const getCategories = () => {
-  return new Promise((resolve, reject) => {
-    commerce.categories.list()
-      .then(({ data }) => {
-        resolve(data);
-      }).catch((err) => {
-        reject(err.data.error);
-      });
-  });
-};
-
-export const getCategoryProducts = (categoryId) => {
-  return new Promise((resolve, reject) => {
-    commerce.categories.retrieve(categoryId)
-      .then(({ data }) => {
-        resolve(data);
-      }).catch((err) => {
-        reject(err.data.error);
-      });
-  });
-};

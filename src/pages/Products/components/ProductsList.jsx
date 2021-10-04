@@ -7,10 +7,10 @@ import LoadSpinner from '../../../components/Spinner/Spinner';
 
 const Products = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
-  const filteredProducts = useSelector(
-    (state) => state.productsInfoReducer.filteredProducts
-  );
   const updatedProducts = useSelector(
+    (state) => state.productsInfoReducer.updatedProducts
+  );
+  const paginatedProducts = useSelector(
     (state) => state.productsInfoReducer.paginatedProducts
   );
   const perPage = useSelector(
@@ -26,13 +26,13 @@ const Products = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    const totalPages = Math.ceil(filteredProducts.length / perPage);
+    const totalPages = Math.ceil(updatedProducts.length / perPage);
     dispatch(setTotalPages(totalPages));
   }, [dispatch, perPage, updatedProducts, currentPage]);
 
   const renderFilteredProducts = () => {
-    if (updatedProducts.length !== 0) {
-      return updatedProducts.map((product) => (
+    if (paginatedProducts.length !== 0) {
+      return paginatedProducts.map((product) => (
         <ProductItem key={product.id} product={product} />
       ));
     } else {

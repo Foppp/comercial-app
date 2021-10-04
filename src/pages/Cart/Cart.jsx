@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { emptyCart } from '../../redux/cartReducer/asyncThunk';
@@ -8,6 +8,10 @@ import Spinner from '../../components/Spinner/Spinner';
 const Cart = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const renderEmptyCart = () => (
     <div className='container text-center mt-5'>

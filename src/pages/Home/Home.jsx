@@ -10,17 +10,25 @@ import {
   Image,
   Carousel,
 } from 'react-bootstrap';
-import main from '../../assets/images/main_header.jpg';
-
+import slide1 from '../../assets/images/slice1.jpg';
+import slide2 from '../../assets/images/slice2.jpg';
+import slide3 from '../../assets/images/slice3.jpg';
 
 const Home = () => {
-  const categories = useSelector(
-    (state) => state.productsInfoReducer.categoryList
-  );
-  const mainCategories = categories.filter((c) => c.assets.length !== 0);
+  const products = useSelector((state) => state.productsInfoReducer.products);
   return (
     <Container fluid className='p-0'>
-              <Image src={main} fluid />
+      <Carousel as={Link} to='/products' fade>
+        <Carousel.Item interval={1500}>
+          <img className='d-block w-100' src={slide1} alt='First slide' />
+        </Carousel.Item>
+        <Carousel.Item interval={1500}>
+          <img className='d-block w-100' src={slide2} alt='Second slide' />
+        </Carousel.Item>
+        <Carousel.Item interval={1500}>
+          <img className='d-block w-100' src={slide3} alt='Third slide' />
+        </Carousel.Item>
+      </Carousel>
       <Row className='p-3'>
         <Col className='text-center d-flex flex-column'>
           <h2 className='display-5'>Welcome to Synthmaster!</h2>
@@ -32,31 +40,6 @@ const Home = () => {
             making music.
           </small>
         </Col>
-      </Row>
-      <Row className='mx-0'>
-        {mainCategories.map((category) => {
-          const [{ url }] = category.assets;
-          return (
-            <Col lg={3} sm={6} key={category.id}>
-              <Card
-                as={Link}
-                to='/products'
-                className='bg-dark text-white text-center mt-1 category-card'
-              >
-                <Card.Img
-                  src={url}
-                  alt='Card image'
-                  className='category-card-image'
-                />
-                <Card.ImgOverlay>
-                  <Card.Title className='category-card-title'>
-                    {category.name}
-                  </Card.Title>
-                </Card.ImgOverlay>
-              </Card>
-            </Col>
-          );
-        })}
       </Row>
       <Row className='m-2'>
         <Col
@@ -90,6 +73,18 @@ const Home = () => {
             for research into the properties of sound and attracted composers
             seeking to extend the range of available sound or to achieve total
             control of their music.
+          </small>
+        </Col>
+      </Row>
+      <Row className='p-3'>
+        <Col className='text-center d-flex flex-column'>
+          <h2 className='display-5'>Our synth store</h2>
+          <small>
+            Synthmaster is your go-to online music store with more than 48,000
+            bits of gear and accessories in stock. More than 1,000 brands and a
+            26,000m2 warehouse packed with musical instruments, DJ and studio
+            gear, headphones, speakers and lighting. Ordered before 10 PM?
+            Receive delivery in 2 - 4 business days.
           </small>
         </Col>
       </Row>

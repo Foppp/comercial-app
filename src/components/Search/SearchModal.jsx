@@ -4,13 +4,18 @@ import { setSearchQuery } from '../../redux/searchReducer/search';
 import { setModalClose } from '../../redux/modalReducer/modal';
 import { Link, useLocation } from 'react-router-dom';
 
-const searchProducts = (text, data) => data
-  .filter(({ name }) => text.length > 2 && name.toLowerCase().includes(text.toLowerCase()));
+const searchProducts = (text, data) =>
+  data.filter(
+    ({ name }) =>
+      text.length > 2 && name.toLowerCase().includes(text.toLowerCase())
+  );
 
 const SearchModal = () => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const searchQuery = useSelector((state) => state.searchInfoReducer.searchQuery);
+  const searchQuery = useSelector(
+    (state) => state.searchInfoReducer.searchQuery
+  );
   const products = useSelector((state) => state.productsInfoReducer.products);
   const searchResult = searchProducts(searchQuery, products);
   const location = useLocation();
@@ -34,7 +39,7 @@ const SearchModal = () => {
         />
       </div>
       <div className='card-body text-center'>
-        {searchResult.length === 0 ? (
+        {searchQuery && searchResult.length === 0 ? (
           <p>No results...</p>
         ) : (
           searchResult.map((product) => (

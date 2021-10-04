@@ -9,7 +9,7 @@ import {
 
 const PagePagination = () => {
   const dispatch = useDispatch();
-  const updatedProducts = useSelector((state) => state.productsInfoReducer.filteredProducts);
+  const updatedProducts = useSelector((state) => state.productsInfoReducer.updatedProducts);
   const totalProducts = updatedProducts.length;
   const perPage = useSelector((state) => state.productsInfoReducer.pagination.perPage);
   const currentPage = useSelector((state) => state.productsInfoReducer.pagination.currentPage);
