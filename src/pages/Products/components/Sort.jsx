@@ -18,7 +18,7 @@ const Sort = () => {
         <InputGroup className='price mb-2'>
           <FormControl
             aria-label='First name'
-            className='shadow-sm'
+            className='shadow-sm price'
             placeholder='0$'
             onChange={(e) => dispatch(setMinPrice(Number(e.target.value)))}
           />

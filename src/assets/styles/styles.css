@@ -74,7 +74,7 @@ header {
 }
 
 .price {
-  border-radius: 5px;
+  border-radius: none;
   height: 38px;
 }
 
@@ -85,7 +85,7 @@ header {
 .form-control {
   padding: 0 18px 3px;
   border: 1px solid #dbe2e8;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: #fff;
   color: #2c2c2c;
   -webkit-appearance: none;
@@ -123,12 +123,12 @@ header {
   border-color: black;
 }
 
-.accordion-button:not(.collapsed) {
+/* .accordion-button:not(.collapsed) {
   color: black;
   background-color: white;
-}
+} */
 
-.price-range-form {
+/* .price-range-form {
   padding: 0 18px 3px;
   border: 1px solid #dbe2e8;
   border-radius: 20px;
@@ -137,4 +137,4 @@ header {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
+} */

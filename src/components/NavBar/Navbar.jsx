@@ -56,7 +56,7 @@ const Navigation = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button
+            <Nav.Link eventKey={4} as={Button}
               variant='outline'
               onClick={() => dispatch(setModalOpen('search'))}
             >
@@ -70,8 +70,8 @@ const Navigation = () => {
               >
                 <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
               </svg>
-            </Button>
-            <Button
+            </Nav.Link>
+            <Nav.Link eventKey={5} as={Button}
               variant='outline'
               onClick={() => dispatch(setModalOpen('cart'))}
             >
@@ -89,7 +89,7 @@ const Navigation = () => {
               <span className='badge bg-warning text-dark ms-1 rounded-pill'>
                 {totalItems ?? 0}
               </span>
-            </Button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Filters from './components/Filters';
 import ProductsList from './components/ProductsList';
 import Sort from './components/Sort';
 import PagePagination from './components/PagePagination';
