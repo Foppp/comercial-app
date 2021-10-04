@@ -1,101 +1,78 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import cn from 'classnames';
+import { Container, Navbar, Nav, Image, Button } from 'react-bootstrap';
 import logo from '../../assets/images/synthmaster_logo_black2.png';
 import logo2 from '../../assets/images/synthmaster_logo_black.png';
-import { Collapse } from 'bootstrap';
-import { setActivePath } from '../../redux/navBarReducer/navbar';
 import { setModalOpen } from '../../redux/modalReducer/modal';
 
-const Navbar = () => {
+const Navigation = () => {
   const dispatch = useDispatch();
   const navBarRef = useRef(null);
   const location = useLocation();
 
-  const navbarMenuItems = useSelector((state) => state.navbarInfoReducer.menuItems);
+  const navbarMenuItems = useSelector(
+    (state) => state.navbarInfoReducer.menuItems
+  );
   const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
-  const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
-
-  useEffect(() => {
-    dispatch(setActivePath(location.pathname));
-  }, [location.pathname, dispatch]);
-
-  useEffect(() => {
-    const navButton = new Collapse(navBarRef.current, { toggle: false });
-    navButton.hide();
-  }, [navBarRef, activePath, location]);
+  const totalItems = useSelector(
+    (state) => state.cartInfoReducer.cart.total_items
+  );
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top'>
-      <div className='container px-2 px-lg-6'>
-        <Link to='/' className='navbar-brand'>
-          <img
+    <Navbar
+      collapseOnSelect
+      expand='lg'
+      bg='light'
+      variant='light shadow-sm sticky-top text-center'
+    >
+      <Container>
+        <Navbar.Brand as={Link} to='/'>
+          <Image
             src={logo}
             alt='shop-logo'
             width='30'
             height='30'
             className='d-inline-block align-text-top'
           />
-          <img
+          <Image
             src={logo2}
             alt='shop-name'
             height='35'
             className='d-inline-block align-text-top'
           />
-        </Link>
-        <button
-          className='navbar-toggler'
-          type='button'
-          data-bs-toggle='collapse navbar-collapse'
-          data-bs-target='#navbarSupportedContent'
-          aria-controls='navbarSupportedContent'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-          onClick={() => new Collapse(navBarRef.current)}
-        >
-          <span className='navbar-toggler-icon' />
-        </button>
-        <div
-          ref={navBarRef}
-          className='collapse navbar-collapse text-center'
-          id='navbarSupportedContent'
-        >
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4'>
-            {navbarMenuItems.map(({ id, title, path }) => {
-              const navMenuClass = cn('nav-link', {
-                active: path === activePath,
-              });
-              return (
-                <li key={id} className='nav-item'>
-                  <Link to={path} className={navMenuClass} aria-current='page'>
-                    <span>{title}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          <div className='d-sm-flex justify-content-center'>
-            <button
-              className='btn search'
-              type='button'
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='me-auto'>
+            <Nav.Link eventKey={1} as={Link} to='/'>
+              Home
+            </Nav.Link>
+            <Nav.Link eventKey={2} as={Link} to='/products'>
+              Products
+            </Nav.Link>
+            <Nav.Link eventKey={3} as={Link} to='/contact'>
+              Contact
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Button
+              variant='outline'
               onClick={() => dispatch(setModalOpen('search'))}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                width='25'
-                height='25'
+                width='20'
+                height='20'
                 fill='currentColor'
                 className='bi bi-search'
                 viewBox='0 0 16 16'
               >
                 <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
               </svg>
-            </button>
-            <div className='ms-5 mt-3'></div>
-            <button
-              type='button'
-              className='btn cart btn-outline-dark rounded-pill'
+            </Button>
+            <Button
+              variant='outline'
               onClick={() => dispatch(setModalOpen('cart'))}
             >
               <svg
@@ -112,12 +89,12 @@ const Navbar = () => {
               <span className='badge bg-warning text-dark ms-1 rounded-pill'>
                 {totalItems ?? 0}
               </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
+            </Button>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default Navigation;
