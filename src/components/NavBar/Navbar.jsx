@@ -11,14 +11,11 @@ import { setModalOpen } from '../../redux/modalReducer/modal';
 const Navbar = () => {
   const dispatch = useDispatch();
   const navBarRef = useRef(null);
-  const navbarMenuItems = useSelector(
-    (state) => state.navbarInfoReducer.menuItems
-  );
-  const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
-  const totalItems = useSelector(
-    (state) => state.cartInfoReducer.cart.total_items
-  );
   const location = useLocation();
+
+  const navbarMenuItems = useSelector((state) => state.navbarInfoReducer.menuItems);
+  const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
+  const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
 
   useEffect(() => {
     dispatch(setActivePath(location.pathname));

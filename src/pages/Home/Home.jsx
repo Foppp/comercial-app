@@ -18,14 +18,14 @@ const Home = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   return (
     <Container fluid className='p-0'>
-      <Carousel as={Link} to='/products' fade>
-        <Carousel.Item interval={1500}>
+      <Carousel fade>
+        <Carousel.Item as={Link} to='/products' interval={1500}>
           <img className='d-block w-100' src={slide1} alt='First slide' />
         </Carousel.Item>
-        <Carousel.Item interval={1500}>
+        <Carousel.Item as={Link} to='/products' interval={1500}>
           <img className='d-block w-100' src={slide2} alt='Second slide' />
         </Carousel.Item>
-        <Carousel.Item interval={1500}>
+        <Carousel.Item as={Link} to='/products' interval={1500}>
           <img className='d-block w-100' src={slide3} alt='Third slide' />
         </Carousel.Item>
       </Carousel>

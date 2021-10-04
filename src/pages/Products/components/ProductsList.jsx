@@ -7,18 +7,10 @@ import LoadSpinner from '../../../components/Spinner/Spinner';
 
 const Products = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
-  const updatedProducts = useSelector(
-    (state) => state.productsInfoReducer.updatedProducts
-  );
-  const paginatedProducts = useSelector(
-    (state) => state.productsInfoReducer.paginatedProducts
-  );
-  const perPage = useSelector(
-    (state) => state.productsInfoReducer.pagination.perPage
-  );
-  const currentPage = useSelector(
-    (state) => state.productsInfoReducer.pagination.currentPage
-  );
+  const updatedProducts = useSelector((state) => state.productsInfoReducer.updatedProducts);
+  const paginatedProducts = useSelector((state) => state.productsInfoReducer.paginatedProducts);
+  const perPage = useSelector((state) => state.productsInfoReducer.pagination.perPage);
+  const currentPage = useSelector((state) => state.productsInfoReducer.pagination.currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {

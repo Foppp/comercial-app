@@ -73,6 +73,7 @@ export const productsInfo = createSlice({
     },
     setPerPage: (state, action) => {
       state.pagination.perPage = action.payload;
+      state.pagination.currentPage = 1;
       const { currentPage, perPage } = state.pagination;
       state.paginatedProducts = paginate(currentPage, perPage, state.updatedProducts);
     },
