@@ -26,7 +26,7 @@ const Navigation = () => {
       bg='light'
       variant='light shadow-sm sticky-top text-center'
     >
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={Link} to='/'>
           <Image
             src={logo}
