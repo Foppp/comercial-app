@@ -35,11 +35,10 @@ const Home = () => {
         </Col>
       </Row>
       <Row className='p-3'>
-        <Col className='text-center d-flex flex-column px-3'>
-          <h2 className='display-5'>Our synth store</h2>
-          <Image src={synthStore} alt='mainHeader' />
+        <Col sm className='text-center d-flex flex-column px-3'>
+          <Image fluid src={synthStore} alt='mainHeader' />
         </Col>
-        <Col className='text-center d-flex flex-column mt-5 px-3'>
+        <Col className='text-center d-flex align-items-center mt-3 px-3'>
           <p>
             Synthmaster is your go-to online music store with more than 48,000
             bits of gear and accessories in stock. More than 1,000 brands and a
@@ -50,7 +49,7 @@ const Home = () => {
         </Col>
       </Row>
       <Row>
-        <Col className='text-center d-flex flex-column'>
+        <Col className='text-center d-flex flex-column mt-3'>
           <h4>Recommended Products</h4>
           <RecomendedProducts />
         </Col>
