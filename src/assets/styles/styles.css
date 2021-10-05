@@ -17,8 +17,8 @@ header {
   transform: translateY(-250%);
 }
 
-.category-card-image {
-  filter: opacity(40%)
+.recomended-card-image {
+  filter: contrast(60%) brightness(70%);
 }
 
 .category-card {

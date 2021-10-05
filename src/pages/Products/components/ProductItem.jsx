@@ -26,7 +26,7 @@ const ProductItem = ({ product }) => {
             to={`products/${product.permalink}`}
             className='product-info text-decoration-none'
           >
-            <Card.Title className='text-dark'>{product.name}</Card.Title>
+            <Card.Title className='text-dark text-wrap'>{product.name}</Card.Title>
             <Card.Text className='text-secondary'>
               {product.price.formatted_with_symbol}
             </Card.Text>

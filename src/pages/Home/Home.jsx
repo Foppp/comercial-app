@@ -10,6 +10,8 @@ import {
   Image,
   Carousel,
 } from 'react-bootstrap';
+import RecomendedProducts from '../Products/components/RecomendedProducts';
+import mainHeader from '../../assets/images/main_header.jpg'
 import slide1 from '../../assets/images/slice1.jpg';
 import slide2 from '../../assets/images/slice2.jpg';
 import slide3 from '../../assets/images/slice3.jpg';
@@ -18,17 +20,18 @@ const Home = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   return (
     <Container fluid className='p-0'>
-      <Carousel fade>
+      <Image fluid src={mainHeader} alt="mainHeader" />
+      {/* <Carousel fade>
         <Carousel.Item as={Link} to='/products' interval={1500}>
-          <img className='d-block w-100' src={slide1} alt='First slide' />
+          <Image className='d-block w-100' src={slide1} alt='First slide' />
         </Carousel.Item>
         <Carousel.Item as={Link} to='/products' interval={1500}>
-          <img className='d-block w-100' src={slide2} alt='Second slide' />
+          <Image className='d-block w-100' src={slide2} alt='Second slide' />
         </Carousel.Item>
         <Carousel.Item as={Link} to='/products' interval={1500}>
-          <img className='d-block w-100' src={slide3} alt='Third slide' />
+          <Image className='d-block w-100' src={slide3} alt='Third slide' />
         </Carousel.Item>
-      </Carousel>
+      </Carousel> */}
       <Row className='p-3'>
         <Col className='text-center d-flex flex-column'>
           <h2 className='display-5'>Welcome to Synthmaster!</h2>
@@ -41,10 +44,15 @@ const Home = () => {
           </small>
         </Col>
       </Row>
-      <Row className='m-2'>
+      <Row>
+        <Col className='text-center d-flex flex-column'>
+        <h4>Recommended Products</h4>
+        <RecomendedProducts /></Col>
+      </Row>
+      <Row className='m-1'>
         <Col
           sm
-          className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
+          className='text-center p-1 d-flex flex-column border mx-sm-2 my-2 rounded shadow-sm'
         >
           <h3 className='mt-2'>Music synthesizer</h3>
           <small>
@@ -61,7 +69,7 @@ const Home = () => {
         </Col>
         <Col
           sm
-          className='text-center d-flex flex-column border mx-sm-2 my-2 rounded'
+          className='text-center p-1 d-flex flex-column border mx-sm-2 my-2 rounded shadow-sm'
         >
           <h3 className='mt-2'>Electronic sound</h3>
           <small>
