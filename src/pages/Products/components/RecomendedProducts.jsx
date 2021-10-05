@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -28,27 +28,31 @@ const RecomendedProducts = () => {
   return (
     <Col sm>
       {products.length === 0 ? (
-        <Container className='product-container text-center py-5'>
+        <Container className='product-container text-center'>
           <LoadSpinner />
         </Container>
       ) : (
         <Carousel variant='dark' controls={false}>
           {chunked.map((p) => (
-            <Carousel.Item key={_.uniqueId()} interval={2000} className='mb-5 px-4'>
-              <Row md={4} sm={2} xs={1} >
+            <Carousel.Item
+              key={_.uniqueId()}
+              interval={2000}
+              className='mb-5 px-4'
+            >
+              <Row lg={4} md={4} sm={2} xs={1}>
                 {p.map((product) => (
                   <Card
                     as={Link}
                     to={`products/${product.permalink}`}
                     key={product.id}
-                    className='text-white py-2'
+                    className='text-white py-2 recomended-card mx-0'
                   >
                     <Card.Img
                       src={product.media.source}
                       alt='Card image'
                       className='recomended-card-image'
                     />
-                    <Card.ImgOverlay className="d-flex flex-column">
+                    <Card.ImgOverlay className='d-flex flex-column'>
                       <Card.Title className='float-start'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
@@ -62,15 +66,12 @@ const RecomendedProducts = () => {
                           <path d='M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z' />
                         </svg>
                       </Card.Title>
-                      <Card.Text className="mt-auto">
-                        {product.name}
-                      </Card.Text>
-                      <Card.Text className="mt-auto">
+                      <Card.Text className='mt-auto'>{product.name}</Card.Text>
+                      <Card.Text className='mt-auto'>
                         {product.price.formatted_with_symbol}
                       </Card.Text>
                     </Card.ImgOverlay>
                   </Card>
-                  // <ProductItem key={product.id} product={product} />
                 ))}
               </Row>
             </Carousel.Item>

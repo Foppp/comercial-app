@@ -21,12 +21,30 @@ header {
   filter: contrast(60%) brightness(70%);
 }
 
+.recomended-card-image:hover {
+  filter: brightness(100%);
+}
+
+.recomended-card {
+  filter: contrast(100%)
+}
+
+.recomended-card:hover {
+  filter:drop-shadow(8px 8px 10px gray) brightness(100%);
+}
+
 .category-card {
   filter: none;
 }
 
-.category-card:hover {
-  filter: brightness(130%) drop-shadow(2px 2px 10px gray);
+.recomended-card-image:hover {
+  filter: drop-shadow(2px 2px 10px gray);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 @media (max-width: 500px) {

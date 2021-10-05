@@ -11,7 +11,8 @@ import {
   Carousel,
 } from 'react-bootstrap';
 import RecomendedProducts from '../Products/components/RecomendedProducts';
-import mainHeader from '../../assets/images/main_header.jpg'
+import mainHeader from '../../assets/images/main_header.jpg';
+import synthStore from '../../assets/images/synthStore.jpg';
 import slide1 from '../../assets/images/slice1.jpg';
 import slide2 from '../../assets/images/slice2.jpg';
 import slide3 from '../../assets/images/slice3.jpg';
@@ -20,18 +21,7 @@ const Home = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   return (
     <Container fluid className='p-0'>
-      <Image fluid src={mainHeader} alt="mainHeader" />
-      {/* <Carousel fade>
-        <Carousel.Item as={Link} to='/products' interval={1500}>
-          <Image className='d-block w-100' src={slide1} alt='First slide' />
-        </Carousel.Item>
-        <Carousel.Item as={Link} to='/products' interval={1500}>
-          <Image className='d-block w-100' src={slide2} alt='Second slide' />
-        </Carousel.Item>
-        <Carousel.Item as={Link} to='/products' interval={1500}>
-          <Image className='d-block w-100' src={slide3} alt='Third slide' />
-        </Carousel.Item>
-      </Carousel> */}
+      <Image fluid src={mainHeader} alt='mainHeader' />
       <Row className='p-3'>
         <Col className='text-center d-flex flex-column'>
           <h2 className='display-5'>Welcome to Synthmaster!</h2>
@@ -44,10 +34,26 @@ const Home = () => {
           </small>
         </Col>
       </Row>
+      <Row className='p-3'>
+        <Col className='text-center d-flex flex-column px-3'>
+          <h2 className='display-5'>Our synth store</h2>
+          <Image src={synthStore} alt='mainHeader' />
+        </Col>
+        <Col className='text-center d-flex flex-column mt-5 px-3'>
+          <p>
+            Synthmaster is your go-to online music store with more than 48,000
+            bits of gear and accessories in stock. More than 1,000 brands and a
+            26,000m2 warehouse packed with musical instruments, DJ and studio
+            gear, headphones, speakers and lighting. Ordered before 10 PM?
+            Receive delivery in 2 - 4 business days.
+          </p>
+        </Col>
+      </Row>
       <Row>
         <Col className='text-center d-flex flex-column'>
-        <h4>Recommended Products</h4>
-        <RecomendedProducts /></Col>
+          <h4>Recommended Products</h4>
+          <RecomendedProducts />
+        </Col>
       </Row>
       <Row className='m-1'>
         <Col
@@ -81,18 +87,6 @@ const Home = () => {
             for research into the properties of sound and attracted composers
             seeking to extend the range of available sound or to achieve total
             control of their music.
-          </small>
-        </Col>
-      </Row>
-      <Row className='p-3'>
-        <Col className='text-center d-flex flex-column'>
-          <h2 className='display-5'>Our synth store</h2>
-          <small>
-            Synthmaster is your go-to online music store with more than 48,000
-            bits of gear and accessories in stock. More than 1,000 brands and a
-            26,000m2 warehouse packed with musical instruments, DJ and studio
-            gear, headphones, speakers and lighting. Ordered before 10 PM?
-            Receive delivery in 2 - 4 business days.
           </small>
         </Col>
       </Row>
