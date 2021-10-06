@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { generateToken } from '../../redux/checkoutReducer/asyncThunk.js';
 import Spinner from '../../components/Spinner/Spinner';
-import AdressForm from "./components/AdressFormPayment";
-import Review from "./components/Review";
-import Payment from "./components/Payment";
-import Confirmation from "./components/Confirmation";
+import AdressForm from './components/AdressFormPayment';
+import Review from './components/Review';
+import Payment from './components/Payment';
+import Confirmation from './components/Confirmation';
 import Stepper from './components/Stepper';
 
 const steps = {
@@ -26,7 +26,7 @@ const Checkout = () => {
   );
 
   const Form = steps[currentStepId];
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentStepId]);
@@ -43,8 +43,8 @@ const Checkout = () => {
         {!checkoutToken ? (
           <Spinner />
         ) : (
-            <div className='card checkout-card shadow-sm'>
-              <Stepper />
+          <div className='card checkout-card shadow-sm'>
+            <Stepper />
             <div className='container'>
               <Form />
             </div>

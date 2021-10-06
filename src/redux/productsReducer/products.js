@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchProducts } from "./asyncThunk";
+import { addToCart } from "../cartReducer/asyncThunk";
 import filterProductList from '../../utils/filters';
 import sortProducts from '../../utils/sort';
 import paginate from '../../utils/pagination';
@@ -8,6 +9,7 @@ export const productsInfo = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    currentProductId: null,
     updatedProducts: [],
     paginatedProducts: [],
     filter: {
@@ -31,6 +33,9 @@ export const productsInfo = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
+    },
+    setCurrentProductId: (state, action) => {
+      state.currentProductId = action.payload;
     },
     setFilteredProducts: (state, action) => {
       state.filteredProducts = action.payload;
@@ -106,11 +111,18 @@ export const productsInfo = createSlice({
       state.status = 'rejected';
       state.productsErrorMessage = action.payload;
     },
+    [addToCart.fulfilled]: (state, action) => {
+      state.currentProductId = null;
+    },
+    [addToCart.rejected]: (state, action) => {
+      state.currentProductId = null;
+    },
   }
 });
 
 export const {
   setProducts,
+  setCurrentProductId,
   setFilteredProducts,
   setMinPrice,
   setMaxPrice,

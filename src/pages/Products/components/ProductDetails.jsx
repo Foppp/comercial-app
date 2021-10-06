@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Col, Row, Button, Card } from 'react-bootstrap';
 import { addToCart } from '../../../redux/cartReducer/asyncThunk';
 import LoadSpinner from '../../../components/Spinner/Spinner';
+import AddToCartButton from './AddToCartButton';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -45,23 +46,15 @@ const ProductDetails = () => {
               <h4>{product.price.formatted_with_symbol}</h4>
             </Row>
             <Row>
-              <Col className='d-flex justify-content-around align-items-center p-3'>
+              <Col className='d-flex justify-content-around align-items-center'>
                 <Button
-                  variant='outline-dark'
-                  className='ms-5'
+                  variant='light'
+                  className='rounded-pill mt-2 mx-2 text-wrap'
                   onClick={() => history.goBack()}
                 >
                   Back
                 </Button>
-                <Button
-                  variant='outline-dark'
-                  className='mx-5'
-                  onClick={() =>
-                    dispatch(addToCart({ productId: product.id, qty: 1 }))
-                  }
-                >
-                  Add to Cart
-                </Button>
+                <AddToCartButton product={product} />
               </Col>
             </Row>
           </Col>

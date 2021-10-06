@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Card, Button } from 'react-bootstrap';
 import { addToCart } from '../../../redux/cartReducer/asyncThunk';
+import { setCurrentProductId } from '../../../redux/productsReducer/products';
+import AddToCartButton from './AddToCartButton';
 
 const ProductItem = ({ product }) => {
-  const dispatch = useDispatch();
 
   return (
     <Col className='mb-3'>
@@ -26,21 +27,15 @@ const ProductItem = ({ product }) => {
             to={`products/${product.permalink}`}
             className='product-info text-decoration-none'
           >
-            <Card.Title className='text-dark text-wrap'>{product.name}</Card.Title>
+            <Card.Title className='text-dark text-wrap'>
+              {product.name}
+            </Card.Title>
             <Card.Text className='text-secondary'>
               {product.price.formatted_with_symbol}
             </Card.Text>
           </Link>
           <footer>
-            <Button
-              variant='light'
-              className='rounded-pill mt-2'
-              onClick={() =>
-                dispatch(addToCart({ productId: product.id, qty: 1 }))
-              }
-            >
-              Add to cart
-            </Button>
+            <AddToCartButton product={product} />
           </footer>
         </Card.Body>
       </Card>
