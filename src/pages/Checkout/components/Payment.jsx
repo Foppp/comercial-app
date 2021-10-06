@@ -26,6 +26,7 @@ const Payment = () => {
         card: cardElement,
       }
     };
+    cardElement.update({ disabled: true })
     dispatch(createPayment(options))
   };
 
