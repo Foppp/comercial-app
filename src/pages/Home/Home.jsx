@@ -10,7 +10,7 @@ import {
   Image,
   Carousel,
 } from 'react-bootstrap';
-import RecomendedProducts from '../Products/components/RecomendedProducts';
+import RecomendedProducts from './components/RecomendedProducts';
 import mainHeader from '../../assets/images/main_header.jpg';
 import synthStore from '../../assets/images/synthStore.jpg';
 import slide1 from '../../assets/images/slice1.jpg';

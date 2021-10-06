@@ -10,18 +10,15 @@ import {
   CardGroup,
   Card,
 } from 'react-bootstrap';
-import ProductItem from './ProductItem';
+import ProductItem from '../../Products/components/ProductItem';
 import { setTotalPages } from '../../../redux/productsReducer/products';
 import LoadSpinner from '../../../components/Spinner/Spinner';
 
 const RecomendedProducts = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
-  const carouselProductsQty = 4;
-  const carouselPages = 3;
-  const chunked = _.chunk(products, carouselProductsQty).slice(
-    0,
-    carouselPages
-  );
+  const qty = 4;
+  const pages = 3;
+  const chunked = _.chunk(products, qty).slice(0, pages);
 
   const dispatch = useDispatch();
 
@@ -45,7 +42,7 @@ const RecomendedProducts = () => {
                     as={Link}
                     to={`products/${product.permalink}`}
                     key={product.id}
-                    className='text-white py-2 recomended-card mx-0'
+                    className='text-white py-2 recomended-card'
                   >
                     <Card.Img
                       src={product.media.source}

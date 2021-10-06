@@ -22,15 +22,17 @@ header {
 }
 
 .recomended-card-image:hover {
-  filter: brightness(100%);
+  filter: contrast(70%) brightness(80%);
 }
 
 .recomended-card {
-  filter: contrast(100%)
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 77);
 }
 
 .recomended-card:hover {
-  filter:drop-shadow(8px 8px 10px gray) brightness(100%);
+  filter: brightness(100%);
+  filter: drop-shadow(5px 5px 10px gray);
+  text-shadow: 3px 3px 3px black, 0 0 25px rgb(0, 0, 0), 0 0 5px darkblue;
 }
 
 .category-card {
