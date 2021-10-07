@@ -1,0 +1,128 @@
+body {
+  font-family: system-ui;
+  font-variant: small-caps;
+}
+
+.nav-link.active {
+  font-weight: 500;
+}
+
+header {
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+}
+
+.explore {
+  position: relative;
+  transform: translateY(-250%);
+}
+
+.recomended-card-image {
+  filter: contrast(60%) brightness(70%);
+}
+
+.recomended-card-image:hover {
+  filter: contrast(70%) brightness(80%);
+}
+
+.recomended-card {
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 77);
+}
+
+.recomended-card:hover {
+  filter: brightness(100%);
+  filter: drop-shadow(5px 5px 10px gray);
+  text-shadow: 3px 3px 3px black, 0 0 25px rgb(0, 0, 0), 0 0 5px darkblue;
+}
+
+.category-card {
+  filter: none;
+}
+
+.recomended-card-image:hover {
+  filter: drop-shadow(2px 2px 10px gray);
+}
+
+/* hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+} */
+
+@media (max-width: 500px) {
+  .explore {
+    transform: translateY(-120%);
+  }
+}
+.shopping-cart-footer {
+  border-bottom: 1px solid #e1e7ec
+}
+
+.cart-container {
+  min-height: 1000px;
+}
+
+
+.checkout-container {
+  min-height: 1000px;
+}
+
+@media (min-width: 900px) {
+  .checkout-card {
+    width: 700px;
+  }
+}
+
+.form-control:not(textarea) {
+  height: 40px;
+}
+
+.price {
+  border-radius: none;
+  height: 38px;
+}
+
+.contact-container {
+  min-height: 1000px;
+}
+
+.form-control {
+  padding: 0 18px 3px;
+  border: 1px solid #dbe2e8;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #2c2c2c;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.product-card {
+  box-shadow: 1px 1px 3px rgb(199, 199, 199);
+}
+
+.product-card:hover {
+  transform: scale(102%);
+  box-shadow: 0px 1px 10px rgb(212, 212, 212);
+}
+
+.products-container, .product-container {
+  min-height: 1000px;
+}
+
+.accordion>.card>.btn {
+  text-decoration: none;
+}
+
+.pagination {
+  margin-top: 50px;
+}
+
+.page-item .page-link {
+  color: black;
+}
+
+.page-item.active .page-link {
+  background-color: rgb(92, 92, 92);
+  border-color: black;
+}
