@@ -2,17 +2,28 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { refreshCart } from '../../../redux/cartReducer/asyncThunk';
-import { setCheckoutToken, setOrder } from '../../../redux/checkoutReducer/checkout';
+import {
+  setCheckoutToken,
+  setOrder,
+  setShippingCountry,
+  setShippingSubdivision,
+  setShippingOption,
+} from '../../../redux/checkoutReducer/checkout';
 
 const Confirmation = () => {
   const dispatch = useDispatch();
-  const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
+  const shippingData = useSelector(
+    (state) => state.checkoutInfoReducer.shipping.shippingData
+  );
 
   useEffect(() => {
     return () => {
       dispatch(setCheckoutToken(null));
       dispatch(setOrder(null));
       dispatch(refreshCart());
+      dispatch(setShippingCountry(''));
+      dispatch(setShippingSubdivision(''));
+      dispatch(setShippingOption(''));
     };
   }, [dispatch]);
 
