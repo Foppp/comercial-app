@@ -1,3 +1,9 @@
+# E-Commerce App 
+## SynthMaster Shop
+
+### [Demo Here](https://synthmaster.netlify.app/)
+
+
 ### `npm start`
 
 Runs the app in the development mode.\
