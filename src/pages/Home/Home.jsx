@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button, Row, Col, Container, Card, Image, Carousel } from 'react-bootstrap';
 import RecomendedProducts from './components/RecomendedProducts';
-import mainHeader from '../../assets/images/main_header.jpg';
-import synthStore from '../../assets/images/synthStore.jpg';
+import mainHeader from '../../../assets/images/main_header.jpg';
+import synthStore from '../../../assets/images/synthStore.jpg';
 
 const Home = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);

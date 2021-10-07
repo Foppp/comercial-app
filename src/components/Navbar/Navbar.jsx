@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Navbar, Nav, Image, Button } from 'react-bootstrap';
-import logo from '../../assets/images/synthmaster_logo_black2.png';
-import logo2 from '../../assets/images/synthmaster_logo_black.png';
+import logo from '../../../assets/images/synthmaster_logo_black2.png';
+import logo2 from '../../../assets/images/synthmaster_logo_black.png';
 import { setModalOpen } from '../../redux/modalReducer/modal';
 
 const Navigation = () => {
