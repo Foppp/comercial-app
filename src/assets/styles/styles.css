@@ -55,9 +55,8 @@ hr {
   }
 }
 .shopping-cart-footer {
-  display: table;
-  width: 100%;
-  padding: 10px 0;
+  /* display: table;
+  width: 100%; */
   border-bottom: 1px solid #e1e7ec
 }
 
@@ -65,7 +64,7 @@ hr {
   min-height: 1000px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .shopping-cart-footer>.column {
     display: block;
     width: 100%
@@ -77,7 +76,7 @@ hr {
     width: 100%;
     margin: 12px 0 !important
   }
-}
+} */
 
 .checkout-container {
   min-height: 1000px;

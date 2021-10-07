@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Col, Row , Button } from 'react-bootstrap';
 import { emptyCart } from '../../redux/cartReducer/asyncThunk';
 import CartItem from './components/CartItem';
 import Spinner from '../../components/Spinner/Spinner';
@@ -33,46 +34,50 @@ const Cart = () => {
 
   const renderCart = () => (
     <>
-      <div className='container'>
+      <Container>
+        <Col className='text-center'>
+          <h1>Your cart</h1>
+        </Col>
         {cart.line_items.map((lineItem) => (
           <CartItem key={lineItem.id} item={lineItem} />
         ))}
-        <div className='d-flex text-center row mt-3'>
-          <div className='col-md-6'>
+        <Row className='d-flex text-center mt-3'>
+          <Col md={6}>
             <h5 className=''>Items in cart: {cart.line_items.length}</h5>
-          </div>
-          <div className='col-md-6'>
+          </Col>
+          <Col md={6}>
             <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
-          </div>
-        </div>
-        <div className='shopping-cart-footer mt-3'>
-          <div className='column float-start'>
-            <Link
+          </Col>
+        </Row>
+        <Row className='mt-3 text-center'>
+          <Col md={8} sm={6} xs={12} className="mt-2">
+            <Button
+              as={Link}
               to='/products'
-              className='btn btn-outline-secondary rounded-pill'
+              variant='outline-secondary rounded-pill float-sm-start'
             >
               Back to Shopping
-            </Link>
-          </div>
-          <div className='column float-end'>
-            <button
-              className='btn btn-warning mx-3 rounded-pill'
+            </Button>
+          </Col>
+          <Col md={4} sm={6} xs={12} className="d-flex justify-content-around mt-2">
+            <Button
+              variant='warning rounded-pill'
               type='button'
               onClick={() => dispatch(emptyCart())}
             >
               Clear Cart
-            </button>
-            <Link to='/checkout' className='btn btn-info rounded-pill'>
+            </Button>
+            <Button sm as={Link} to='/checkout' variant='info rounded-pill'>
               Checkout
-            </Link>
-          </div>
-        </div>
-      </div>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 
   return (
-    <div className='cart-container mt-5'>
+    <div className='cart-container mt-3'>
       {!cart.line_items.length ? renderEmptyCart() : renderCart()}
     </div>
   );

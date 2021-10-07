@@ -66,7 +66,7 @@ const CartQuickView = () => {
           <h5 className=''>Total: {cart.subtotal.formatted_with_symbol}</h5>
         </div>
       </div>
-      <div className='shopping-cart-footer mt-3'>
+      <div className='mt-3'>
         <div className='column float-start'>
           <button
             className='btn btn-outline-secondary rounded-pill'
