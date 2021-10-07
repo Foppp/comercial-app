@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {
+  Container, Button, InputGroup, FormControl, CloseButton, Row, Col, Image,
+} from 'react-bootstrap';
 import { setSearchQuery } from '../../redux/searchReducer/search';
 import { setModalClose } from '../../redux/modalReducer/modal';
 import { Link, useLocation } from 'react-router-dom';
@@ -13,9 +16,7 @@ const searchProducts = (text, data) =>
 const SearchModal = () => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const searchQuery = useSelector(
-    (state) => state.searchInfoReducer.searchQuery
-  );
+  const searchQuery = useSelector((state) => state.searchInfoReducer.searchQuery);
   const products = useSelector((state) => state.productsInfoReducer.products);
   const searchResult = searchProducts(searchQuery, products);
   const location = useLocation();
@@ -27,35 +28,36 @@ const SearchModal = () => {
   }, []);
 
   return (
-    <div className='search-modal-content'>
-      <div className='input-group'>
-        <input
+    <Container className='search-modal-content'>
+      <CloseButton
+        className='float-end mb-2'
+        onClick={() => dispatch(setModalClose())}
+      />
+      <InputGroup className='mt-2'>
+        <FormControl
           ref={inputRef}
-          className='form-control border-end-0 border rounded-pill'
-          type='search'
           placeholder='Search for product...'
-          id='example-search-input'
           onChange={(e) => dispatch(setSearchQuery(e.target.value))}
         />
-      </div>
-      <div className='card-body text-center'>
+      </InputGroup>
+      <Container className='card-body text-center'>
         {searchQuery && searchResult.length === 0 ? (
           <p>No results...</p>
         ) : (
           searchResult.map((product) => (
-            <div
+            <Row
               key={product.id}
               className='row search-item text-center m-1 border rounded p-2'
             >
-              <div className='col-2'>
-                <img
+              <Col sm={2}>
+                <Image
                   src={product.media.source}
                   alt='Product'
                   width='30'
                   height='30'
                 />
-              </div>
-              <div className='col-10'>
+              </Col>
+              <Col sm={10}> 
                 <span className='product-title mt-2'>
                   <Link
                     to={`${from.pathname}products/${product.permalink}`}
@@ -65,18 +67,12 @@ const SearchModal = () => {
                     {product.name}
                   </Link>
                 </span>
-              </div>
-            </div>
+              </Col>
+            </Row>
           ))
         )}
-      </div>
-      <button
-        className='btn btn-outline-secondary rounded-pill'
-        onClick={() => dispatch(setModalClose())}
-      >
-        Back
-      </button>
-    </div>
+      </Container>
+    </Container>
   );
 };
 
