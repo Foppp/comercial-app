@@ -11,13 +11,9 @@ const Navigation = () => {
   const navBarRef = useRef(null);
   const location = useLocation();
 
-  const navbarMenuItems = useSelector(
-    (state) => state.navbarInfoReducer.menuItems
-  );
+  const navbarMenuItems = useSelector((state) => state.navbarInfoReducer.menuItems);
   const activePath = useSelector((state) => state.navbarInfoReducer.activePath);
-  const totalItems = useSelector(
-    (state) => state.cartInfoReducer.cart.total_items
-  );
+  const totalItems = useSelector((state) => state.cartInfoReducer.cart.total_items);
 
   return (
     <Navbar
@@ -26,7 +22,7 @@ const Navigation = () => {
       bg='light'
       variant='light shadow-sm sticky-top text-center'
     >
-      <Container fluid>
+      <Container>
         <Navbar.Brand as={Link} to='/'>
           <Image
             src={logo}
@@ -57,7 +53,7 @@ const Navigation = () => {
           </Nav>
           <Nav>
             <Nav.Link eventKey={4} as={Button}
-              variant='outline'
+              variant='outline px-3'
               onClick={() => dispatch(setModalOpen('search'))}
             >
               <svg

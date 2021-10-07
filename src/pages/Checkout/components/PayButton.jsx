@@ -6,19 +6,19 @@ const PayButton = ({ stripe }) => {
   const paymentStatus = useSelector((state) => state.paymentInfoReducer.status);
 
   return paymentStatus === 'pending' ? (
-    <button className="btn btn-info" type="button" disabled>
+    <button className='btn btn-info' type='button' disabled>
       <span
-        className="spinner-border spinner-border-sm"
-        role="status"
-        aria-hidden="true"
+        className='spinner-border spinner-border-sm'
+        role='status'
+        aria-hidden='true'
       ></span>
-      <span className="ms-1">Processing...</span>
+      <span className='ms-1'>Processing...</span>
     </button>
   ) : (
     <button
-      type="submit"
-      className="btn btn-info"
-      disabled={!stripe || paymentStatus === "pending"}
+      type='submit'
+      className='btn btn-info'
+      disabled={!stripe || paymentStatus === 'pending'}
     >
       Pay {checkoutToken.live.subtotal.formatted_with_symbol}
     </button>

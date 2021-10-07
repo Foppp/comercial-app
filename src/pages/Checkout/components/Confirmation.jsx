@@ -6,9 +6,7 @@ import { setCheckoutToken, setOrder } from '../../../redux/checkoutReducer/check
 
 const Confirmation = () => {
   const dispatch = useDispatch();
-  const shippingData = useSelector(
-    (state) => state.checkoutInfoReducer.shipping.shippingData
-  );
+  const shippingData = useSelector((state) => state.checkoutInfoReducer.shipping.shippingData);
 
   useEffect(() => {
     return () => {

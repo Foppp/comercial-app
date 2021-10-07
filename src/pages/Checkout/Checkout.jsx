@@ -18,12 +18,8 @@ const steps = {
 const Checkout = () => {
   const cart = useSelector((state) => state.cartInfoReducer.cart);
   const dispatch = useDispatch();
-  const checkoutToken = useSelector(
-    (state) => state.checkoutInfoReducer.checkoutToken
-  );
-  const currentStepId = useSelector(
-    (state) => state.checkoutInfoReducer.currentStepId
-  );
+  const checkoutToken = useSelector((state) => state.checkoutInfoReducer.checkoutToken);
+  const currentStepId = useSelector((state) => state.checkoutInfoReducer.currentStepId);
 
   const Form = steps[currentStepId];
 

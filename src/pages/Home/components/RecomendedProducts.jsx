@@ -2,14 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
-import {
-  Row,
-  Col,
-  Container,
-  Carousel,
-  CardGroup,
-  Card,
-} from 'react-bootstrap';
+import { Row, Col, Container, Carousel, CardGroup, Card } from 'react-bootstrap';
 import ProductItem from '../../Products/components/ProductItem';
 import { setTotalPages } from '../../../redux/productsReducer/products';
 import LoadSpinner from '../../../components/Spinner/Spinner';
@@ -25,7 +18,7 @@ const RecomendedProducts = () => {
   return (
     <Col sm>
       {products.length === 0 ? (
-        <Container className='product-container text-center'>
+        <Container className='text-center'>
           <LoadSpinner />
         </Container>
       ) : (

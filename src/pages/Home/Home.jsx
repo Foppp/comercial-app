@@ -1,26 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  Button,
-  Row,
-  Col,
-  Container,
-  Card,
-  Image,
-  Carousel,
-} from 'react-bootstrap';
+import { Button, Row, Col, Container, Card, Image, Carousel } from 'react-bootstrap';
 import RecomendedProducts from './components/RecomendedProducts';
 import mainHeader from '../../assets/images/main_header.jpg';
 import synthStore from '../../assets/images/synthStore.jpg';
-import slide1 from '../../assets/images/slice1.jpg';
-import slide2 from '../../assets/images/slice2.jpg';
-import slide3 from '../../assets/images/slice3.jpg';
 
 const Home = () => {
   const products = useSelector((state) => state.productsInfoReducer.products);
   return (
-    <Container fluid className='p-0'>
+    <Container className='p-0'>
       <Image fluid src={mainHeader} alt='mainHeader' />
       <Row className='p-3'>
         <Col className='text-center d-flex flex-column'>

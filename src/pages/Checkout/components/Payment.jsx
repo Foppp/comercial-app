@@ -20,14 +20,9 @@ const Payment = () => {
     event.preventDefault();
     if (!stripe || !elements) return;
     const cardElement = elements.getElement(CardElement);
-    const options = {
-      stripe, method: {
-        type: 'card',
-        card: cardElement,
-      }
-    };
-    cardElement.update({ disabled: true })
-    dispatch(createPayment(options))
+    const options = { stripe, method: { type: 'card', card: cardElement } };
+    cardElement.update({ disabled: true });
+    dispatch(createPayment(options));
   };
 
   useEffect(() => {
@@ -64,8 +59,8 @@ const Payment = () => {
 
   return (
     <div className='col text-center align-items-center mt-5'>
-      <div className='py-2 text-center' >
-        <h2 className="mb-5">Payment Details</h2>
+      <div className='py-2 text-center'>
+        <h2 className='mb-5'>Payment Details</h2>
       </div>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
