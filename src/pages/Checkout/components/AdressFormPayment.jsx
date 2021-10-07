@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import { Form, Row, Col, InputGroup, Button } from "react-bootstrap";
+import * as Yup from 'yup';
 import {
   nextStep,
   setShippingData,
@@ -23,28 +25,18 @@ const AdressForm = () => {
   const shippingSubdivision = useSelector((state) => state.checkoutInfoReducer.shipping.shippingSubdivision);
   const shippingOptions = useSelector((state) => state.checkoutInfoReducer.shipping.shippingOptions);
   const shippingOption = useSelector((state) => state.checkoutInfoReducer.shipping.shippingOption);
-
-  const submitShippingData = (data) => {
-    dispatch(setShippingData(data));
-    dispatch(nextStep());
-  };
-
-  useEffect(() => {
-    dispatch(fetchShippingCountries(checkoutToken.id));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (shippingCountry) dispatch(fetchSubdivisions(shippingCountry));
-  }, [shippingCountry]);
-
-  useEffect(() => {
-    if (shippingSubdivision)
-      dispatch(fetchShippingOptions({
-        checkoutTokenId: checkoutToken.id,
-        country: shippingCountry,
-        stateProvince: shippingSubdivision,
-      }));
-  }, [shippingSubdivision]);
+  
+  const schema = Yup.object().shape({
+    firstName: Yup.string().required('Please type your name'),
+    lastName: Yup.string().required('Please type your last name'),
+    email: Yup.string().email('email is not valid').required('Please type your email'),
+    address1: Yup.string().required('Please type your address'),
+    city: Yup.string().required('Please type your city'),
+    zip: Yup.number().required('Please type your zip'),
+    shippingCountry: Yup.string().required('Please select your country'),
+    shippingSubdivision: Yup.string().required('Please select your state'),
+    shippingOption: Yup.string().required('Please select shipping option'),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -54,199 +46,221 @@ const AdressForm = () => {
       address1: shippingData.address1,
       city: shippingData.city,
       zip: shippingData.zip,
+      shippingCountry,
+      shippingSubdivision,
+      shippingOption,
     },
+    validationSchema: schema,
     onSubmit: (data) => {
-      submitShippingData({ ...data, shippingCountry, shippingSubdivision, shippingOption });
-      setShippingCountry("");
-      setShippingSubdivision("");
-      setShippingOption("");
+      submitShippingData(data);
+      dispatch(setShippingCountry(data.shippingCountry));
+      dispatch(setShippingSubdivision(data.shippingSubdivision));
+      dispatch(setShippingOption(data.shippingOption));
     },
   });
+
+  const submitShippingData = (data) => {
+    dispatch(setShippingData(data));
+    dispatch(nextStep());
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchShippingCountries(checkoutToken.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (formik.values.shippingCountry) dispatch(fetchSubdivisions(formik.values.shippingCountry));
+  }, [formik.values.shippingCountry]);
+
+  useEffect(() => {
+    if (formik.values.shippingSubdivision)
+      dispatch(fetchShippingOptions({
+        checkoutTokenId: checkoutToken.id,
+        country: formik.values.shippingCountry,
+        stateProvince: formik.values.shippingSubdivision,
+      }));
+  }, [formik.values.shippingSubdivision]);
+
+  
   return (
     <main>
-      <div className="py-2 text-center">
+      <div className='py-2 text-center'>
         <h2>Shipping Address</h2>
       </div>
-
-      <div className="row g-3 border-bottom">
-        <div className="col-lg-12">
-          <form className="" onSubmit={formik.handleSubmit}>
-            <div className="row g-3">
-              <div className="form-floating col-sm-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="Name"
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.firstName}
-                  required
-                />
-                <label htmlFor="firstName">First name</label>
-                <div className="invalid-feedback">
-                  Valid first name is required.
-                </div>
-              </div>
-              <div className="form-floating col-sm-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="lastName"
-                  placeholder="Last Name"
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.lastName}
-                  required
-                />
-                <label htmlFor="lastName">Last name</label>
-                <div className="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
-              <div className="form-floating col-12">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="you@example.com"
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.email}
-                  required
-                />
-                <label htmlFor="email">Email</label>
-                <div className="invalid-feedback">
-                  Please enter a valid email address htmlFor shipping updates.
-                </div>
-              </div>
-              <div className="form-floating col-sm-5">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="address1"
-                  name="address1"
-                  placeholder="1234 Main St"
-                  required
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.address1}
-                />
-                <label htmlFor="address1">Address</label>
-                <div className="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
-              <div className="form-floating col-sm-5">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="city"
-                  name="city"
-                  placeholder="City"
-                  required
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.city}
-                />
-                <label htmlFor="city">City</label>
-                <div className="invalid-feedback">Please enter your city.</div>
-              </div>
-              <div className="form-floating col-md-2">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="zip"
-                  name="zip"
-                  placeholder="Zip"
-                  required
-                  onChange={formik.handleChange}
-                  defaultValue={formik.values.zip}
-                />
-                <label htmlFor="zip">Zip</label>
-                <div className="invalid-feedback">Zip code required.</div>
-              </div>
-              <div className="form-floating col-md-4">
-                <select
-                  className="form-select form-control"
-                  id="country"
-                  required
-                  defaultValue={shippingCountry}
-                  onChange={(e) => dispatch(setShippingCountry(e.target.value))}
-                >
-                  <option value="" disabled>Select...</option>
-                  {Object.entries(shippingCountries)
-                    .map(([code, name]) => ({ id: code, label: name }))
-                    .map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.label}
-                      </option>
-                    ))}
-                </select>
-                <label htmlFor="country">Country</label>
-                <div className="invalid-feedback">
-                  Please select a valid country.
-                </div>
-              </div>
-              <div className="form-floating col-md-4">
-                <select
-                  className="form-select form-control"
-                  id="state"
-                  selected
-                  required
-                  defaultValue={shippingSubdivision}
-                  onChange={(e) =>
-                    dispatch(setShippingSubdivision(e.target.value))
-                  }
-                >
-                  <option value="" disabled>Select...</option>
-                  {Object.entries(shippingSubdivisions)
-                    .map(([code, name]) => ({ id: code, label: name }))
-                    .map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.label}
-                      </option>
-                    ))}
-                </select>
-                <label htmlFor="state">State</label>
-                <div className="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div className="form-floating col-md-4">
-                <select
-                  className="form-select form-control"
-                  id="options"
-                  required
-                  defaultValue={shippingOption}
-                  onChange={(e) => dispatch(setShippingOption(e.target.value))}
-                >
-                  <option value="" disabled >Select...</option>
-                  {shippingOptions
-                    .map((sO) => ({
-                      id: sO.id,
-                      label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
-                    }))
-                    .map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.label}
-                      </option>
-                    ))}
-                </select>
-                <label htmlFor="options">Shipping options</label>
-                <div className="invalid-feedback">
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div className="d-grid gap-2 d-md-flex justify-content-md-between pb-3">
-                <Link to="/cart" className="btn btn-outline-secondary rounded-pill" type="button">
-                  Back to cart
-                </Link>
-                <button className="full-width btn btn-info rounded-pill" type="submit">
-                  Continue to payment
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+      <Col>
+        <Form noValidate onSubmit={formik.handleSubmit}>
+          <Row className='g-3'>
+            <Form.Group as={Col} sm='6' controlId='firstName'>
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                type='text'
+                name='firstName'
+                defaultValue={formik.values.firstName}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.firstName}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.firstName}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} sm='6' controlId='lastName'>
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                type='text'
+                name='lastName'
+                defaultValue={formik.values.lastName}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.lastName}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.lastName}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} sm='12' controlId='email'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='text'
+                name='email'
+                defaultValue={formik.values.email}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.email}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} sm='5' controlId='address1'>
+              <Form.Label>Adress</Form.Label>
+              <Form.Control
+                type='text'
+                name='address1'
+                defaultValue={formik.values.address1}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.address1}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.address1}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} sm='5' controlId='city'>
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                type='text'
+                name='city'
+                defaultValue={formik.values.city}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.city}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.city}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md='2' controlId='zip'>
+              <Form.Label>Zip</Form.Label>
+              <Form.Control
+                type='text'
+                name='zip'
+                defaultValue={formik.values.zip}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.zip}
+              />
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.zip}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md='4' controlId='shippingCountry'>
+              <Form.Label>Country</Form.Label>
+              <Form.Select
+                name='shippingCountry'
+                defaultValue={formik.values.shippingCountry}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.shippingCountry}
+              >
+                <option value='' disabled>
+                  Select...
+                </option>
+                {Object.entries(shippingCountries)
+                  .map(([code, name]) => ({ id: code, label: name }))
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+              </Form.Select>
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.shippingCountry}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md='4' controlId='shippingSubdivision'>
+              <Form.Label>State</Form.Label>
+              <Form.Select
+                name='shippingSubdivision'
+                defaultValue={formik.values.shippingSubdivision}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.shippingSubdivision}
+              >
+                <option value='' disabled>
+                  Select...
+                </option>
+                {Object.entries(shippingSubdivisions)
+                  .map(([code, name]) => ({ id: code, label: name }))
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+              </Form.Select>
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.shippingSubdivision}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md='4' controlId='shippingOption'>
+              <Form.Label>Shipping Option</Form.Label>
+              <Form.Select
+                name='shippingOption'
+                defaultValue={formik.values.shippingOption}
+                onChange={formik.handleChange}
+                isInvalid={!!formik.errors.shippingOption}
+              >
+                <option value='' disabled>
+                  Select...
+                </option>
+                {shippingOptions
+                  .map((sO) => ({
+                    id: sO.id,
+                    label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
+                  }))
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+              </Form.Select>
+              <Form.Control.Feedback type='invalid'>
+                {formik.errors.shippingOption}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
+          <Row>
+            <Col className='d-flex justify-content-between p-2'>
+              <Button
+                as={Link}
+                to='/cart'
+                variant='outline-secondary rounded-pill m-sm-2 mt-2'
+              >
+                Back to cart
+              </Button>
+              <Button variant='info rounded-pill m-sm-2 mt-2' type='submit'>
+                Continue
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Col>
     </main>
   );
 };
