@@ -1,9 +1,4 @@
-/node_modules
-/.pnp
-.pnp.js
-
-/coverage
-
+/node_modules/
 dist
 
 .DS_Store
@@ -12,10 +7,6 @@ dist
 .env.development.local
 .env.test.local
 .env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Local Netlify folder
 .netlify
