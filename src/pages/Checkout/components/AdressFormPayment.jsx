@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import { Form, Row, Col, InputGroup, Button } from "react-bootstrap";
+import { Form, Row, Col, InputGroup, Button, Container } from "react-bootstrap";
 import * as Yup from 'yup';
 import {
   nextStep,
@@ -27,12 +27,12 @@ const AdressForm = () => {
   const shippingOption = useSelector((state) => state.checkoutInfoReducer.shipping.shippingOption);
   
   const schema = Yup.object().shape({
-    firstName: Yup.string().required('Please type your name'),
-    lastName: Yup.string().required('Please type your last name'),
-    email: Yup.string().email('email is not valid').required('Please type your email'),
-    address1: Yup.string().required('Please type your address'),
-    city: Yup.string().required('Please type your city'),
-    zip: Yup.number().required('Please type your zip'),
+    firstName: Yup.string().required('Please enter your name'),
+    lastName: Yup.string().required('Please enter your last name'),
+    email: Yup.string().email('email is not valid').required('Please enter your email'),
+    address1: Yup.string().required('Please enter your address'),
+    city: Yup.string().required('Please enter your city'),
+    zip: Yup.number().required('Please enter your zip'),
     shippingCountry: Yup.string().required('Please select your country'),
     shippingSubdivision: Yup.string().required('Please select your state'),
     shippingOption: Yup.string().required('Please select shipping option'),
@@ -87,10 +87,10 @@ const AdressForm = () => {
 
   
   return (
-    <main>
-      <div className='py-2 text-center'>
+    <Container>
+      <Col className='py-2 text-center'>
         <h2>Shipping Address</h2>
-      </div>
+      </Col>
       <Col>
         <Form noValidate onSubmit={formik.handleSubmit}>
           <Row className='g-3'>
@@ -261,7 +261,7 @@ const AdressForm = () => {
           </Row>
         </Form>
       </Col>
-    </main>
+    </Container>
   );
 };
 
