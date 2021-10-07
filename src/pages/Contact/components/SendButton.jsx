@@ -1,32 +1,28 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Button, Spinner } from 'react-bootstrap';
 
 const SendButton = () => {
   const messageStatus = useSelector((state) => state.contactInfoReducer.status);
   return messageStatus === 'pending' ? (
     <>
-      <button
-        type='submit'
-        className='btn btn-primary rounded-pill btn-info'
-        disabled
-      >
-       <span
-        className="spinner-border spinner-border-sm"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      <span className="ms-1">Sending...</span>
-      </button>
+      <Button variant='primary rounded-pill btn-info' disabled>
+        <Spinner
+          as='span'
+          animation='grow'
+          size='sm'
+          role='status'
+          aria-hidden='true'
+        />
+        <span className='ms-1'>Sending...</span>
+      </Button>
     </>
   ) : (
     <>
-    <button
-      type='submit'
-      className='btn btn-primary rounded-pill btn-info'
-    >
-      Send Message
-    </button>
-  </>
+      <Button type='submit' variant='primary rounded-pill btn-info'>
+        <span className='ms-1'>Send Message</span>
+      </Button>
+    </>
   );
 };
 
