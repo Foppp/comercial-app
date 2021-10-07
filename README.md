@@ -1,4 +1,18 @@
-# E-Commerce App - SynthMaster Shop
+# E-Commerce App - React, Redux, Stripe, CommerceJs
+
+### Main goal is to build fully responsive SPA shop for browsers and mobiles, work with redux, commercejs and stripe for payments.
+
+* React
+* Redux / Redux Toolkit / asyncThunk
+* Integration with CommerceJs and Stripe for payments
+* Fetching and adding products
+* Filters, Pagination page and sort options
+* React Router
+* Forms, Forms Validation (Yup, Formik)
+* Bootstrap and React-bootstrap library
+* Build with Webpack
+* Deploy with Netlify
+
 
 ### [Demo Here](https://synthmaster.netlify.app/)
 
