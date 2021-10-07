@@ -10,6 +10,8 @@
 * React Router
 * Forms, Forms Validation (Yup, Formik)
 * Bootstrap and React-bootstrap library
+* Lodash library
+* Babel, NPM, ESlint
 * Build with Webpack
 * Deploy with Netlify
 
