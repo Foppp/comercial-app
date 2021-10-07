@@ -1,5 +1,4 @@
-# E-Commerce App 
-## SynthMaster Shop
+# E-Commerce App - SynthMaster Shop
 
 ### [Demo Here](https://synthmaster.netlify.app/)
 
