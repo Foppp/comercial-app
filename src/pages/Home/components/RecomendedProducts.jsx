@@ -29,7 +29,7 @@ const RecomendedProducts = () => {
               interval={2000}
               className='mb-5 px-4'
             >
-              <Row lg={4} md={4} sm={2} xs={1}>
+              <Row lg={4} md={2} sm={2} xs={1}>
                 {p.map((product) => (
                   <Card
                     as={Link}
@@ -56,8 +56,8 @@ const RecomendedProducts = () => {
                           <path d='M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z' />
                         </svg>
                       </Card.Title>
-                      <Card.Text className='mt-auto'>{product.name}</Card.Text>
-                      <Card.Text className='mt-auto'>
+                      <Card.Text>{product.name}</Card.Text>
+                      <Card.Text>
                         {product.price.formatted_with_symbol}
                       </Card.Text>
                     </Card.ImgOverlay>
