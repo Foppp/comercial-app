@@ -24,7 +24,7 @@ const Home = () => {
         </Col>
       </Row>
       <Row className='p-3'>
-        <Col sm className='text-center d-flex flex-column px-3'>
+        <Col md className='text-center d-flex flex-column px-3'>
           <Image fluid src={synthStore} alt='mainHeader' />
         </Col>
         <Col className='text-center d-flex align-items-center mt-3 px-3'>
