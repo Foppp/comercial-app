@@ -101,7 +101,8 @@ const AdressForm = () => {
                 name='firstName'
                 defaultValue={formik.values.firstName}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.firstName}
+                isValid={!formik.errors.firstName && formik.touched.firstName}
+                isInvalid={formik.errors.firstName && formik.touched.firstName}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.firstName}
@@ -114,7 +115,8 @@ const AdressForm = () => {
                 name='lastName'
                 defaultValue={formik.values.lastName}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.lastName}
+                isValid={!formik.errors.lastName && formik.touched.lastName}
+                isInvalid={formik.errors.lastName && formik.touched.lastName}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.lastName}
@@ -127,7 +129,8 @@ const AdressForm = () => {
                 name='email'
                 defaultValue={formik.values.email}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.email}
+                isValid={!formik.errors.email && formik.touched.email}
+                isInvalid={formik.errors.email && formik.touched.email}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.email}
@@ -140,7 +143,8 @@ const AdressForm = () => {
                 name='address1'
                 defaultValue={formik.values.address1}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.address1}
+                isValid={!formik.errors.address1 && formik.touched.address1}
+                isInvalid={formik.errors.address1 && formik.touched.address1}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.address1}
@@ -153,7 +157,8 @@ const AdressForm = () => {
                 name='city'
                 defaultValue={formik.values.city}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.city}
+                isValid={!formik.errors.city && formik.touched.city}
+                isInvalid={formik.errors.city && formik.touched.city}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.city}
@@ -166,7 +171,8 @@ const AdressForm = () => {
                 name='zip'
                 defaultValue={formik.values.zip}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.zip}
+                isValid={!formik.errors.zip && formik.touched.zip}
+                isInvalid={formik.errors.zip && formik.touched.zip}
               />
               <Form.Control.Feedback type='invalid'>
                 {formik.errors.zip}
@@ -178,7 +184,8 @@ const AdressForm = () => {
                 name='shippingCountry'
                 defaultValue={formik.values.shippingCountry}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.shippingCountry}
+                isValid={!formik.errors.shippingCountry && formik.touched.shippingCountry}
+                isInvalid={formik.errors.shippingCountry && formik.touched.shippingCountry}
               >
                 <option value='' disabled>
                   Select...
@@ -201,7 +208,8 @@ const AdressForm = () => {
                 name='shippingSubdivision'
                 defaultValue={formik.values.shippingSubdivision}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.shippingSubdivision}
+                isValid={!formik.errors.shippingSubdivision && formik.touched.shippingSubdivision}
+                isInvalid={formik.errors.shippingSubdivision && formik.touched.shippingSubdivision}
               >
                 <option value='' disabled>
                   Select...
@@ -224,7 +232,8 @@ const AdressForm = () => {
                 name='shippingOption'
                 defaultValue={formik.values.shippingOption}
                 onChange={formik.handleChange}
-                isInvalid={!!formik.errors.shippingOption}
+                isValid={!formik.errors.shippingOption && formik.touched.shippingOption}
+                isInvalid={formik.errors.shippingOption && formik.touched.shippingOption}
               >
                 <option value='' disabled>
                   Select...
