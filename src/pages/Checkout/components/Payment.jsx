@@ -21,11 +21,12 @@ const Payment = () => {
     if (!stripe || !elements) return;
     const cardElement = elements.getElement(CardElement);
     const options = { stripe, method: { type: 'card', card: cardElement } };
-    cardElement.update({ disabled: true });
+    // cardElement.update({ disabled: true });
     dispatch(createPayment(options));
   };
 
   useEffect(() => {
+    console.log('use effect payment')
     if (paymentMethodId) {
       const orderData = {
         line_items: checkoutToken.live.line_items,
